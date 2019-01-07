@@ -11,7 +11,7 @@ executar_backup_bd_googledrive <- function(backup = "NAO") {
         break()
     }
 
-    # Define o padrão do nome a ser utilizado para identificar o BK dos arquivos
+    # Define o padrão do nome a ser utilizado para identificar o BK dos arquivos;
     sufixo <- log_data_hora() %>%
         stringr::str_replace_all("[:]", "-") %>%
         stringr::str_replace_all("[ ]", "_")
