@@ -1,0 +1,33 @@
+Package: tcmbapessoal
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    httr,
+    rvest,
+    xml2,
+    XML,
+    tibble,
+    readr,
+    dplyr,
+    magrittr,
+    tidyr,
+    janitor,
+    stringr,
+    stringi,
+    lubridate,
+    purrr,
+    DBI,
+    RSQLite,
+    zip,
+    googledrive,
+    digest
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
