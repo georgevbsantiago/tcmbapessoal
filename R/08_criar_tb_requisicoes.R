@@ -12,20 +12,20 @@ criar_tb_requisicoes_pessoal <- function() {
 
     tb_dcalendario <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(),
                                        "tabela_dcalendario") %>%
-                      tibble::as.tibble() %>%
+                      tibble::as_tibble() %>%
                       dplyr::select("data", "ano", "mes")
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
 
     tb_municipios_entidades <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(),
                                                 "tabela_tcm_dmunicipios_entidades") %>%
-                               tibble::as.tibble() %>%
+                               tibble::as_tibble() %>%
                                dplyr::select(-log_create)
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
 
     tb_requisicao_novos <- merge.data.frame(tb_dcalendario, tb_municipios_entidades) %>%
-                           tibble::as.tibble() %>%
+                           tibble::as_tibble() %>%
                            dplyr::mutate(status_request_html = "N",
                                          log_request_html = "",
                                          nm_arq_html = "",
@@ -38,7 +38,7 @@ criar_tb_requisicoes_pessoal <- function() {
 
 
     tb_municipios_alvos_anteriores <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") %>%
-                                      tibble::as.tibble()
+                                      tibble::as_tibble()
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
 

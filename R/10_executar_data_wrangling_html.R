@@ -22,7 +22,7 @@ executar_data_wrangling_html_pessoal <- function() {
 
 
     tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") %>%
-        tibble::as.tibble() %>%
+        tibble::as_tibble() %>%
         dplyr::filter(status_tratamento_arq_csv == "N")
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
@@ -73,7 +73,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
     if (is.vector(pegar_dados_html$"13Âº SalÃ¡rio") == TRUE){
 
         data_wrangling <- pegar_dados_html %>%
-            tibble::as.tibble() %>%
+            tibble::as_tibble() %>%
             purrr::set_names(c("nome",
                                "matricula",
                                "tipo_servidor",
@@ -91,7 +91,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
 
 
         data_wrangling <- pegar_dados_html %>%
-            tibble::as.tibble() %>%
+            tibble::as_tibble() %>%
             purrr::set_names(c("nome",
                                "matricula",
                                "tipo_servidor",

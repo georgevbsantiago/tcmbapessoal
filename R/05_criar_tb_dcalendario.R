@@ -8,7 +8,7 @@
 criar_tb_dcalendario <- function(anos_alvos){
 
     tb_dcalendario <- purrr::map_dfr(anos_alvos, tb_anos_alvos) %>%
-                      tibble::as.tibble()
+                      tibble::as_tibble()
 
     DBI::dbWriteTable(connect_sgbd(), "tabela_dcalendario", tb_dcalendario, overwrite = TRUE)
 
