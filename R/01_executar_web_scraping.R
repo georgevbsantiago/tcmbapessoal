@@ -47,6 +47,14 @@ executar_web_scraping <- function(ano, nome_scraping, bd, repetir, backup) {
 
               return(print("Não utilize os caracteres inválidos no nome do Scraping "))
             }
+            
+            if(bd != "sqlite" | bd != "mysql") {
+              
+              
+              message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados")
+              
+              
+            }
 
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
     if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
@@ -117,7 +125,7 @@ executar_web_scraping <- function(ano, nome_scraping, bd, repetir, backup) {
 
       # Função cria a tabela de requisições e faz o Web Scraping das páginas HTML que contêm
       # os dados da Folha de Pessoal. #OBS: O tempo de resposta do TCM está entre 10 a 30 segundos
-      tcmbapessoal::executar_scraping_html_folhapessoal
+      tcmbapessoal::executar_scraping_html_folhapessoal()
 
       # Função que faz o parser dos HTMLs das depesas e o Data Wrangling dos HTMLs
       # Faz o pré-processamento dos dados obtidos do HTML, aplicando o conceito Tidy Data

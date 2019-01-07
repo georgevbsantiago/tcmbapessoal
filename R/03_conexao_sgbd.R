@@ -54,15 +54,6 @@ criar_bd <- function(bd = "sqlite") {
 connect_sgbd <- function(bd = "sqlite") {
     
     
-    if(bd != "sqlite" | bd != "mysql") {
-        
-        
-        message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados")
-        
-        
-    }
-    
-    
     if(bd == "sqlite") {
         
     
