@@ -10,12 +10,13 @@
 #' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
 #' para realizar o Backup do Banco de Dados e dos arquivos CSV para o Google Drive.
 #' É preciso configurar o token Google Drive antes de executar
-#' @param bd Define qual é o Banco de Dados a ser utilizado.
+#' @param sgbd Define qual é o Banco de Dados a ser utilizado.
 #' Por padrão, é definido o SQLite
 #'
 #' @export
 
-executar_web_scraping <- function(ano, nome_scraping, bd, repetir, backup) {
+executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
+                                  repetir = "NAO", backup = "NAO") {
 
   # Para desenvolver esse script, é necessário pensar em, pelo menos, 2 Hipótese de execução:
   # Se o Web Scraping está executando pela primeira vez ou se é uma continuação;
@@ -48,7 +49,7 @@ executar_web_scraping <- function(ano, nome_scraping, bd, repetir, backup) {
               return(print("Não utilize os caracteres inválidos no nome do Scraping "))
             }
             
-            if(bd != "sqlite" | bd != "mysql") {
+            if(sgbd != "sqlite" | sgbd != "mysql") {
               
               
               message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados")
@@ -63,31 +64,31 @@ executar_web_scraping <- function(ano, nome_scraping, bd, repetir, backup) {
       tcmbapessoal::criar_diretorios(nome_scraping)
       
     # Função que cria o Banco de Dados
-      tcmbapessoal::criar_bd(bd)
+      tcmbapessoal::criar_bd(sgbd)
 
     # Função que cria 4 tabelas que serão armazenadas no SQLite.
-      tcmbapessoal::criar_tabelas_bd()
+      tcmbapessoal::criar_tabelas_bd(sgbd)
 
     # Função que cria a tabela dCalendario
-      tcmbapessoal::criar_tb_dcalendario(anos_alvos)
+      tcmbapessoal::criar_tb_dcalendario(anos_alvos, sgbd)
 
     # Função que faz o Web Scraping do código e nome dos Municípios
-      tcmbapessoal::criar_tb_dmunicipios()
+      tcmbapessoal::criar_tb_dmunicipios(sgbd)
 
     # Função que faz o Web Scraping (via Web Service) do código e nome das Entidades e, ao fim, cria a tabela.
-      tcmbapessoal::criar_tb_dmunicipios_entidades()
+      tcmbapessoal::criar_tb_dmunicipios_entidades(sgbd)
 
     # Função que cria a tabela das requisições
-      tcmbapessoal::criar_tb_requisicoes_pessoal()
+      tcmbapessoal::criar_tb_requisicoes_pessoal(sgbd)
 
     # Função cria a tabela de requisições e faz o Web Scraping das páginas HTML que contêm
     # os dados da Folha de Pessoal. #OBS: O tempo de resposta do TCM está entre 10 a 30 segundos
-      tcmbapessoal::executar_scraping_html_folhapessoal(repetir)
+      tcmbapessoal::executar_scraping_html_folhapessoal(repetir, sgbd)
 
     # Função que faz o parser dos HTMLs das depesas e o Data Wrangling dos HTMLs
       # Faz o pré-processamento dos dados obtidos do HTML, aplicando o conceito Tidy Data
       # Por fim, cria uma arquivos CSV para a pasta dados_exportados.
-      tcmbapessoal::executar_data_wrangling_html_pessoal()
+      tcmbapessoal::executar_data_wrangling_html_pessoal(sgbd)
 
             # O conceito Tidy Data de Hadley Wickham tem por objetivo arrumar os dados
             # para que eles sejam utilizados em softwares de estatísticas ou
@@ -112,25 +113,25 @@ executar_web_scraping <- function(ano, nome_scraping, bd, repetir, backup) {
 
 
       # Função que cria a tabela dCalendario
-      tcmbapessoal::criar_tb_dcalendario(anos_alvos)
-
+      tcmbapessoal::criar_tb_dcalendario(anos_alvos, sgbd)
+      
       # Função que faz o Web Scraping do código e nome dos Municípios
-      tcmbapessoal::criar_tb_dmunicipios()
-
+      tcmbapessoal::criar_tb_dmunicipios(sgbd)
+      
       # Função que faz o Web Scraping (via Web Service) do código e nome das Entidades e, ao fim, cria a tabela.
-      tcmbapessoal::criar_tb_dmunicipios_entidades()
-
+      tcmbapessoal::criar_tb_dmunicipios_entidades(sgbd)
+      
       # Função que cria a tabela das requisições
-      tcmbapessoal::criar_tb_requisicoes_pessoal()
-
+      tcmbapessoal::criar_tb_requisicoes_pessoal(sgbd)
+      
       # Função cria a tabela de requisições e faz o Web Scraping das páginas HTML que contêm
       # os dados da Folha de Pessoal. #OBS: O tempo de resposta do TCM está entre 10 a 30 segundos
-      tcmbapessoal::executar_scraping_html_folhapessoal()
-
+      tcmbapessoal::executar_scraping_html_folhapessoal(repetir, sgbd)
+      
       # Função que faz o parser dos HTMLs das depesas e o Data Wrangling dos HTMLs
       # Faz o pré-processamento dos dados obtidos do HTML, aplicando o conceito Tidy Data
       # Por fim, cria uma arquivos CSV para a pasta dados_exportados.
-      tcmbapessoal::executar_data_wrangling_html_pessoal()
+      tcmbapessoal::executar_data_wrangling_html_pessoal(sgbd)
 
               # O conceito Tidy Data de Hadley Wickham tem por objetivo arrumar os dados
               # para que eles sejam utilizados em softwares de estatísticas ou

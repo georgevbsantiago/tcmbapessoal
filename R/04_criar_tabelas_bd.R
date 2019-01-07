@@ -4,12 +4,12 @@
 #'
 #'@export
 
-criar_tabelas_bd <- function() {
+criar_tabelas_bd <- function(sgbd = "sqlite") {
 
 
-    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(), "tabela_dcalendario") == FALSE) {
+    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_dcalendario") == FALSE) {
 
-        DBI::dbExecute(tcmbapessoal::connect_sgbd(), "CREATE TABLE tabela_dcalendario (
+        DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_dcalendario (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     data TEXT NOT NULL,
                                                     ano TEXT NOT NULL,
@@ -17,15 +17,15 @@ criar_tabelas_bd <- function() {
                                                     );"
         )
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     }
 
 
 
-    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(), "tabela_tcm_dmunicipios") == FALSE) {
+    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_tcm_dmunicipios") == FALSE) {
 
-        DBI::dbExecute(tcmbapessoal::connect_sgbd(), "CREATE TABLE tabela_tcm_dmunicipios (
+        DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_tcm_dmunicipios (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     cod_municipio INT NOT NULL,
                                                     nm_municipio TEXT NOT NULL,
@@ -33,14 +33,14 @@ criar_tabelas_bd <- function() {
                                                     );"
         )
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     }
 
 
-    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(), "tabela_tcm_dmunicipios_entidades") == FALSE) {
+    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_tcm_dmunicipios_entidades") == FALSE) {
 
-        DBI::dbExecute(tcmbapessoal::connect_sgbd(), "CREATE TABLE tabela_tcm_dmunicipios_entidades (
+        DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_tcm_dmunicipios_entidades (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     cod_municipio INT NOT NULL,
                                                     nm_municipio TEXT NOT NULL,
@@ -50,15 +50,15 @@ criar_tabelas_bd <- function() {
                                                     );"
         )
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     }
 
 
 
-    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") == FALSE) {
+    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") == FALSE) {
 
-        DBI::dbExecute(tcmbapessoal::connect_sgbd(), "CREATE TABLE tabela_requisicoes (
+        DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_requisicoes (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     data TEXT NOT NULL,
                                                     ano TEXT NOT NULL,
@@ -77,15 +77,15 @@ criar_tabelas_bd <- function() {
                                                     );"
         )
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     }
 
 
 
-    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(), "tabela_log") == FALSE) {
+    if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log") == FALSE) {
 
-        DBI::dbExecute(tcmbapessoal::connect_sgbd(), "CREATE TABLE tabela_log (
+        DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_log (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                   	data TEXT NOT NULL,
                                                   	log_erro TEXT NOT NULL,
@@ -95,7 +95,7 @@ criar_tabelas_bd <- function() {
                                                     );"
         )
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     }
 

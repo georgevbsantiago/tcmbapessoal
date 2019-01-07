@@ -6,19 +6,19 @@
 #'
 #'@export
 
-criar_tb_dmunicipios_entidades <- function() {
+criar_tb_dmunicipios_entidades <- function(sgbd = "sqlite") {
 
 
-    cod_nm_mun <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_tcm_dmunicipios")
+    cod_nm_mun <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_tcm_dmunicipios")
 
 
     #Gera a tabela com dados dos municípios e entidades, a partir do scraping do WS do TCM-Ba
     scraping_mun_ent <- purrr::pmap_dfr(cod_nm_mun, scraping_tcm_entidades_ws)
 
 
-    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_tcm_dmunicipios_entidades", scraping_mun_ent, overwrite = TRUE)
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_tcm_dmunicipios_entidades", scraping_mun_ent, overwrite = TRUE)
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
     print("A tabela `tabela_tcm_dmunicipios_entidades` foi criado com sucesso no BD")

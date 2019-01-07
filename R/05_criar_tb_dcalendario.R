@@ -5,16 +5,16 @@
 #'
 #' @export
 
-criar_tb_dcalendario <- function(anos_alvos){
+criar_tb_dcalendario <- function(anos_alvos, sgbd = "sqlite"){
 
     tb_dcalendario <- purrr::map_dfr(anos_alvos, tb_anos_alvos) %>%
                       tibble::as_tibble()
 
-    DBI::dbWriteTable(connect_sgbd(), "tabela_dcalendario", tb_dcalendario, overwrite = TRUE)
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_dcalendario", tb_dcalendario, overwrite = TRUE)
 
     print("A tabela `tabela_dcalendario` foi criada com sucesso no BD")
 
-    DBI::dbDisconnect(connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
 }

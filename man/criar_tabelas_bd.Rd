@@ -4,7 +4,7 @@
 \alias{criar_tabelas_bd}
 \title{Função que cria as Tabelas do Banco de Dados}
 \usage{
-criar_tabelas_bd()
+criar_tabelas_bd(sgbd = "sqlite")
 }
 \description{
 Função que cria as Tabelas do Banco de Dados

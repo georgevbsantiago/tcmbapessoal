@@ -6,14 +6,14 @@
 #'
 
 
-executar_data_wrangling_html_pessoal <- function() {
+executar_data_wrangling_html_pessoal <- function(sgbd = "sqlite") {
 
 
-    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") %>%
+    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") %>%
         tibble::as_tibble() %>%
         dplyr::filter(status_tratamento_arq_csv == "N")
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     print("Iniciando o tratamento dos arquivos HTML")
 
@@ -27,12 +27,13 @@ executar_data_wrangling_html_pessoal <- function() {
     } else {
 
 
-        purrr::pwalk(tb_requisicoes, data_wrangling_html_pessoal)
+        purrr::pwalk(tb_requisicoes, data_wrangling_html_pessoal, sgbd)
 
         #future::plan(strategy = future::multisession)
         # Substituir futuramente por furrr::future_pwalk que já está disponível no github
-        # furrr::future_pmap(tb_requisicoes, data_wrangling_html_pessoal, .progress = TRUE)
-        # furrr::future_pwalk(tb_requisicoes, data_wrangling_html_pessoal, .progress = TRUE)
+        # Lembrar de acidionar o banco de dados na função
+        # furrr::future_pmap(tb_requisicoes, data_wrangling_html_pessoal, sgbd, .progress = TRUE)
+        # furrr::future_pwalk(tb_requisicoes, data_wrangling_html_pessoal, sgbd, .progress = TRUE)
         
         # abjutils::pvec()
 
@@ -143,7 +144,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
     update_sqlite <- purrr::safely(DBI::dbExecute)
 
 
-        result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(), 'UPDATE tabela_requisicoes
+        result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_tratamento_arq_csv = "S",
                                                             log_tratamento_arq_csv = :log_tratamento_arq_csv,
                                                             nm_arq_csv = :nm_arq_csv
@@ -153,7 +154,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                                                   nm_arq_csv = as.character(nm_arq_csv),
                                                   id = as.character(id)))
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
         while(length(result_sql$result) == 0) {
@@ -168,11 +169,11 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
             #     nm_entidade = ""
             # )
             #
-            # DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_log", tb_request, append = TRUE)
+            # DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
             #
-            # DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+            # DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
-            result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(), 'UPDATE tabela_requisicoes
+            result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_tratamento_arq_csv = "S",
                                                             log_tratamento_arq_csv = :log_tratamento_arq_csv,
                                                             nm_arq_csv = :nm_arq_csv
@@ -182,7 +183,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                                                       nm_arq_csv = as.character(nm_arq_csv),
                                                       id = as.character(id)))
 
-            DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+            DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
         }
 

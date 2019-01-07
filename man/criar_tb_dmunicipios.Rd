@@ -4,7 +4,7 @@
 \alias{criar_tb_dmunicipios}
 \title{Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados}
 \usage{
-criar_tb_dmunicipios()
+criar_tb_dmunicipios(sgbd = "sqlite")
 }
 \description{
 Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados

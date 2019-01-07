@@ -4,7 +4,7 @@
 \alias{criar_tb_requisicoes_pessoal}
 \title{Função que gera a Tabela de Requisições "tabela_paginas_links" no Banco de Dados}
 \usage{
-criar_tb_requisicoes_pessoal()
+criar_tb_requisicoes_pessoal(sgbd = "sqlite")
 }
 \description{
 Função que gera a Tabela de Requisições "tabela_paginas_links" no Banco de Dados

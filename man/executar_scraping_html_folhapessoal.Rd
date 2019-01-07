@@ -4,7 +4,7 @@
 \alias{executar_scraping_html_folhapessoal}
 \title{Função que executa o Web Scraping}
 \usage{
-executar_scraping_html_folhapessoal(repetir = "NAO")
+executar_scraping_html_folhapessoal(repetir = "NAO", sgbd = "sqlite")
 }
 \arguments{
 \item{repetir}{É definido como "NAO" por padrão, mas pode ser atribuído SIM

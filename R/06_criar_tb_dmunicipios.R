@@ -7,7 +7,7 @@
 #'
 #'@export
 
-criar_tb_dmunicipios <- function() {
+criar_tb_dmunicipios <- function(sgbd = "sqlite") {
 
 
     print("Iniciando Web Scraping dos códigos e nomes dos Municípios utilziados pelo TCM-Ba")
@@ -16,9 +16,9 @@ criar_tb_dmunicipios <- function() {
     tb_tcm_dmunicipios <- scraping_tcm_municipios()
 
 
-    DBI::dbWriteTable(connect_sgbd(), "tabela_tcm_dmunicipios", tb_tcm_dmunicipios, overwrite = TRUE)
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_tcm_dmunicipios", tb_tcm_dmunicipios, overwrite = TRUE)
 
-    DBI::dbDisconnect(connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
     print("A tabela `tabela_tcm_dmunicipios` foi criado com sucesso no BD")

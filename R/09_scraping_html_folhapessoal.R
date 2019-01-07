@@ -10,27 +10,27 @@
 #'
 #' @export
 
-executar_scraping_html_folhapessoal <- function(repetir = "NAO") {
+executar_scraping_html_folhapessoal <- function(repetir = "NAO", sgbd = "sqlite") {
 
 
   if(repetir == "NAO") {
 
-    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") %>%
+    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") %>%
       tibble::as.tibble() %>%
       dplyr::filter(status_request_html == "N") %>%
       dplyr::arrange(dplyr::desc(data), cod_entidade)
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
   } else {
 
-    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") %>%
+    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") %>%
       tibble::as.tibble() %>%
       dplyr::filter(status_request_html == "N" | status_request_html == "R") %>%
       dplyr::arrange(dplyr::desc(data), cod_entidade)
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
   }
@@ -40,7 +40,7 @@ executar_scraping_html_folhapessoal <- function(repetir = "NAO") {
     print(paste( "Total de Resquisições:", nrow(tb_requisicoes)))
 
 
-    purrr::pwalk(tb_requisicoes, scraping_html_folhapessoal)
+    purrr::pwalk(tb_requisicoes, scraping_html_folhapessoal, sgbd)
 
 
     message("O Web Scraping dos arquivos HTML das Despesas foi concluído")
@@ -107,9 +107,9 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
             nm_entidade = nm_entidade
         )
 
-        DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_log", tb_request, append = TRUE)
+        DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
         message("#### Iniciando Segunda tentativa para: ",
@@ -139,9 +139,9 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
             )
 
 
-            DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_log", tb_request, append = TRUE)
+            DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
 
-            DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+            DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
             # Parar a iteração e pular para a próxima requisição
@@ -166,9 +166,9 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
             nm_entidade = nm_entidade
         )
 
-        DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_log", tb_request, append = TRUE)
+        DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
 
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
         # Parar a iteração e pular para a próxima requisição.
@@ -207,7 +207,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
 
     if (detectar_tabela == FALSE) {
 
-       result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(), 'UPDATE tabela_requisicoes
+       result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_request_html = "S",
                                                             log_request_html = :log_request,
                                                             nm_arq_html = :nm_arq_html,
@@ -220,7 +220,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                                                      hash_arq_html = as.character(hash_arq_html),
                                                      id = as.character(id)))
 
-       DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+       DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
         while(length(result_sql$result) == 0) {
@@ -235,11 +235,11 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
             #     nm_entidade = ""
             # )
             #
-            # DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_log", tb_request, append = TRUE)
+            # DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
             #
-            # DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+            # DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
-          result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(), 'UPDATE tabela_requisicoes
+          result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_request_html = "S",
                                                             log_request_html = :log_request,
                                                             nm_arq_html = :nm_arq_html,
@@ -252,7 +252,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                                         hash_arq_html = as.character(hash_arq_html),
                                         id = as.character(id)))
 
-          DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+          DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
         }
 
@@ -263,7 +263,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
 
     } else {
 
-      result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(), 'UPDATE tabela_requisicoes
+      result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_request_html = "R",
                                                             log_request_html = :log_request,
                                                             nm_arq_html = :nm_arq_html,
@@ -275,14 +275,14 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                                     hash_arq_html = as.character(hash_arq_html),
                                     id = as.character(id)))
 
-      DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+      DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
         while(length(result_sql$result) == 0) {
 
             print("Banco de Dados bloqueado - Tentando conectar novamente...")
 
-          result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(), 'UPDATE tabela_requisicoes
+          result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_request_html = "R",
                                                             log_request_html = :log_request,
                                                             nm_arq_html = :nm_arq_html,
@@ -294,7 +294,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                                         hash_arq_html = as.character(hash_arq_html),
                                         id = as.character(id)))
 
-          DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+          DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
         }
 

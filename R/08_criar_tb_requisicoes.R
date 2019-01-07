@@ -7,22 +7,22 @@
 #' @export
 #'
 
-criar_tb_requisicoes_pessoal <- function() {
+criar_tb_requisicoes_pessoal <- function(sgbd = "sqlite") {
 
 
-    tb_dcalendario <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(),
+    tb_dcalendario <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd),
                                        "tabela_dcalendario") %>%
                       tibble::as_tibble() %>%
                       dplyr::select("data", "ano", "mes")
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
-    tb_municipios_entidades <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(),
+    tb_municipios_entidades <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd),
                                                 "tabela_tcm_dmunicipios_entidades") %>%
                                tibble::as_tibble() %>%
                                dplyr::select(-log_create)
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     tb_requisicao_novos <- merge.data.frame(tb_dcalendario, tb_municipios_entidades) %>%
                            tibble::as_tibble() %>%
@@ -34,13 +34,13 @@ criar_tb_requisicoes_pessoal <- function() {
                                          log_tratamento_arq_csv = "",
                                          nm_arq_csv = "")
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
-    tb_municipios_alvos_anteriores <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") %>%
+    tb_municipios_alvos_anteriores <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") %>%
                                       tibble::as_tibble()
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     tb_municipios_alvos_atualizada <- tb_requisicao_novos %>%
         # o sinal ! antes de cod_municipio é um
@@ -48,11 +48,11 @@ criar_tb_requisicoes_pessoal <- function() {
         dplyr::filter(!tb_requisicao_novos$data %in% tb_municipios_alvos_anteriores$data)
 
 
-    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes",
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes",
                       tb_municipios_alvos_atualizada, append = TRUE)
 
 
-    DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
     print("Tabela 'tabela_requisicoes' gerada com sucesso!")

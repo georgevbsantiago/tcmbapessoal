@@ -4,14 +4,15 @@
 \alias{executar_web_scraping}
 \title{Função que executa o Web Scraping}
 \usage{
-executar_web_scraping(ano, nome_scraping, bd, repetir, backup)
+executar_web_scraping(ano, nome_scraping, sgbd = "sqlite",
+  repetir = "NAO", backup = "NAO")
 }
 \arguments{
 \item{ano}{Exercíico (ano) que ser pretende obter}
 
 \item{nome_scraping}{Nome do Diretório que será criado para alocar o Web Scraping}
 
-\item{bd}{Define qual é o Banco de Dados a ser utilizado.
+\item{sgbd}{Define qual é o Banco de Dados a ser utilizado.
 Por padrão, é definido o SQLite}
 
 \item{repetir}{É definido "NAO" como padrão. Mas pode ser marcado como "SIM",

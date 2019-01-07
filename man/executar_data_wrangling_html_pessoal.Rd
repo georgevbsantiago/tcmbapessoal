@@ -4,7 +4,7 @@
 \alias{executar_data_wrangling_html_pessoal}
 \title{Função que executa do Data Wrangling}
 \usage{
-executar_data_wrangling_html_pessoal()
+executar_data_wrangling_html_pessoal(sgbd = "sqlite")
 }
 \description{
 Função que realiza a extração de dados da Folha de Pessoal do arquivo html

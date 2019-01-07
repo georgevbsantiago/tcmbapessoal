@@ -5,10 +5,10 @@
 #'@export
 #'
 
-criar_bd <- function(bd = "sqlite") {
+criar_bd <- function(sgbd = "sqlite") {
  
     
-    if(bd == "sqlite") {
+    if(sgbd == "sqlite") {
     
         if(file.exists(file.path("bd_sqlite",
                                  "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
@@ -20,7 +20,7 @@ criar_bd <- function(bd = "sqlite") {
                                                dbname = file.path("bd_sqlite",
                                                                   "bd_tcm_folha_pessoal_municipios.db"))
             
-            DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+            DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
     
             
         }
@@ -36,7 +36,7 @@ criar_bd <- function(bd = "sqlite") {
     }
     
     
-    #if(bd == "mysql") {}
+    #if(sgbd == "mysql") {}
     
     
 }
@@ -51,10 +51,10 @@ criar_bd <- function(bd = "sqlite") {
 #'
 #'@export
 
-connect_sgbd <- function(bd = "sqlite") {
+connect_sgbd <- function(sgbd = "sqlite") {
     
     
-    if(bd == "sqlite") {
+    if(sgbd == "sqlite") {
         
     
         conexao_segura_sqlite <- purrr::safely(DBI::dbConnect)
@@ -75,9 +75,9 @@ connect_sgbd <- function(bd = "sqlite") {
                 nm_entidade = ""
             )
     
-            DBI::dbWriteTable(tcmbapessoal::connect_sgbd(), "tabela_log", tb_request, append = TRUE)
+            DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
     
-            DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+            DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
             
             # Tentar novamente a conexão com o BD
             sqlite_bd <- conexao_segura_sqlite(RSQLite::SQLite(),
