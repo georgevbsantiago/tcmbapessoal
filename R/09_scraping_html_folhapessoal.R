@@ -55,7 +55,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                                    cod_entidade, nm_entidade, status_request_html,
                                    log_request_htm, nm_arq_html, hash_arq_html,
                                    status_tratamento_arq_csv, log_tratamento_arq_csv,
-                                   nm_tratamento_arq_csv, ...) {
+                                   nm_tratamento_arq_csv, sgbd, ...) {
 
     subdir_resposta_html_mun <- file.path("resposta_scraping_html",
                                           tcmbapessoal::limpar_nome(nm_municipio))

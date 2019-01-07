@@ -52,7 +52,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                                          cod_entidade, nm_entidade, status_request_html,
                                         log_request_html, nm_arq_html, hash_arq_html,
                                         status_tratamento_arq_csv, log_tratamento_arq_csv,
-                                        nm_arq_csv, ...) {
+                                        nm_arq_csv, sgbd, ...) {
 
     subdir_dados_exportados <- file.path(getwd(), "dados_exportados")
 
