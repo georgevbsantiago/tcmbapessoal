@@ -24,6 +24,7 @@ Imports:
     stringi,
     lubridate,
     purrr,
+    furrr,
     DBI,
     RSQLite,
     zip,

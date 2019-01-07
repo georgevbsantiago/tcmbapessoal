@@ -6,6 +6,9 @@
 \usage{
 criar_diretorios(nome_scraping)
 }
+\arguments{
+\item{nome_scraping}{Nome do Web Scraping e do seu diretório raiz}
+}
 \description{
-Os diretórios do Web Scraping são criados no diretório de trabalho escolhido pelo usuário
+Função que cria os diretório do Web Scraping
 }

@@ -41,10 +41,11 @@ executar_data_wrangling_html_pessoal <- function() {
 
         purrr::pwalk(tb_requisicoes, data_wrangling_html_pessoal)
 
-        # future::plan(multisession)
-        #
+        #future::plan(strategy = future::multisession)
+        # Substituir futuramente por furrr::future_pwalk que já está disponível no github
         # furrr::future_pmap(tb_requisicoes, data_wrangling_html_pessoal, .progress = TRUE)
-
+        # furrr::future_pwalk(tb_requisicoes, data_wrangling_html_pessoal, .progress = TRUE)
+        
         # abjutils::pvec()
 
         message("Todos os Arquivos HTML das Folhas de Pessoal foram tratados!!!")

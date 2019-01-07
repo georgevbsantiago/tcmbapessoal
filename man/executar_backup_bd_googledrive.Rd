@@ -2,10 +2,11 @@
 % Please edit documentation in R/11_executar_backup_googledrive.R
 \name{executar_backup_bd_googledrive}
 \alias{executar_backup_bd_googledrive}
-\title{Função que executa o backup dos dados}
+\title{Função que executa o backup}
 \usage{
 executar_backup_bd_googledrive(backup = "NAO")
 }
 \description{
-Função que executa o backup dos dados
+Função que executa o backup do Banco de Dados
+e dos arquivos CSV para o Google Drive
 }

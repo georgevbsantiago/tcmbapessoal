@@ -2,10 +2,10 @@
 % Please edit documentation in R/03_conexao_sgbd.R
 \name{connect_sgbd}
 \alias{connect_sgbd}
-\title{Função que cria o Banco de Dados no SQLite}
+\title{Função que cria a conexão com o Banco de Dados}
 \usage{
 connect_sgbd()
 }
 \description{
-Função que cria o Banco de Dados no SQLite
+Função que cria a conexão com o Banco de Dados
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/08_criar_tb_requisicoes.R
 \name{criar_tb_requisicoes_pessoal}
 \alias{criar_tb_requisicoes_pessoal}
-\title{Função que gera a Tabela de Requisições "tabela_paginas_links"}
+\title{Função que gera a Tabela de Requisições "tabela_paginas_links" no Banco de Dados}
 \usage{
 criar_tb_requisicoes_pessoal()
 }
 \description{
-Função que gera a Tabela de Requisições "tabela_paginas_links"
+Função que gera a Tabela de Requisições "tabela_paginas_links" no Banco de Dados
 }

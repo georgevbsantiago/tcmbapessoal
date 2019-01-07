@@ -2,10 +2,10 @@
 % Please edit documentation in R/10_executar_data_wrangling_html.R
 \name{executar_data_wrangling_html_pessoal}
 \alias{executar_data_wrangling_html_pessoal}
-\title{Função que realiza a extração de dados da Folha de Pessoal do arquivo html}
+\title{Função que executa do Data Wrangling}
 \usage{
 executar_data_wrangling_html_pessoal()
 }
 \description{
-...
+Função que realiza a extração de dados da Folha de Pessoal do arquivo html
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/04_criar_tabelas_bd.R
 \name{criar_tabelas_bd}
 \alias{criar_tabelas_bd}
-\title{Função que cria as tabelas do Banco de Dados no SQLite}
+\title{Função que cria as Tabelas do Banco de Dados}
 \usage{
 criar_tabelas_bd()
 }
 \description{
-Função que cria as tabelas do Banco de Dados no SQLite
+Função que cria as Tabelas do Banco de Dados
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/06_criar_tb_dmunicipios.R
 \name{criar_tb_dmunicipios}
 \alias{criar_tb_dmunicipios}
-\title{Função que gera a tabela "tabela_tcm_dmunicipios"}
+\title{Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados}
 \usage{
 criar_tb_dmunicipios()
 }
 \description{
-Função que gera a tabela "tabela_tcm_dmunicipios"
+Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados
 }
