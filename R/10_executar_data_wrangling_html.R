@@ -1,6 +1,6 @@
-#' @title Função que realiza a extração de dados da Folha de Pessoal do arquivo html
+#' @title Função que executa do Data Wrangling
 #'
-#' @description ...
+#' @description Função que realiza a extração de dados da Folha de Pessoal do arquivo html
 #'
 #' @export
 #'

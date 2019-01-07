@@ -1,6 +1,10 @@
-#' @title Função que executa o Web Scraping das Páginas de despesas do TCM-ba
+#' @title Função que executa o Web Scraping
 #'
-#'
+#' @description Executa o Web Scraping das Páginas que tem a Folha de pessoal dos Municípios no site do TCM-ba
+#' 
+#' @param repetir É definido como "NAO" por padrão, mas pode ser atribuído SIM
+#' para realizar o Web Scraping de páginas que retornaram erro ou que ainda não foram informados pelos
+#' municípios ao TCM-Ba
 #'
 #' @importFrom magrittr %>%
 #'

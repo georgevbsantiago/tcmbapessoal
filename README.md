@@ -1,7 +1,7 @@
 # Pacote tcmbapessoal
 Web Scraping para coletar a Folha de Pessoal dos Municípios (BA) armazenados no site do TCM-Ba.
 
-# Sobre a proposta e objetivo do Web Scraping
+# Sobre a proposta e o objetivo do Web Scraping
 
 O presente Web Scraping tem o objetivo de obter os dados da Folha de Pessoal dos Municípios da Bahia, por meio do site do Tribunal de Contas dos Municípios do Estado da Bahia (TCM-Ba), visto que os dados ainda não são disponibilizados no formato de Dados Abertos, conforme impõe a Lei de Acesso à Informação (art. 8º, §3°, III, da LAI). Em vista disso, foi necessário produzir um Web Scraping para obter os dados disponibilizados no site do TCM-Ba em formato HTML (Ver [link do TCM-Ba](http://www.tcm.ba.gov.br/portal-da-cidadania/pessoal/)) de forma sistêmica e automatizada, reduzindo significativamente o tempo que se levaria para obter os dados caso as consultas fossem feitas manualmente.
 

@@ -1,6 +1,6 @@
 #' @title Função que cria os diretório do Web Scraping
 #'
-#' @description Os diretórios do Web Scraping são criados no diretório de trabalho escolhido pelo usuário
+#' @param nome_scraping Nome do Web Scraping e do seu diretório raiz
 #'
 #' @export
 

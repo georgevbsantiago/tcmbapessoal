@@ -1,4 +1,4 @@
-#' @title Função que gera a tabela "tabela_tcm_dmunicipios"
+#' @title Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados
 #'
 #'
 #'

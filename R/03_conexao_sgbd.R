@@ -1,4 +1,6 @@
-#' @title Função que cria o Banco de Dados no SQLite
+#' @title Função que cria a conexão com o Banco de Dados
+#' 
+#'
 #'
 #'@export
 

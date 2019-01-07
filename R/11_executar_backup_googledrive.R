@@ -1,6 +1,7 @@
-#' @title Função que executa o backup dos dados
+#' @title Função que executa o backup
 #'
-#'
+#' @description Função que executa o backup do Banco de Dados
+#' e dos arquivos CSV para o Google Drive
 #'
 #' @export
 

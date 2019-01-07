@@ -1,4 +1,4 @@
-#' @title Função que gera a Tabela de Requisições "tabela_paginas_links"
+#' @title Função que gera a Tabela de Requisições "tabela_paginas_links" no Banco de Dados
 #'
 #'
 #'

@@ -1,6 +1,15 @@
 #' @title Função que executa o Web Scraping
 #'
-#' @description Essa função foi desenvolvida ...
+#' @description Essa função foi desenvolvida para executar todas as etapas do Web Scraping
+#' 
+#' @param ano Exercíico (ano) que ser pretende obter
+#' @param nome_scraping Nome do Diretório que será criado para alocar o Web Scraping
+#' @param repetir É definido "NAO" como padrão. Mas pode ser marcado como "SIM",
+#' caso deseje repetir as consulta do Web Scraping que falharam ou que não foram
+#' identificadas resposta do ente municipal
+#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar o Backup do Banco de Dados e dos arquivos CSV para o Google Drive.
+#' É preciso configurar o token Google Drive antes de executar
 #'
 #' @export
 
