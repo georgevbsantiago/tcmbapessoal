@@ -10,10 +10,12 @@
 #' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
 #' para realizar o Backup do Banco de Dados e dos arquivos CSV para o Google Drive.
 #' É preciso configurar o token Google Drive antes de executar
+#' @param bd Define qual é o Banco de Dados a ser utilizado.
+#' Por padrão, é definido o SQLite
 #'
 #' @export
 
-executar_web_scraping <- function(ano, nome_scraping, repetir, backup) {
+executar_web_scraping <- function(ano, nome_scraping, bd, repetir, backup) {
 
   # Para desenvolver esse script, é necessário pensar em, pelo menos, 2 Hipótese de execução:
   # Se o Web Scraping está executando pela primeira vez ou se é uma continuação;
@@ -51,12 +53,9 @@ executar_web_scraping <- function(ano, nome_scraping, repetir, backup) {
 
     # Função que cria as pastas dos arquivos
       tcmbapessoal::criar_diretorios(nome_scraping)
-
+      
     # Função que cria o Banco de Dados
-      tcmbapessoal::connect_sgbd()
-
-    # Função para desconectar do Banco de Dados
-      DBI::dbDisconnect(tcmbapessoal::connect_sgbd())
+      tcmbapessoal::criar_bd(bd)
 
     # Função que cria 4 tabelas que serão armazenadas no SQLite.
       tcmbapessoal::criar_tabelas_bd()

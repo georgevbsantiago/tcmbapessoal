@@ -8,18 +8,6 @@
 
 executar_data_wrangling_html_pessoal <- function() {
 
-    #-----------------------------------------------------------------------------
-    #!!! Excluir essa rotina IF após tornar o código agnóstico em relação ao BD
-    if(file.exists(file.path("bd_sqlite",
-                             "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
-
-        return(message(paste("Banco de Dados NÃO Localizado no diretório:",
-                             file.path(getwd(), "bd_sqlite"))))
-
-    }
-
-    #-----------------------------------------------------------------------------
-
 
     tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(), "tabela_requisicoes") %>%
         tibble::as_tibble() %>%

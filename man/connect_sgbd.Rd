@@ -4,7 +4,7 @@
 \alias{connect_sgbd}
 \title{Função que cria a conexão com o Banco de Dados}
 \usage{
-connect_sgbd()
+connect_sgbd(bd = "sqlite")
 }
 \description{
 Função que cria a conexão com o Banco de Dados
