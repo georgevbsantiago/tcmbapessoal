@@ -112,25 +112,42 @@ valor_monetario2 <- function(x) {
 #' 
 #' @export
 
-gravar_erro <- function(log_request, nm_log_erro ="", entrada ="",
+gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
                         id = "", cod_entidade = "", nm_entidade = "",
                         ano = "", mes = "", outros = "", sgbd) {
     
-    tb_request <- tibble::tibble(
-        data_time = log_request,
-        nm_log_erro = nm_log_erro,
-        error = entrada$error,
-        foreign_key = id,
-        cod_entidade = cod_entidade,
-        nm_entidade = nm_entidade,
-        ano = ano,
-        mes = mes,
-        outros = outros
-    )
+                tb_error <- tibble::tibble(
+                    data_time = log_request,
+                    nm_log_erro = nm_log_erro,
+                    entrada_result = entrada$result,
+                    entrada_error = entrada$error,
+                    foreign_key = id,
+                    cod_entidade = cod_entidade,
+                    nm_entidade = nm_entidade,
+                    ano = ano,
+                    mes = mes,
+                    outros = outros
+                )
     
-    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
+    write_sqlite <- purrr::safely(DBI::dbWriteTable)
+    
+    
+    result_sql <- write_sqlite(tcmbapessoal::connect_sgbd(sgbd), "tabela_log",
+                               tb_error, append = TRUE)
     
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
     
-
+    
+    while(is.null(result_sql$result) == TRUE) {
+        
+        print("Banco de Dados bloqueado - Tentando conectar novamente...")
+        
+        
+        result_sql <- write_sqlite(tcmbapessoal::connect_sgbd(sgbd), "tabela_log",
+                                   tb_error, append = TRUE)
+        
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
+        
+    }
+    
 }

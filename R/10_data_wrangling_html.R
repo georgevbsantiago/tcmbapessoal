@@ -156,21 +156,9 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
         DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
-        while(length(result_sql$result) == 0) {
+        while(is.null(result_sql$result) == TRUE) {
 
             print("Banco de Dados bloqueado - Tentando conectar novamente...")
-
-            # tb_request <- tibble::tibble(
-            #     data = tcmbapessoal::log_data_hora(),
-            #     log_erro = "BD Bloqueado",
-            #     time = "",
-            #     foreign_key = "",
-            #     nm_entidade = ""
-            # )
-            #
-            # DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
-            #
-            # DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
             result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_tratamento_arq_csv = "S",

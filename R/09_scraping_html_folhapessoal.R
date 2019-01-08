@@ -93,25 +93,25 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
     log_request <- tcmbapessoal::log_data_hora()
 
 
-    # Verifica houve timeout. Se sim, esperar 20 segundos e tentar novamente.
-    if (length(scraping_html$result) == 0) {
+    #!!! Desenvolver um tratamento melhor para timeout
+    
+    if (is.null(scraping_html$result) == TRUE) {
 
         message("#### Erro: 'Timeout' da Primeira tentativa para: ",
                 nm_entidade, " ano: ", ano, " mês:", mes, " ####")
-
-        tb_request <- tibble::tibble(
-            data = data,
-            log_erro = "timeout - primeira tentativa",
-            time = log_request,
-            foreign_key = id,
-            nm_entidade = nm_entidade
-        )
-
-        DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
-
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
-
+        
+      tcmbapessoal::gravar_erro(log_request = log_request,
+                                nm_log_erro ="timeout - primeira tentativa",
+                                entrada = scraping_html,
+                                id = id,
+                                cod_entidade = cod_entidade,
+                                nm_entidade = nm_entidade,
+                                ano = ano, 
+                                mes = mes,
+                                outros = "",
+                                sgbd = sgbd
+                                )
+      
         message("#### Iniciando Segunda tentativa para: ",
                 nm_entidade, " ano: ", ano, " mês:", mes, " ####")
 
@@ -127,56 +127,50 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
 
         log_request <- tcmbapessoal::log_data_hora()
 
-
-        if (length(scraping_html$result) == 0) {
-
-            tb_request <- tibble::tibble(
-                data = data,
-                log_erro = "timeout - primeira tentativa",
-                time = log_request,
-                foreign_key = id,
-                nm_entidade = nm_entidade
-            )
-
-
-            DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
-
-            DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
-
-            # Parar a iteração e pular para a próxima requisição
-            return(message("#### Erro: 'Timeout' da Segunda tentativa para: ",
-                           nm_entidade, " ano: ", ano, " mês:", mes, " ####"))
-
+        if (is.null(scraping_html$result) == TRUE) {
+          
+            tcmbapessoal::gravar_erro(log_request = log_request,
+                                      nm_log_erro ="timeout - segunda tentativa",
+                                      entrada = scraping_html,
+                                      id = id,
+                                      cod_entidade = cod_entidade,
+                                      nm_entidade = nm_entidade,
+                                      ano = ano, 
+                                      mes = mes,
+                                      outros = "",
+                                      sgbd = sgbd
+                                      )
+  
+              # Parar a iteração e pular para a próxima requisição
+              return(message("#### Erro: 'Timeout' da Segunda tentativa para: ",
+                             nm_entidade, " ano: ", ano, " mês:", mes, " ####"))
 
         }
+        
 
     }
 
 
-    # Verifica se há erro de querisição 404. Se sim, grava o erro numa tabela de log no BD.
-    if (scraping_html$result$status_code == 404) {
+        # Verifica se há erro de querisição 404. Se sim, grava o erro numa tabela de log no BD.
+        if (scraping_html$result$status_code == 404) {
 
+            tcmbapessoal::gravar_erro(log_request = log_request,
+                                      nm_log_erro ="erro - 404",
+                                      entrada = scraping_html,
+                                      id = id,
+                                      cod_entidade = cod_entidade,
+                                      nm_entidade = nm_entidade,
+                                      ano = ano, 
+                                      mes = mes,
+                                      outros = "",
+                                      sgbd = sgbd
+                                      )
+            
+            # Parar a iteração e pular para a próxima requisição.
+            return(message("#### Erro 404 de Requisição para: ",
+                           nm_entidade, " ano: ", ano, " mês:", mes, " ####"))
 
-        tb_request <- tibble::tibble(
-            data = data,
-            log_erro = "erro - 404",
-            time = log_request,
-            foreign_key = id,
-            nm_entidade = nm_entidade
-        )
-
-        DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
-
-        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
-
-        # Parar a iteração e pular para a próxima requisição.
-        return(message("#### Erro 404 de Requisição para: ",
-                       nm_entidade, " ano: ", ano, " mês:", mes, " ####"))
-
-
-    }
+        }
 
 
     nm_arq_html <- file.path(subdir_resposta_html_entidade,
@@ -223,83 +217,71 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
-        while(length(result_sql$result) == 0) {
+                  while(is.null(result_sql$result) == TRUE) {
+          
+                      print("Banco de Dados bloqueado - Tentando conectar novamente...")
+          
 
-            print("Banco de Dados bloqueado - Tentando conectar novamente...")
+                      result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
+                                                                    SET status_request_html = "S",
+                                                                        log_request_html = :log_request,
+                                                                        nm_arq_html = :nm_arq_html,
+                                                                        hash_arq_html = :hash_arq_html,
+                                                                        status_tratamento_arq_csv = "N"
+                                                                    WHERE id = :id
+                                                                                ;',
+                                      params = list(log_request = as.character(log_request),
+                                                    nm_arq_html = as.character(nm_arq_html),
+                                                    hash_arq_html = as.character(hash_arq_html),
+                                                    id = as.character(id)))
+            
+                      DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
+          
+                  }
 
-            # tb_request <- tibble::tibble(
-            #     data = tcmbapessoal::log_data_hora(),
-            #     log_erro = "BD Bloqueado",
-            #     time = "",
-            #     foreign_key = "",
-            #     nm_entidade = ""
-            # )
-            #
-            # DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
-            #
-            # DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
-          result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
-                                                        SET status_request_html = "S",
-                                                            log_request_html = :log_request,
-                                                            nm_arq_html = :nm_arq_html,
-                                                            hash_arq_html = :hash_arq_html,
-                                                            status_tratamento_arq_csv = "N"
-                                                        WHERE id = :id
-                                                                    ;',
-                          params = list(log_request = as.character(log_request),
-                                        nm_arq_html = as.character(nm_arq_html),
-                                        hash_arq_html = as.character(hash_arq_html),
-                                        id = as.character(id)))
-
-          DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
-        }
-
-
-        print(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
-                    tcmbapessoal::limpar_nome(nm_entidade), "-", "OK"))
+      print(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
+                  tcmbapessoal::limpar_nome(nm_entidade), "-", "OK"))
 
 
     } else {
 
-      result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
-                                                        SET status_request_html = "R",
-                                                            log_request_html = :log_request,
-                                                            nm_arq_html = :nm_arq_html,
-                                                            hash_arq_html = :hash_arq_html
-                                                        WHERE id = :id
-                                                                    ;',
-                      params = list(log_request = as.character(log_request),
-                                    nm_arq_html = as.character(nm_arq_html),
-                                    hash_arq_html = as.character(hash_arq_html),
-                                    id = as.character(id)))
-
-      DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
-
-        while(length(result_sql$result) == 0) {
-
-            print("Banco de Dados bloqueado - Tentando conectar novamente...")
-
           result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
-                                                        SET status_request_html = "R",
-                                                            log_request_html = :log_request,
-                                                            nm_arq_html = :nm_arq_html,
-                                                            hash_arq_html = :hash_arq_html
-                                                        WHERE id = :id
-                                                                    ;',
+                                                            SET status_request_html = "R",
+                                                                log_request_html = :log_request,
+                                                                nm_arq_html = :nm_arq_html,
+                                                                hash_arq_html = :hash_arq_html
+                                                            WHERE id = :id
+                                                                        ;',
                           params = list(log_request = as.character(log_request),
                                         nm_arq_html = as.character(nm_arq_html),
                                         hash_arq_html = as.character(hash_arq_html),
                                         id = as.character(id)))
-
+    
           DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
-        }
 
-      message(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
-                    tcmbapessoal::limpar_nome(nm_entidade), "-", "NAO INFORMADO"))
+                  while(is.null(result_sql$result) == TRUE) {
+          
+                      print("Banco de Dados bloqueado - Tentando conectar novamente...")
+          
+                      result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
+                                                                    SET status_request_html = "R",
+                                                                        log_request_html = :log_request,
+                                                                        nm_arq_html = :nm_arq_html,
+                                                                        hash_arq_html = :hash_arq_html
+                                                                    WHERE id = :id
+                                                                                ;',
+                                      params = list(log_request = as.character(log_request),
+                                                    nm_arq_html = as.character(nm_arq_html),
+                                                    hash_arq_html = as.character(hash_arq_html),
+                                                    id = as.character(id)))
+            
+                      DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
+          
+                  }
+
+        message(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
+                      tcmbapessoal::limpar_nome(nm_entidade), "-", "NAO INFORMADO"))
 
     }
 }
