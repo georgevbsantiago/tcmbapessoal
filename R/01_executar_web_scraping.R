@@ -24,6 +24,10 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
   # Rotina para verificar se o preenchimento da variável "ano" está correto
   anos_alvos <- as.numeric(ano)
+  nome_scraping <- as.character(nome_scraping)
+  sgbd <- as.character(sgbd)
+  repetir <- as.character(repetir)
+  backup <- as.character(backup)
 
             if(length(anos_alvos) > 1){
 
@@ -52,7 +56,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
             if(sgbd != "sqlite" | sgbd != "mysql") {
               
               
-              message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados")
+              return(message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados"))
               
               
             }

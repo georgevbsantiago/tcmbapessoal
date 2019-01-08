@@ -54,7 +54,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                                         status_tratamento_arq_csv, log_tratamento_arq_csv,
                                         nm_arq_csv, sgbd, ...) {
 
-    subdir_dados_exportados <- file.path(getwd(), "dados_exportados")
+    subdir_dados_exportados <- "dados_exportados"
 
     pegar_dados_html <- XML::htmlParse(nm_arq_html, encoding = "UTF-8") %>%
                          XML::readHTMLTable(stringsAsFactors = FALSE) %>%

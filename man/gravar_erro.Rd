@@ -6,7 +6,7 @@
 \usage{
 gravar_erro(log_request, nm_log_erro = "", entrada = "", id = "",
   cod_entidade = "", nm_entidade = "", ano = "", mes = "",
-  outros = "", sgbd)
+  outros = "", sgbd = "sqlite")
 }
 \arguments{
 \item{log_request}{Valor gerado pela função log_data_hora()}

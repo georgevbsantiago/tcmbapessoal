@@ -114,7 +114,7 @@ valor_monetario2 <- function(x) {
 
 gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
                         id = "", cod_entidade = "", nm_entidade = "",
-                        ano = "", mes = "", outros = "", sgbd) {
+                        ano = "", mes = "", outros = "", sgbd = "sqlite") {
     
                 tb_error <- tibble::tibble(
                     data_time = log_request,
