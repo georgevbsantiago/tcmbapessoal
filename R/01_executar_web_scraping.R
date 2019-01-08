@@ -35,11 +35,11 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
             }
 
-            anos_validos <- c(2016, 2017, 2018)
-
-            if(!anos_alvos %in% anos_validos){
-
-              return(print("Informe um dos seguintes anos: 2016, 2017 ou 2018"))
+                  anos_validos <- c(2016, 2017, 2018)
+      
+                  if(!anos_alvos %in% anos_validos){
+      
+                    return(print("Informe um dos seguintes anos: 2016, 2017 ou 2018"))
 
             }
 
@@ -57,6 +57,25 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
               
               
               return(message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados"))
+              
+              
+            }
+                  
+                  
+            if(repetir != "SIM" | backup != "NAO") {
+              
+              
+              return(message("Digite SIM ou NAO para o argumento 'repetir' da função"))
+              
+              
+            }
+                  
+                  
+                  
+            if(backup != "SIM" | backup != "NAO") {
+              
+              
+              return(message("Digite SIM ou NAO para o argumento 'backup' da função"))
               
               
             }

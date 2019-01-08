@@ -88,7 +88,7 @@ Assim como outras informações como o nome do Web Scraping. Data de Criação, 
 > readr::parse_number("R$ 3.312.200,35", locale = readr::locale(grouping_mark = ".", decimal_mark = ","))
 [1] 3312200
 
-
+!!! Mudar a lógica da rotina de verificação em " if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE)" para algo mais genérico, já que o código, agora, é agnóstico.
 
 
 

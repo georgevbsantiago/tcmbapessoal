@@ -7,6 +7,7 @@
 
 executar_backup_bd_googledrive <- function(backup = "NAO") {
 
+    
     if( backup == "NAO") {
 
         break()
@@ -24,6 +25,8 @@ executar_backup_bd_googledrive <- function(backup = "NAO") {
 
     zip::zip(nome_arquivo_zip, bd_sqlite,
              recurse = FALSE, compression_level = 1)
+    
+    print("Arquivo de Backup do BD gerado com sucesso!")
 
     # Grava a hora e data da requisição para ser incluída no arquivo HMTL e no BD
     log_request <- log_data_hora()
@@ -67,6 +70,15 @@ executar_backup_bd_googledrive <- function(backup = "NAO") {
     #googledrive::drive_user()
 
     # ---------------------------------------------------------------------------
+    
+    if(file.exists("token_googledrive.rds") == FALSE) {
+        
+        message("Realize o processo de autenticação do Google Drive ",
+        "e salve o TOKEN no arquivo 'token_googledrive.rds' na pasta raiz do Web Scraping")
+        
+    }
+    
+    print("Iniciando processo de Autenticação do Token no Google Drive!")
 
     # Autenticar com Token ou API KEY
     googledrive::drive_auth(oauth_token = "token_googledrive.rds")
@@ -111,7 +123,7 @@ executar_backup_csv_googledrive <- function(backup = "NAO") {
         break()
     }
 
-    nome_arquivo_zip <- file.path(getwd(), "backup", "bk_arquivos_csv.zip")
+    nome_arquivo_zip <- file.path("backup", "bk_arquivos_csv.zip")
 
     lista_arquivos_csv <- file.path("dados_exportados", dir("dados_exportados"))
 
@@ -165,7 +177,16 @@ executar_backup_csv_googledrive <- function(backup = "NAO") {
     #googledrive::drive_user()
 
     # ---------------------------------------------------------------------------
-
+    
+    if(file.exists("token_googledrive.rds") == FALSE) {
+        
+        message("Realize o processo de autenticação do Google Drive ",
+                "e salve o TOKEN no arquivo 'token_googledrive.rds' na pasta raiz do Web Scraping")
+        
+    }
+    
+    print("Iniciando processo de Autenticação do Token no Google Drive!")
+    
     # Autenticar com Token ou API KEY
     googledrive::drive_auth(oauth_token = "token_googledrive.rds")
 
@@ -182,15 +203,21 @@ executar_backup_csv_googledrive <- function(backup = "NAO") {
 
     if (verificador_dir_existe == 0){
 
-    print("Iniciando o UPLOAD do arquivo 'bk_arquivos_csv.zip' para o Google Drive...")
+        print("Iniciando o UPLOAD do arquivo 'bk_arquivos_csv.zip' para o Google Drive...")
 
-    googledrive::drive_upload(nome_arquivo_zip,
-                              nm_arquivo_googledrive)
+        googledrive::drive_upload(nome_arquivo_zip,
+                                  nm_arquivo_googledrive)
 
     } else {
-
-        googledrive::drive_update(nome_arquivo_zip,
-                                  nm_arquivo_googledrive)
+        
+        print("Iniciando o UPDATE do arquivo 'bk_arquivos_csv.zip' para o Google Drive...")
+        
+        
+        # OBS: Na fução googledrive::drive_update() as variáveis são invertidas
+        #em relação à função googledrive::drive_upload(
+        googledrive::drive_update(nm_arquivo_googledrive,
+                                  nome_arquivo_zip)
+        
     }
 
     print("Arquivos CSV (.zip) exportados com sucesso para o Google Drive!")
