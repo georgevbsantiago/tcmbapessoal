@@ -43,16 +43,21 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
             }
 
+                  
             if(nome_scraping == "") {
 
               return(print("Defina uma nome para o Scraping"))
+              
             }
+                  
 
             if(stringr::str_detect(nome_scraping, "[*//={}]") == TRUE) {
 
               return(print("Não utilize os caracteres inválidos no nome do Scraping "))
+              
             }
             
+                  
             if(sgbd != "sqlite" | sgbd != "mysql") {
               
               
@@ -81,6 +86,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
             }
 
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
+    # !!! Mudar essa rotina para algo mais genérico que seja aceito no SQLite e no MySQL
     if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
 
     # Função que cria as pastas dos arquivos
@@ -91,50 +97,9 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
     # Função que cria 4 tabelas que serão armazenadas no SQLite.
       tcmbapessoal::criar_tabelas_bd(sgbd)
-
-    # Função que cria a tabela dCalendario
-      tcmbapessoal::criar_tb_dcalendario(anos_alvos, sgbd)
-
-    # Função que faz o Web Scraping do código e nome dos Municípios
-      tcmbapessoal::criar_tb_dmunicipios(sgbd)
-
-    # Função que faz o Web Scraping (via Web Service) do código e nome das Entidades e, ao fim, cria a tabela.
-      tcmbapessoal::criar_tb_dmunicipios_entidades(sgbd)
-
-    # Função que cria a tabela das requisições
-      tcmbapessoal::criar_tb_requisicoes_pessoal(sgbd)
-
-    # Função cria a tabela de requisições e faz o Web Scraping das páginas HTML que contêm
-    # os dados da Folha de Pessoal. #OBS: O tempo de resposta do TCM está entre 10 a 30 segundos
-      tcmbapessoal::executar_scraping_html_folhapessoal(repetir, sgbd)
-
-    # Função que faz o parser dos HTMLs das depesas e o Data Wrangling dos HTMLs
-      # Faz o pré-processamento dos dados obtidos do HTML, aplicando o conceito Tidy Data
-      # Por fim, cria uma arquivos CSV para a pasta dados_exportados.
-      tcmbapessoal::executar_data_wrangling_html_pessoal(sgbd)
-
-            # O conceito Tidy Data de Hadley Wickham tem por objetivo arrumar os dados
-            # para que eles sejam utilizados em softwares de estatísticas ou
-            # de Business Intelligence sem a necessidade de realizar
-            # mais transformações nos dados.
-
-            # O Conceito está resumido nestas três regras:
-            # - Cada variável deve ter sua própria coluna.
-            # - Cada observação deve ter sua própria linha.
-            # - Cada valor deve ter sua própria célula.
-
-            #(http://r4ds.had.co.nz/tidy-data.html)
-
-    # Função que faz o Backup dos Banco de Dados para o Google Drive
-      tcmbapessoal::executar_backup_bd_googledrive(backup)
-
-    # Função que faz o Backup dos Arquivos CSV para o Google Drive
-      tcmbapessoal::executar_backup_csv_googledrive(backup)
-
-
-    } else {
-
-
+      
+    }
+     
       # Função que cria a tabela dCalendario
       tcmbapessoal::criar_tb_dcalendario(anos_alvos, sgbd)
       
@@ -174,9 +139,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
       # Função que faz o Backup dos Arquivos CSV para o Google Drive
       tcmbapessoal::executar_backup_csv_googledrive(backup)
 
-
-    }
-
-            print("## Web Scraping finalizado com sucesso! ###")
+      
+      print("## Web Scraping finalizado com sucesso! ###")
 
 }
