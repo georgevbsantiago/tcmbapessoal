@@ -76,3 +76,61 @@ resultado <- stringr::str_replace_all(x, "[/]", "") %>%
 return(resultado)
 
 }
+
+
+###################################################################
+
+
+#' @title Função utilizadas no Web Scraping
+#' 
+#' @param x Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75
+#' 
+#' @export
+valor_monetario2 <- function(x) {
+        x %>% 
+        stringr::str_remove("R\\$") %>% 
+        stringr::str_remove(".") %>% 
+        stringr::str_replace_all(",", "\\.") %>% 
+        as.numeric()
+}
+
+###################################################################
+
+
+#' @title Função para gravar erro da execução do código
+#' 
+#' @param log_request Valor gerado pela função log_data_hora()
+#' @param nm_log_erro Nome do erro atribuído pelo desenvolvedor;
+#' @param entrada Resultado após execução da função envolvida pela função purrr::safely
+#' @param id Número do ID no Banco de Dados;
+#' @param cod_entidade Código da Entidade Municipal do Web Scraping;
+#' @param nm_entidade Nome da Entidade Municipal do Web Scraping;
+#' @param ano Ano de referência da Entidade Municipal;
+#' @param mes Mês de referência da Entidade Municipal;
+#' @param outros Outras informações adicionadas pelo Desenvolvedor;
+#' @param sgbd Nome do Banco de Dados usado na execução do Código
+#' 
+#' @export
+
+gravar_erro <- function(log_request, nm_log_erro ="", entrada ="",
+                        id = "", cod_entidade = "", nm_entidade = "",
+                        ano = "", mes = "", outros = "", sgbd) {
+    
+    tb_request <- tibble::tibble(
+        data_time = log_request,
+        nm_log_erro = nm_log_erro,
+        error = entrada$error,
+        foreign_key = id,
+        cod_entidade = cod_entidade,
+        nm_entidade = nm_entidade,
+        ano = ano,
+        mes = mes,
+        outros = outros
+    )
+    
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
+    
+    DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
+    
+
+}

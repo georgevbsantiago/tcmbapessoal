@@ -54,6 +54,7 @@ Upload para o Google Drive:
 
 # BUGS e Melhorias
 
+
 1º - Resolver o problema do progressivo consumo de memória durante o tratamento dos arquivos HTML para CSV;
 
 2º - Criar um arquivo .R para armazenar todas as hipóteses de rotinas de erro

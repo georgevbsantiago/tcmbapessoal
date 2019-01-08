@@ -198,7 +198,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
 
     hash_arq_html <- digest::sha1(nm_arq_html)
 
-
+    
     detectar_tabela <- xml2::read_html(scraping_html$result) %>%
                        rvest::html_node("#tabelaConsulta") %>%
                        is.na()
