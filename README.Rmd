@@ -51,26 +51,31 @@ Tratamento dos Dados:
 Upload para o Google Drive:
 7 - Upload dos arquivos (CSV) para o Google Drive para diponibilização do BD ao público:
 
+## Objetivos do Web Scraping
+
+1 - Empregar um comportamento de Web Scraping, em vez de Web Crawler.
+
+2 - Tornar o Web Scraping autônomo e que não pare devido a exceções após ser executado.
+
+3 - Tornar o Web Scraping executável por aplições de automação/tarefas como Cron do Linux.
+
+4 - Tornar o Web Scraping agnóstico de Sistema de Banco de Dados Relacional (pelo menos, aceite o SQLite e MySQL).
+
+5 - Exportar o resultado do Scraping para um repositório público para que qualquer pessoa possa baixar os dados.
 
 # BUGS e Melhorias
 
 
 1º - Resolver o problema do progressivo consumo de memória durante o tratamento dos arquivos HTML para CSV;
 
-2º - Criar um arquivo .R para armazenar todas as hipóteses de rotinas de erro
+2º - Agregar possíveis insights aplicados no pacote RCrawler
 
-3º - Tornar o código agnóstico de Banco de Dados relacional
-
-4º - Agregar possíveis insights aplicados no pacote RCrawler
-
-5º - Aprimorar elementos da Documentação
+3º - Aprimorar elementos da Documentação
 
 Outras Melhorias:
 !!!Criar um loop seguro para a função salvar_html de erros ao salvar o artquivo hmtl por ser muito grande (maior que 260 caracteres) ou por ter um conteúdo vazio
 
 !!! Tentar desenvolver um contador para visualizar o progresso do Web Scraping
-
-!!! Criar uma regra para criação do Banco de Dados e Outra para Conexão do Banco de Dados
 
 !!! Analisar a vantagem de regisrar o caminho do diretório principal em uma tabela do Banco de Dados,
 Assim como outras informações como o nome do Web Scraping. Data de Criação, Escopo... dentre outros metadados
