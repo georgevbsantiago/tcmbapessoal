@@ -42,7 +42,7 @@ executar_backup_bd_dropbox <- function(backup = "NAO") {
 
     if(file.exists("token_dropbox.rds") == FALSE) {
         
-        message("Realize o processo de autenticação do DropBox ",
+        stop("Realize o processo de autenticação do DropBox ",
                 "e salve o TOKEN no arquivo 'token_dropbox.rds' na pasta raiz do Web Scraping.",
                 "Veja as instruções no arquivo '11_backup_dropbox.R deste pacote")
         
@@ -121,7 +121,7 @@ executar_backup_csv_dropbox <- function(backup = "NAO") {
     
     if(file.exists("token_dropbox.rds") == FALSE) {
         
-        message("Realize o processo de autenticação do DropBox ",
+        stop("Realize o processo de autenticação do DropBox ",
                 "e salve o TOKEN no arquivo 'token_dropbox.rds' na pasta raiz do Web Scraping.",
                 "Veja as instruções no arquivo '11_backup_dropbox.R deste pacote")
         
