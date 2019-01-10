@@ -4,38 +4,24 @@
 #'
 #' @export
 
-criar_diretorios <- function(nome_scraping) {
+criar_diretorios <- function() {
 
     # Cria as pastas dos diretórios que serão utilizados;
 
-    dir_principal <- file.path(getwd(), nome_scraping)
-
-    if (dir.exists(dir_principal) == FALSE) {
-        dir.create(dir_principal)
+    if (dir.exists("bd_sqlite") == FALSE) {
+        dir.create("bd_sqlite")
     }
 
-    setwd(dir_principal)
-
-
-    subdir_bd_sqlite <- file.path(dir_principal, "bd_sqlite")
-    subdir_resposta_scraping_html <- file.path(dir_principal, "resposta_scraping_html")
-    subdir_dados_exportados <- file.path(dir_principal, "dados_exportados")
-    subdir_backup <- file.path(dir_principal, "backup")
-
-    if (dir.exists(subdir_bd_sqlite) == FALSE) {
-        dir.create(subdir_bd_sqlite)
+    if (dir.exists("resposta_scraping_html") == FALSE) {
+        dir.create("resposta_scraping_html")
     }
 
-    if (dir.exists(subdir_resposta_scraping_html) == FALSE) {
-        dir.create(subdir_resposta_scraping_html)
+    if (dir.exists("dados_exportados") == FALSE) {
+        dir.create("dados_exportados")
     }
 
-    if (dir.exists(subdir_dados_exportados) == FALSE) {
-        dir.create(subdir_dados_exportados)
-    }
-
-    if (dir.exists(subdir_backup) == FALSE) {
-        dir.create(subdir_backup)
+    if (dir.exists("backup") == FALSE) {
+        dir.create("backup")
     }
 
 

@@ -57,40 +57,45 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
               
             }
             
-                  
-            if(sgbd != "sqlite" | sgbd != "mysql") {
-              
-              
+
+
+            if(!sgbd %in% c("sqlite", "mysql")) {
+
+
               return(message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados"))
-              
-              
-            }
-                  
-                  
-            if(repetir != "SIM" | backup != "NAO") {
-              
-              
-              return(message("Digite SIM ou NAO para o argumento 'repetir' da função"))
-              
-              
-            }
-                  
-                  
-                  
-            if(backup != "SIM" | backup != "NAO") {
-              
-              
-              return(message("Digite SIM ou NAO para o argumento 'backup' da função"))
-              
-              
+
+
             }
 
+
+            if(!repetir %in% c("SIM", "NAO")) {
+
+
+              return(message("Digite SIM ou NAO para o argumento 'repetir' da função"))
+
+
+            }
+
+
+
+            if(!backup %in% c("SIM", "NAO")) {
+
+
+              return(message("Digite SIM ou NAO para o argumento 'backup' da função"))
+
+
+            }
+
+    
+    # Definir o caminho do Diretório Raiz (pasta de trabalho)
+    setwd(file.path(get.wd(), nome_scraping))
+                  
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
     # !!! Mudar essa rotina para algo mais genérico que seja aceito no SQLite e no MySQL
     if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
 
     # Função que cria as pastas dos arquivos
-      tcmbapessoal::criar_diretorios(nome_scraping)
+      tcmbapessoal::criar_diretorios()
       
     # Função que cria o Banco de Dados
       tcmbapessoal::criar_bd(sgbd)
