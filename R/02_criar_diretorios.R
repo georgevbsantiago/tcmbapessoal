@@ -7,28 +7,29 @@
 criar_diretorios <- function(nome_scraping) {
 
     # Cria as pastas dos diretórios que serão utilizados;
-    # Cria as pastas dos diretórios que serão utilizados;
+    # Sa get() for igual ao diretório atual, então print
+
+    dir_raiz_atual <- getwd()
     
-    dir_principal <- file.path(getwd(), nome_scraping)
+    dir_raiz_verificador <- file.path(dir_raiz_atual, "bd_sqlite")
     
-    if (dir.exists(dir_principal) == TRUE) {
-        
-        
-        setwd(dir_principal)
-        
+    if (dir.exists(dir_raiz_verificador) == TRUE) {
+
         print("O diretório Raiz foi definido com sucesso!")
         
         
     } else {
         
-            dir.create(dir_principal)
+            dir_raiz_ws <- file.path(getwd(), nome_scraping)
         
-            setwd(dir_principal)
+            dir.create(dir_raiz_ws)
+        
+            setwd(dir_raiz_ws)
             
-            subdir_bd_sqlite <- file.path(dir_principal, "bd_sqlite")
-            subdir_resposta_scraping_html <- file.path(dir_principal, "resposta_scraping_html")
-            subdir_dados_exportados <- file.path(dir_principal, "dados_exportados")
-            subdir_backup <- file.path(dir_principal, "backup")
+            subdir_bd_sqlite <- file.path(dir_raiz_ws, "bd_sqlite")
+            subdir_resposta_scraping_html <- file.path(dir_raiz_ws, "resposta_scraping_html")
+            subdir_dados_exportados <- file.path(dir_raiz_ws, "dados_exportados")
+            subdir_backup <- file.path(dir_raiz_ws, "backup")
             
             if (dir.exists(subdir_bd_sqlite) == FALSE) {
                 dir.create(subdir_bd_sqlite)
@@ -46,7 +47,7 @@ criar_diretorios <- function(nome_scraping) {
                 dir.create(subdir_backup)
             }
             
-            print("As pastas foram criadas com sucesso no diretório")
+            print("As pastas foram criadas com sucesso no diretório raiz")
         
     }       
 

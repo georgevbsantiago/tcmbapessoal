@@ -31,7 +31,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
             if(length(anos_alvos) > 1){
 
-              return(print("Informe apenas um valor: O ano de início para realizar o Web Scraping."))
+              stop("Informe apenas um valor: O ano de início para realizar o Web Scraping.")
 
             }
 
@@ -39,40 +39,34 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
       
                   if(!anos_alvos %in% anos_validos){
       
-                    return(print("Informe um dos seguintes anos: 2016, 2017 ou 2018"))
+                    stop("Informe um dos seguintes anos: 2016, 2017 ou 2018")
 
             }
 
                   
             if(nome_scraping == "") {
 
-              return(print("Defina uma nome para o Scraping"))
-              
+              stop("Defina uma nome para o Scraping")
             }
                   
 
             if(stringr::str_detect(nome_scraping, "[*//={}]") == TRUE) {
 
-              return(print("Não utilize os caracteres inválidos no nome do Scraping "))
-              
+              stop("Não utilize os caracteres inválidos no nome do Scraping ")
             }
             
 
 
             if(!sgbd %in% c("sqlite", "mysql")) {
 
-
-              return(message("Selecione o SQLite ou o MySql para conectar ao Banco de Dados"))
-
+              stop("Selecione o SQLite ou o MySql para conectar ao Banco de Dados")
 
             }
 
 
             if(!repetir %in% c("SIM", "NAO")) {
 
-
-              return(message("Digite SIM ou NAO para o argumento 'repetir' da função"))
-
+              stop("Digite SIM ou NAO para o argumento 'repetir' da função")
 
             }
 
@@ -80,9 +74,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
             if(!backup %in% c("SIM", "NAO")) {
 
-
-              return(message("Digite SIM ou NAO para o argumento 'backup' da função"))
-
+              stop("Digite SIM ou NAO para o argumento 'backup' da função")
 
             }
 

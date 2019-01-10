@@ -8,9 +8,11 @@
 executar_backup_bd_dropbox <- function(backup = "NAO") {
     
     
-    if( backup == "NAO") {
+    if(!backup %in% c("SIM", "NAO")) {
         
-        break()
+        stop("Digite SIM ou NAO para o argumento 'backup' da função")
+        
+        
     }
     
     # Define o padrão do nome a ser utilizado para identificar o BK dos arquivos;
@@ -87,13 +89,14 @@ executar_backup_bd_dropbox <- function(backup = "NAO") {
 
 executar_backup_csv_dropbox <- function(backup = "NAO") {
     
-    if( backup == "NAO") {
+    if(!backup %in% c("SIM", "NAO")) {
         
-        break()
+        stop("Digite SIM ou NAO para o argumento 'backup' da função")
+        
+        
     }
     
-    token <- readRDS("token_dropbox.rds")
-    
+
     nome_arquivo_zip <- file.path("backup", "bk_arquivos_csv.zip")
     
     lista_arquivos_csv <- file.path("dados_exportados", dir("dados_exportados"))
