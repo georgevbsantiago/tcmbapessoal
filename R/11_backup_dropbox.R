@@ -144,6 +144,7 @@ executar_backup_csv_dropbox <- function(backup = "NAO") {
     
     rdrop2::drop_upload(nome_arquivo_zip,
                         path = dir_arquivo_dropbox,
+                        mode = "overwrite",
                         dtoken = token_dropbox)
     
     print("Backup do Banco de Dados (.zip) exportado com sucesso para o DropBox!")
