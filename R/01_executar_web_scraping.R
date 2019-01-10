@@ -88,7 +88,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
     
     # Definir o caminho do Diretório Raiz (pasta de trabalho)
-    setwd(file.path(get.wd(), nome_scraping))
+    setwd(file.path(getwd(), nome_scraping))
                   
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
     # !!! Mudar essa rotina para algo mais genérico que seja aceito no SQLite e no MySQL
