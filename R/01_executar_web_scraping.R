@@ -94,14 +94,14 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
     # !!! Mudar essa rotina para algo mais genérico que seja aceito no SQLite e no MySQL
     if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
 
-    # Função que cria as pastas dos arquivos
-      tcmbapessoal::criar_diretorios()
+          # Função que cria as pastas dos arquivos
+            tcmbapessoal::criar_diretorios()
+            
+          # Função que cria o Banco de Dados
+            tcmbapessoal::criar_bd(sgbd)
       
-    # Função que cria o Banco de Dados
-      tcmbapessoal::criar_bd(sgbd)
-
-    # Função que cria 4 tabelas que serão armazenadas no SQLite.
-      tcmbapessoal::criar_tabelas_bd(sgbd)
+          # Função que cria 4 tabelas que serão armazenadas no SQLite.
+            tcmbapessoal::criar_tabelas_bd(sgbd)
       
     }
      
@@ -139,10 +139,12 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
               #(http://r4ds.had.co.nz/tidy-data.html)
 
       # Função que faz o Backup dos Banco de Dados para o Google Drive
-      tcmbapessoal::executar_backup_bd_googledrive(backup)
+      #tcmbapessoal::executar_backup_bd_googledrive(backup)
+      tcmbapessoal::executar_backup_bd_dropbox(backup)
 
       # Função que faz o Backup dos Arquivos CSV para o Google Drive
-      tcmbapessoal::executar_backup_csv_googledrive(backup)
+      #tcmbapessoal::executar_backup_csv_googledrive(backup)
+      tcmbapessoal::executar_backup_csv_dropbox(backup)
 
       
       print("## Web Scraping finalizado com sucesso! ###")

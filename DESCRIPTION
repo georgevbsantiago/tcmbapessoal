@@ -29,6 +29,7 @@ Imports:
     RSQLite,
     zip,
     googledrive,
+    rdrop2,
     digest
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
