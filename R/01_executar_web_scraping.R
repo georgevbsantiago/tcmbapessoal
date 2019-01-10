@@ -87,16 +87,14 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
             }
 
     
-    # Definir o caminho do Diretório Raiz (pasta de trabalho)
-    setwd(file.path(getwd(), nome_scraping))
-                  
+    # Função que cria as pastas dos arquivos e define o diretório Raiz
+    tcmbapessoal::criar_diretorios(nome_scraping)
+    
+
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
     # !!! Mudar essa rotina para algo mais genérico que seja aceito no SQLite e no MySQL
     if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
 
-          # Função que cria as pastas dos arquivos
-            tcmbapessoal::criar_diretorios()
-            
           # Função que cria o Banco de Dados
             tcmbapessoal::criar_bd(sgbd)
       
@@ -105,6 +103,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
       
     }
      
+
       # Função que cria a tabela dCalendario
       tcmbapessoal::criar_tb_dcalendario(anos_alvos, sgbd)
       
