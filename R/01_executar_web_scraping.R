@@ -29,7 +29,11 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
   repetir <- as.character(repetir)
   backup <- as.character(backup)
 
-
+            if(length(anos) > 1){
+              
+              stop("Informe o ano de início do Web Scraping: 2016, 2017, 2018 ou 2019")
+              
+            }
       
             if(any(anos == c(2016, 2017, 2018, 2019)) == FALSE){
 
