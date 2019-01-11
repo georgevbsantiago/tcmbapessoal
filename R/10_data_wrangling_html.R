@@ -60,8 +60,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                          XML::readHTMLTable(stringsAsFactors = FALSE) %>%
                          .[[2]]
     
-#!!! Modificar a função para retornar TRUE quando identificar o número "13" no nome da coluna
-    if (is.vector(pegar_dados_html$"13Âº SalÃ¡rio") == TRUE){
+    if( any(stringr::str_detect(names(pegar_dados_html), "13")) ){
 
         data_wrangling <- pegar_dados_html %>%
             tibble::as_tibble() %>%
