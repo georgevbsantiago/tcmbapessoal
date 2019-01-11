@@ -23,7 +23,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
 
 
   # Rotina para verificar se o preenchimento da variável "ano" está correto
-  anos <- as.numeric(anos)
+  anos <- as.integer(anos)
   nome_scraping <- as.character(nome_scraping)
   sgbd <- as.character(sgbd)
   repetir <- as.character(repetir)
@@ -31,9 +31,9 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
 
 
       
-            if(!anos %in% c(2016, 2017, 2018)){
+            if(any(anos == c(2016, 2017, 2018, 2019)) == FALSE){
 
-              stop("Informe um dos seguintes anos: 2016, 2017 ou 2018")
+              stop("Informe um dos seguintes anos: 2016, 2017, 2018 ou 2019")
 
             }
 
