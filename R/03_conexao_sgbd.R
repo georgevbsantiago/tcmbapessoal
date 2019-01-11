@@ -25,13 +25,15 @@ criar_bd <- function(sgbd = "sqlite") {
             
         }
             
-            if(length(sqlite_bd$result) == 0) {
+            if(is.null(sqlite_bd$result)) {
                 
-                message("### Ocorreu um erro durante a criação do Bando de Dados no SQLite!")
-                message("### Verifique se o diretório foi criado corretamente ou se você tem permissão para criar o SQLite no diretório!")
+                stop("### Ocorreu um erro durante a criação do Bando de Dados no SQLite!",
+                     "### Verifique se o diretório foi criado corretamente ou se você tem permissão para criar o SQLite no diretório!")
             
         
-        }
+            }
+        
+        print("Banco de Dados do SQLite criado com Sucesso!")
        
     }
     
@@ -66,18 +68,15 @@ connect_sgbd <- function(sgbd = "sqlite") {
         while(length(sqlite_bd$result) == 0) {
     
             print("Banco de Dados bloqueado - Tentando conectar novamente...")
-    
-            tb_request <- tibble::tibble(
-                data = tcmbapessoal::log_data_hora(),
-                log_erro = "BD Bloqueado",
-                time = "",
-                foreign_key = "",
-                nm_entidade = ""
-            )
-    
-            DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_log", tb_request, append = TRUE)
-    
-            DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
+            
+            log_request <- tcmbapessoal::log_data_hora()
+            
+            tibble::tibble(log_request,
+                            nm_log_erro = "Erro ao acesso o SQLite",
+                            sgbd = "sqlite") %>%
+             readr::write_delim(file.path("bd_sqlite",
+                                          "log_sgbd.csv"),
+                                delim = ";", append = TRUE)
             
             # Tentar novamente a conexão com o BD
             sqlite_bd <- conexao_segura_sqlite(RSQLite::SQLite(),
