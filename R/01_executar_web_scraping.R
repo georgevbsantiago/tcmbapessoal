@@ -15,7 +15,7 @@
 #'
 #' @export
 
-executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
+executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
                                   repetir = "NAO", backup = "NAO") {
 
   # Para desenvolver esse script, é necessário pensar em, pelo menos, 2 Hipótese de execução:
@@ -23,23 +23,17 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
 
 
   # Rotina para verificar se o preenchimento da variável "ano" está correto
-  anos_alvos <- as.numeric(ano)
+  anos <- as.numeric(anos)
   nome_scraping <- as.character(nome_scraping)
   sgbd <- as.character(sgbd)
   repetir <- as.character(repetir)
   backup <- as.character(backup)
 
-            if(length(anos_alvos) > 1){
 
-              stop("Informe apenas um valor: O ano de início para realizar o Web Scraping.")
-
-            }
-
-                  anos_validos <- c(2016, 2017, 2018)
       
-                  if(!anos_alvos %in% anos_validos){
-      
-                    stop("Informe um dos seguintes anos: 2016, 2017 ou 2018")
+            if(!anos %in% c(2016, 2017, 2018)){
+
+              stop("Informe um dos seguintes anos: 2016, 2017 ou 2018")
 
             }
 
@@ -97,7 +91,7 @@ executar_web_scraping <- function(ano, nome_scraping, sgbd = "sqlite",
      
 
       # Função que cria a tabela dCalendario
-      tcmbapessoal::criar_tb_dcalendario(anos_alvos, sgbd)
+      tcmbapessoal::criar_tb_dcalendario(anos, sgbd)
       
       # Função que faz o Web Scraping do código e nome dos Municípios
       tcmbapessoal::criar_tb_dmunicipios(sgbd)
