@@ -5,12 +5,13 @@
 #'
 #' @export
 
-criar_tb_dcalendario <- function(anos_alvos, sgbd = "sqlite"){
+criar_tb_dcalendario <- function(anos, sgbd = "sqlite"){
 
-    tb_dcalendario <- purrr::map_dfr(anos_alvos, tb_anos_alvos) %>%
+    tb_dcalendario <- purrr::map_dfr(anos, tb_anos) %>%
                       tibble::as_tibble()
 
-    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_dcalendario", tb_dcalendario, overwrite = TRUE)
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_dcalendario",
+                      tb_dcalendario, overwrite = TRUE)
 
     print("A tabela `tabela_dcalendario` foi criada com sucesso no BD")
 
@@ -21,11 +22,11 @@ criar_tb_dcalendario <- function(anos_alvos, sgbd = "sqlite"){
 
 ######################################################################################
 
-tb_anos_alvos <- function(anos_alvos) {
+tb_anos <- function(anos) {
 
 
     # Cria a tabela com a relação de meses e ano para o Web Scraping;
-    tb_calendario <- tibble::tibble(data = seq(lubridate::ymd(paste0(anos_alvos,"-01-01")),
+    tb_calendario <- tibble::tibble(data = seq(lubridate::ymd(paste0(anos, "-01-01")),
                                                (lubridate::today() - lubridate::day(lubridate::today()) + 1 - months(2)),
                                                by = "month"),
                                     ano = lubridate::year(data),

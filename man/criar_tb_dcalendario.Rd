@@ -4,7 +4,7 @@
 \alias{criar_tb_dcalendario}
 \title{Função que gera a tabela com a relação de meses e ano para o Web Scraping;}
 \usage{
-criar_tb_dcalendario(anos_alvos, sgbd = "sqlite")
+criar_tb_dcalendario(anos, sgbd = "sqlite")
 }
 \description{
 Função que gera a tabela com a relação de meses e ano para o Web Scraping;
