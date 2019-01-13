@@ -26,7 +26,7 @@ executar_backup_bd_dropbox <- function(backup = "NAO") {
                                   paste0("bk_bd_tcm_folha_pessoal_municipios_", sufixo, ".zip"))
     
     zip::zip(nome_arquivo_zip, bd_sqlite,
-             recurse = FALSE, compression_level = 1)
+             recurse = FALSE, compression_level = 9)
     
     print("Arquivo de Backup do BD gerado com sucesso!")
     
@@ -105,7 +105,7 @@ executar_backup_csv_dropbox <- function(backup = "NAO") {
                   "arquivos CSV. Esse processo pode levar alguns minutos"))
     
     zip::zip(nome_arquivo_zip, lista_arquivos_csv,
-             recurse = FALSE, compression_level = 1)
+             recurse = FALSE, compression_level = 9)
     
     print("Arquivo 'bk_arquivos_csv.zip' gerado com sucesso!")
     
