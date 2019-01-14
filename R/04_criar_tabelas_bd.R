@@ -87,11 +87,16 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
 
         DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_log (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                  	data TEXT NOT NULL,
-                                                  	log_erro TEXT NOT NULL,
-                                                  	time TEXT NOT NULL,
-                                                  	foreign_key	TEXT NOT NULL,
-                                                  	nm_entidade	TEXT NOT NULL
+                                                  	data_time TEXT NOT NULL,
+                                                  	nm_log_erro TEXT NOT NULL,
+                                                  	entrada_result TEXT NOT NULL,
+                                                  	entrada_error TEXT NOT NULL,
+                                                  	foreign_key TEXT NOT NULL,
+                                                  	cod_entidade TEXT NOT NULL,
+                                                  	nm_entidade TEXT NOT NULL,
+                                                  	ano TEXT NOT NULL,
+                                                  	mes TEXT NOT NULL,
+                                                  	outros TEXT NOT NULL
                                                     );"
         )
 

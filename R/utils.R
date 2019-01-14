@@ -117,17 +117,17 @@ gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
                         ano = "", mes = "", outros = "", sgbd = "sqlite") {
     
                 tb_error <- tibble::tibble(
-                    data_time = log_request,
-                    nm_log_erro = nm_log_erro,
-                    entrada_result = entrada$result,
-                    entrada_error = entrada$error,
-                    foreign_key = id,
-                    cod_entidade = cod_entidade,
-                    nm_entidade = nm_entidade,
-                    ano = ano,
-                    mes = mes,
-                    outros = outros
-                )
+                                        data_time = log_request,
+                                        nm_log_erro = nm_log_erro,
+                                        entrada_result = entrada$result,
+                                        entrada_error = entrada$error,
+                                        foreign_key = id,
+                                        cod_entidade = cod_entidade,
+                                        nm_entidade = nm_entidade,
+                                        ano = ano,
+                                        mes = mes,
+                                        outros = outros
+                                        )
     
     write_sqlite <- purrr::safely(DBI::dbWriteTable)
     
