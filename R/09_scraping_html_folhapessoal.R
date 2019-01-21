@@ -36,14 +36,24 @@ executar_scraping_html_folhapessoal <- function(repetir = "NAO", sgbd = "sqlite"
   }
 
     print("Iniciando Web Scraping dos arquivos HTML das Despesas")
+    
+    #Variável alocada no ambiente global (com: '<<-') para servidir de contador de requisição
+    n_requisicao <<- 1L
+    
+    #Variável alocada no ambiente global (com: '<<-') para ser utilizado no contador de requisição
+    total_requisicao <<- nrow(tb_requisicoes)
 
-    print(paste( "Total de Resquisições:", nrow(tb_requisicoes)))
+    print(paste("Total de Resquisições:", total_requisicao))
+    
 
 
     purrr::pwalk(tb_requisicoes, scraping_html_folhapessoal, sgbd)
 
 
     message("O Web Scraping dos arquivos HTML das Despesas foi concluído")
+    
+    # Rotina para remove as variáveis alocadas no ambiente global
+    rm(n_requisicao, total_requisicao, envir = globalenv())
 
 }
 
@@ -238,9 +248,16 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                       DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
           
                   }
+       
+
 
       print(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
-                  tcmbapessoal::limpar_nome(nm_entidade), "-", "OK"))
+                  tcmbapessoal::limpar_nome(nm_entidade), "-",
+                  paste0(n_requisicao,"/",total_requisicao),
+                  "-", "OK"))
+      
+      # Variável que está no ambiente global e
+      n_requisicao <<- n_requisicao + 1
 
 
     } else {
@@ -279,9 +296,14 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                       DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
           
                   }
-
+          
+          
         message(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
-                      tcmbapessoal::limpar_nome(nm_entidade), "-", "NAO INFORMADO"))
+                      tcmbapessoal::limpar_nome(nm_entidade), "-",
+                      paste0(n_requisicao,"/",total_requisicao),
+                      "-", "NAO INFORMADO"))
+        
+        n_requisicao <<- n_requisicao + 1
 
     }
 }

@@ -56,6 +56,8 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
 
     subdir_dados_exportados <- "dados_exportados"
 
+    # !!! Implementar esse argumento na função: readHTMLTable(., colClasses = ("character", 10))
+    
     pegar_dados_html <- XML::htmlParse(nm_arq_html, encoding = "UTF-8") %>%
                          XML::readHTMLTable(stringsAsFactors = FALSE) %>%
                          .[[2]]

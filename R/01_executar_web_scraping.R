@@ -129,11 +129,11 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
 
       # Função que faz o Backup dos Banco de Dados para o Google Drive
       #tcmbapessoal::executar_backup_bd_googledrive(backup)
-      tcmbapessoal::executar_backup_bd_dropbox(backup)
+      tcmbapessoal::executar_backup_arquivos(backup)
 
       # Função que faz o Backup dos Arquivos CSV para o Google Drive
       #tcmbapessoal::executar_backup_csv_googledrive(backup)
-      tcmbapessoal::executar_backup_csv_dropbox(backup)
+      tcmbapessoal::exportar_csv_dropbox(backup)
 
       
       print("## Web Scraping finalizado com sucesso! ###")

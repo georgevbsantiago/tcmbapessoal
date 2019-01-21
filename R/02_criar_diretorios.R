@@ -8,7 +8,8 @@ criar_diretorios <- function(nome_scraping) {
 
     # Cria as pastas dos diretórios que serão utilizados;
     # Sa get() for igual ao diretório atual, então print
-
+    
+    
     dir_raiz_atual <- getwd()
     
     dir_raiz_verificador <- file.path(dir_raiz_atual, "bd_sqlite")

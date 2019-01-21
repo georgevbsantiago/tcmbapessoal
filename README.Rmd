@@ -73,12 +73,10 @@ Upload para o Google Drive:
 3º - Aprimorar elementos da Documentação
 
 Outras Melhorias:
-!!!Criar um loop seguro para a função salvar_html de erros ao salvar o artquivo hmtl por ser muito grande (maior que 260 caracteres) ou por ter um conteúdo vazio
+!!!Criar um loop seguro para a função salvar_html de erros ao salvar o artquivo html por ser muito grande (maior que 260 caracteres) ou por ter um conteúdo vazio.
 
-!!! Tentar desenvolver um contador para visualizar o progresso do Web Scraping
+!!! Reformular as funções backup para direcionar cada backup para uma única apasta ou arquivo ZIP
 
-!!! Analisar a vantagem de regisrar o caminho do diretório principal em uma tabela do Banco de Dados,
-Assim como outras informações como o nome do Web Scraping. Data de Criação, Escopo... dentre outros metadados
 
 !!! Verificar o comportamento da função readr::parse_number que está na função valor_nometario em utils:
 > readr::parse_number("R$ 321.200,35", locale = readr::locale(grouping_mark = ".", decimal_mark = ","))
@@ -89,6 +87,7 @@ Assim como outras informações como o nome do Web Scraping. Data de Criação, 
 [1] 3312200
 
 !!! Mudar a lógica da rotina de verificação em " if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE)" para algo mais genérico, já que o código, agora, é agnóstico.
+
 
 
 
