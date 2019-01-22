@@ -8,6 +8,8 @@ executar_web_scraping(anos, nome_scraping, sgbd = "sqlite",
   repetir = "NAO", backup = "NAO")
 }
 \arguments{
+\item{anos}{Exercíico (ano) que ser pretende obter}
+
 \item{nome_scraping}{Nome do Diretório que será criado para alocar o Web Scraping}
 
 \item{sgbd}{Define qual é o Banco de Dados a ser utilizado.
@@ -18,10 +20,8 @@ caso deseje repetir as consulta do Web Scraping que falharam ou que não foram
 identificadas resposta do ente municipal}
 
 \item{backup}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
-para realizar o Backup do Banco de Dados e dos arquivos CSV para o Google Drive.
+para realizar o Backup do Banco de Dados e dos arquivos CSV.
 É preciso configurar o token Google Drive antes de executar}
-
-\item{ano}{Exercíico (ano) que ser pretende obter}
 }
 \description{
 Essa função foi desenvolvida para executar todas as etapas do Web Scraping

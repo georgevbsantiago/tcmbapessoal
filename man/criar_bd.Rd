@@ -6,6 +6,9 @@
 \usage{
 criar_bd(sgbd = "sqlite")
 }
+\arguments{
+\item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
+}
 \description{
 Função que cria o Banco de Dados
 }

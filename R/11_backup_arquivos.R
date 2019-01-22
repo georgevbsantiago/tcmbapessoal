@@ -3,6 +3,9 @@
 #' @description Função que executa o backup do Banco de Dados, dos arquivos HTML,
 #' e dos arquivos CSVs.
 #'
+#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar o Backup do Banco de Dados e dos arquivos CSV.
+#'
 #' @export
 
 executar_backup_arquivos <- function(backup = "NAO") {

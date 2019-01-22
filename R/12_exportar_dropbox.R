@@ -1,7 +1,9 @@
 
 #' @title Função que exporta os arquivos CSV para o DropBox, com o objetivo
 #' conectar com o Power BI
-#'
+#' 
+#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar o Backup do Banco de Dados e dos arquivos CSV.
 #'
 #' @export
 
@@ -76,7 +78,8 @@ exportar_csv_dropbox <- function(backup = "NAO") {
 #' @title Função que exporta os arquivos CSV único para o DropBox, com o objetivo
 #' conectar com o Power BI
 #'
-#'
+#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar o Backup do Banco de Dados e dos arquivos CSV.
 #'
 #' @export
 

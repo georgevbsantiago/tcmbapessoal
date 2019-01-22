@@ -6,6 +6,9 @@
 \usage{
 criar_tb_dmunicipios(sgbd = "sqlite")
 }
+\arguments{
+\item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
+}
 \description{
 Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados
 }

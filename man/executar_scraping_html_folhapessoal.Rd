@@ -10,6 +10,8 @@ executar_scraping_html_folhapessoal(repetir = "NAO", sgbd = "sqlite")
 \item{repetir}{É definido como "NAO" por padrão, mas pode ser atribuído SIM
 para realizar o Web Scraping de páginas que retornaram erro ou que ainda não foram informados pelos
 municípios ao TCM-Ba}
+
+\item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
 }
 \description{
 Executa o Web Scraping das Páginas que tem a Folha de pessoal dos Municípios no site do TCM-ba

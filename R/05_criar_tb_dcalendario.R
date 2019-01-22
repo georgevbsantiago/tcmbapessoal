@@ -1,5 +1,8 @@
 #' @title Função que gera a tabela com a relação de meses e ano para o Web Scraping;
-#'
+#' 
+#' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
+#' 
+#' @param anos Define o ano de início do Web Scraping
 #'
 #' @importFrom magrittr %>%
 #'

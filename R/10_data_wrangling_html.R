@@ -1,6 +1,8 @@
 #' @title Função que executa do Data Wrangling
 #'
 #' @description Função que realiza a extração de dados da Folha de Pessoal do arquivo html
+#' 
+#' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #'
 #' @export
 #'

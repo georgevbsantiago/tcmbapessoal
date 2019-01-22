@@ -1,11 +1,11 @@
 #' @title Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados
 #'
+#' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
+#'
+#' @importFrom magrittr %>%
 #'
 #'
-#'@importFrom magrittr %>%
-#'
-#'
-#'@export
+#' @export
 
 criar_tb_dmunicipios <- function(sgbd = "sqlite") {
 

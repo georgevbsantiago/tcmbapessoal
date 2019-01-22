@@ -7,6 +7,10 @@ conectar com o Power BI}
 \usage{
 exportar_csv_unico_dropbox(backup = "NAO")
 }
+\arguments{
+\item{backup}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+para realizar o Backup do Banco de Dados e dos arquivos CSV.}
+}
 \description{
 Função que exporta os arquivos CSV único para o DropBox, com o objetivo
 conectar com o Power BI

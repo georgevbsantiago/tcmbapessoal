@@ -5,6 +5,8 @@
 #' @param repetir É definido como "NAO" por padrão, mas pode ser atribuído SIM
 #' para realizar o Web Scraping de páginas que retornaram erro ou que ainda não foram informados pelos
 #' municípios ao TCM-Ba
+#' 
+#' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #'
 #' @importFrom magrittr %>%
 #'

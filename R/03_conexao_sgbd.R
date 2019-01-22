@@ -1,8 +1,8 @@
 #' @title Função que cria o Banco de Dados
 #' 
+#' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #'
-#'
-#'@export
+#' @export
 #'
 
 criar_bd <- function(sgbd = "sqlite") {
@@ -49,7 +49,7 @@ criar_bd <- function(sgbd = "sqlite") {
 
 #' @title Função que cria a conexão com o Banco de Dados
 #' 
-#'
+#' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #'
 #'@export
 

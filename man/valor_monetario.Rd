@@ -6,6 +6,9 @@
 \usage{
 valor_monetario(x)
 }
+\arguments{
+\item{x}{Limpa os valores monetários de caracteres especiais}
+}
 \description{
 Função utilizadas no Web Scraping
 }

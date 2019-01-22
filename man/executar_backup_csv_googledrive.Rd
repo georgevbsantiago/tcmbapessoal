@@ -6,6 +6,10 @@
 \usage{
 executar_backup_csv_googledrive(backup = "NAO")
 }
+\arguments{
+\item{backup}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+para realizar o Backup do Banco de Dados e dos arquivos CSV.}
+}
 \description{
 Função que executa o backup dos dados
 }

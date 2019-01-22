@@ -14,7 +14,7 @@ Imports:
     rvest,
     xml2,
     XML,
-    tibble,
+    tibble (>= 2.0.1),
     readr,
     dplyr,
     magrittr,

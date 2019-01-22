@@ -2,7 +2,10 @@
 #'
 #' @description Função que executa o backup do Banco de Dados
 #' e dos arquivos CSV para o Google Drive
-#'
+#' 
+#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar o Backup do Banco de Dados e dos arquivos CSV.
+#' 
 #' @export
 
 executar_backup_bd_googledrive <- function(backup = "NAO") {
@@ -112,7 +115,8 @@ executar_backup_bd_googledrive <- function(backup = "NAO") {
 
 #' @title Função que executa o backup dos dados
 #'
-#'
+#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar o Backup do Banco de Dados e dos arquivos CSV.
 #'
 #' @export
 

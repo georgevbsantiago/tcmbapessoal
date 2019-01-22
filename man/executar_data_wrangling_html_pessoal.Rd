@@ -6,6 +6,9 @@
 \usage{
 executar_data_wrangling_html_pessoal(sgbd = "sqlite")
 }
+\arguments{
+\item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
+}
 \description{
 Função que realiza a extração de dados da Folha de Pessoal do arquivo html
 }

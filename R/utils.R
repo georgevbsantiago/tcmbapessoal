@@ -18,6 +18,9 @@ log_data_hora <- function () {
 
 #' @title Função utilizadas no Web Scraping
 #'
+#' @param x Limpa os valores monetários de caracteres especiais
+#' 
+#' @example "R$ 1.059,00" para "1059,00"
 #'
 #' @export
 
@@ -60,6 +63,7 @@ url_tcm_entidades_ws <- function(){
 
 #' @title Função para limpar nomes de caracteres especiais
 #'
+#' @param x Limpa o nome dos entes municipais para retirar caracteres especiais
 #'
 #' @export
 
