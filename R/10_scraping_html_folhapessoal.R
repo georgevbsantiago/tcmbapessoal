@@ -102,7 +102,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
     scraping_html <- scraping_html_purrr(tcmbapessoal::url_tcm(),
                                          body = parametros,
                                          encode = 'form',
-                                         httr::timeout(35))
+                                         httr::timeout(50))
 
     log_request <- tcmbapessoal::log_data_hora()
 
