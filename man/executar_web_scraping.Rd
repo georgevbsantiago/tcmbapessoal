@@ -32,3 +32,12 @@ Essa função foi desenvolvida para executar todas as etapas do Web Scraping
 e, então, coletar os dados públicos da Folha de Pessoal dos Municípios do Estado da Bahia
 custodiados no site do TCM-Ba
 }
+\examples{
+tcmbapessoal::executar_web_scraping(ano = 2018,
+                                    nome_scraping = "ws_tcmba_pessoal",
+                                    sgbd = "sqlite",
+                                    repetir = "SIM",
+                                    backup_local = "SIM",
+                                    backup_nuvem = "NAO")
+
+}

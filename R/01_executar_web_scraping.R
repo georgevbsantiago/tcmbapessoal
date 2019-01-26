@@ -17,6 +17,14 @@
 #' (ver instruções na função 'exportar_csv_dropbox').
 #' @param sgbd Define qual é o Banco de Dados a ser utilizado.
 #' Por padrão, é definido o SQLite.
+#' 
+#' @examples 
+#' tcmbapessoal::executar_web_scraping(ano = 2018,
+#'                                     nome_scraping = "ws_tcmba_pessoal",
+#'                                     sgbd = "sqlite",
+#'                                     repetir = "SIM",
+#'                                     backup_local = "SIM",
+#'                                     backup_nuvem = "NAO")
 #'
 #' @export
 
