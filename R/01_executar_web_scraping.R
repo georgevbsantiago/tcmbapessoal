@@ -104,7 +104,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
   arq_rds_id_ws <- paste0("id_ws_", nome_scraping, ".rds")
   
   if (dir.exists(nome_scraping) == FALSE &
-      file.exist(arq_rds_id_ws) == FALSE) {
+      file.exists(arq_rds_id_ws) == FALSE) {
     
     # Função que cria o diretório com o nome do Web Scraping
     dir.create(nome_scraping)
