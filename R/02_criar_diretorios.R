@@ -13,7 +13,7 @@ criar_diretorios <- function(nome_scraping) {
     
     if (dir.exists(dir_raiz_verificador) == TRUE) {
 
-        print("O diretório Raiz foi definido com sucesso!")
+        return(print("O diretório Raiz foi definido com sucesso!"))
         
     } else {
         

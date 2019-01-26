@@ -5,7 +5,8 @@
 \title{Função que executa o Web Scraping}
 \usage{
 executar_web_scraping(anos, nome_scraping, sgbd = "sqlite",
-  repetir = "SIM", backup_local = "SIM", backup_nuvem = "NAO")
+  repetir = "SIM", backup_local = "SIM", backup_nuvem = "NAO",
+  exportar_nuvem = "NAO")
 }
 \arguments{
 \item{anos}{Exercíico (ano) inicial da coleta de dados}
@@ -26,6 +27,9 @@ Mas pode ser marcado como "NAO".}
 \item{backup_nuvem}{Realiza o Backup dos dados para o DropBox. Como padrão, é definido "NAO".
 Obs: É preciso configurar o token do DropBox antes de executar
 (ver instruções na função 'exportar_csv_dropbox').}
+
+\item{exportar_nuvem}{É definido como "NAO" como padrão para realizar
+Exportar os CSVs para o DropBox com o objetivo de conectar o Power BI}
 }
 \description{
 Essa função foi desenvolvida para executar todas as etapas do Web Scraping

@@ -15,6 +15,8 @@
 #' @param backup_nuvem Realiza o Backup dos dados para o DropBox. Como padrão, é definido "NAO".
 #' Obs: É preciso configurar o token do DropBox antes de executar
 #' (ver instruções na função 'exportar_csv_dropbox').
+#' @param exportar_nuvem É definido como "NAO" como padrão para realizar
+#' Exportar os CSVs para o DropBox com o objetivo de conectar o Power BI
 #' @param sgbd Define qual é o Banco de Dados a ser utilizado.
 #' Por padrão, é definido o SQLite.
 #' 
@@ -33,7 +35,8 @@
 
 executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
                                   repetir = "SIM", backup_local = "SIM",
-                                  backup_nuvem = "NAO") {
+                                  backup_nuvem = "NAO",
+                                  exportar_nuvem = "NAO") {
 
   
   # Etapas de padronização dos argumentos preenchidos pelo usuário
@@ -147,6 +150,9 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
       # Função que faz o Backup local do Banco de Dados e dos arquivos HTML e CSV.
       # e o Backup em nuvem no DropBox
       tcmbapessoal::executar_backup_arquivos(backup_local, backup_nuvem)
+      
+      # Exportar os CSVs para o Dropbox para conectar ao Power BI
+      tcmbapessoal::exportar_csv_dropbox(exportar_nuvem)
 
       
       print("## Web Scraping finalizado com sucesso! ###")

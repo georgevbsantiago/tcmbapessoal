@@ -109,3 +109,9 @@ Outras Melhorias:
     acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd)
     
 !!! Restruturar o print para sinalizar o Scraping
+
+!!! Bug de recomeço da execução. Se estiver no mesmo diretório dará problema. Já se estiver um nível acima, funciona normalmente.
+Quado se estar dentro do diretório do Web Scraping
+[1] "O diretório Raiz foi definido com sucesso!"
+Error in (function (classes, fdef, mtable)  : 
+  unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"SQLiteConnection", "character"’
