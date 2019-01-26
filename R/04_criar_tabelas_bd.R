@@ -96,7 +96,8 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
                                                   	nm_entidade TEXT,
                                                   	ano TEXT,
                                                   	mes TEXT,
-                                                  	outros TEXT
+                                                  	outros TEXT,
+                                                  	sgbd TEXT
                                                     );"
         )
 
