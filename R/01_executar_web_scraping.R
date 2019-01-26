@@ -142,7 +142,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
   }
   
   
-  if(file.exist(arq_rds_id_ws) == TRUE) {
+  if(file.exists(arq_rds_id_ws) == TRUE) {
   
       info_ws <- readRDS(arq_rds_id_ws)
     
