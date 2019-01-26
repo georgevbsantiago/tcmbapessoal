@@ -256,10 +256,13 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
       # para ser usada como contador das requisições. Não é a melhor prática no
       # paradgima da programação funcional, mas o propósito foi alcançado
        
-      print(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
-                  tcmbapessoal::limpar_nome(nm_entidade), "-",
+      print(paste("Scraping - (R:",
                   paste0(n_requisicao,"/",total_requisicao),
-                  "-", "OK"))
+                  ") | -",
+                  ano, "-",
+                  mes, "-",
+                  tcmbapessoal::limpar_nome(nm_entidade),
+                  "- OK"))
       
       # Variável que está no ambiente global e
       n_requisicao <<- n_requisicao + 1
@@ -303,10 +306,13 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                   }
           
           
-        message(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
-                      tcmbapessoal::limpar_nome(nm_entidade), "-",
+        message(paste("Scraping - (R:",
                       paste0(n_requisicao,"/",total_requisicao),
-                      "-", "NAO INFORMADO"))
+                      ") | -",
+                      ano, "-",
+                      mes, "-",
+                      tcmbapessoal::limpar_nome(nm_entidade),
+                      "- NAO INFORMADO"))
         
         n_requisicao <<- n_requisicao + 1
 
