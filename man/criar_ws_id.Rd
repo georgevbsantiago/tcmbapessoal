@@ -4,10 +4,12 @@
 \alias{criar_ws_id}
 \title{Função que cria o ID do Web Scraping}
 \usage{
-criar_ws_id(nome_scraping, sgbd)
+criar_ws_id(nome_scraping, arq_rds_id_ws, sgbd)
 }
 \arguments{
 \item{nome_scraping}{Nome do Web Scraping}
+
+\item{arq_rds_id_ws}{Nome do Arquivo RDS com os metadados do Web Scraping}
 
 \item{sgbd}{Nome do SGBD usado pelo Banco de Dados}
 }

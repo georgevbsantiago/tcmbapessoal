@@ -101,7 +101,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
     
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
   
-  arq_rds_id_ws <- paste0("id_ws_", nome_scraping, ".rds")
+  arq_rds_id_ws <- paste0("id_", nome_scraping, ".rds")
   
   if (dir.exists(nome_scraping) == FALSE &
       file.exists(arq_rds_id_ws) == FALSE) {
@@ -118,7 +118,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
     tcmbapessoal::criar_diretorios()
     
     # Função que cria a identidade do Web Scraping
-    tcmbapessoal::criar_ws_id(nome_scraping, sgbd)
+    tcmbapessoal::criar_ws_id(nome_scraping, arq_rds_id_ws, sgbd)
     
     # Função que cria o Banco de Dados
     tcmbapessoal::criar_bd(sgbd)
@@ -135,7 +135,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
   
   if(dir.exists(nome_scraping) == TRUE) {
     
-    setwd(file.path(getwd(), nome_scraping))
+    setwd(nome_scraping)
     
     print("O Diretório Raiz foi definido com Sucesso!")
     

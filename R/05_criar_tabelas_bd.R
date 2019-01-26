@@ -104,6 +104,8 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
         DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     }
+    
+    print("As tabelas foram criadas no Banco de Dados com Sucesso!")
 
 
 }

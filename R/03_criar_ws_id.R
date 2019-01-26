@@ -1,15 +1,16 @@
 #' @title Função que cria o ID do Web Scraping
 #'
 #' @param nome_scraping Nome do Web Scraping
+#' @param arq_rds_id_ws Nome do Arquivo RDS com os metadados do Web Scraping
 #' @param sgbd Nome do SGBD usado pelo Banco de Dados
 #'
 #' @export
 
-criar_ws_id <- function(nome_scraping, sgbd) {
+criar_ws_id <- function(nome_scraping, arq_rds_id_ws, sgbd) {
     
 
-        ws_id <- list(nome = paste0("id_ws_", nome_scraping),
-                      file_id = paste0("ws_id", nome_scraping, ".rds"),
+        ws_id <- list(nome = nome_scraping,
+                      file_id = arq_rds_id_ws,
                       dir_wd = getwd(),
                       dir_ws = dir(),
                       sgbd_ws = sgbd,
@@ -17,7 +18,7 @@ criar_ws_id <- function(nome_scraping, sgbd) {
                       )
 
         saveRDS(object = ws_id,
-                file = paste0("ws_id", nome_scraping, ".rds"))
+                file = arq_rds_id_ws)
         
 
         print("A identidade do Web Scraping foi definida com Sucesso!")
