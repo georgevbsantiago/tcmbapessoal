@@ -131,6 +131,12 @@ gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
                         id = "", cod_entidade = "", nm_entidade = "",
                         ano = "", mes = "", outros = "", sgbd = "sqlite") {
     
+    
+    entrada_resultado <- entrada$result
+    
+    entrada_error <- entrada$error
+    
+    
     if(is.null(entrada$result) == TRUE) {
         
         entrada_resultado <- "NULO"

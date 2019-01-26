@@ -107,4 +107,5 @@ Outras Melhorias:
     
 !!! Verificar se a rotina de tratamento de erro na função tcmbapessoal::connect_sgbd(sgbd) possibilita
     acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd)
-
+    
+!!! Restruturar o print para sinalizar o Scraping
