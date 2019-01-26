@@ -33,11 +33,14 @@ e, então, coletar os dados públicos da Folha de Pessoal dos Municípios do Est
 custodiados no site do TCM-Ba
 }
 \examples{
+\dontrun{
 tcmbapessoal::executar_web_scraping(ano = 2018,
                                     nome_scraping = "ws_tcmba_pessoal",
                                     sgbd = "sqlite",
                                     repetir = "SIM",
                                     backup_local = "SIM",
                                     backup_nuvem = "NAO")
+}
+
 
 }

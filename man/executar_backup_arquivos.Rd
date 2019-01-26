@@ -10,10 +10,14 @@ executar_backup_arquivos(backup_local = "SIM", backup_nuvem = "NAO")
 \item{backup_local}{É definido como "SIM" como padrão para realizar
 o Backup do Banco de Dados e dos arquivos HTML e CSV.
 Mas pode ser marcado como "NAO".}
+
+\item{backup_nuvem}{É definido como "NAO" como padrão.
+Mas pode ser marcado como "SIM", caso deseje realizar
+o backup no DroBox.}
 }
 \description{
 Função que executa o backup do Banco de Dados, dos arquivos HTML,
 e dos arquivos CSVs no ambiente local e na nuvem (DropBox).
 Obs: É preciso configurar o token do DropBox para a função funcionar.
-Saiba como gerar o seu Token em: \link{https://github.com/karthik/rdrop2}
+Saiba como gerar o seu Token em: \href{https://github.com/karthik/rdrop2}{linked phrase}
 }

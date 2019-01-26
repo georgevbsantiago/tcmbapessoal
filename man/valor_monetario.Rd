@@ -10,9 +10,6 @@ valor_monetario(x)
 \item{x}{string}
 }
 \description{
-Limpa os valores monetários de caracteres especiais
-}
-\examples{
-"R$ 1.059,00" para "1059,00"
-
+Limpa os valores monetários de caracteres especiais.
+Ex: 'R$ 1.059,00' para '1059.00'
 }

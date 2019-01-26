@@ -21,12 +21,11 @@ log_data_hora <- function () {
 
 #' @title Função para padronizar valores monetários
 #' 
-#' @description Limpa os valores monetários de caracteres especiais
+#' @description Limpa os valores monetários de caracteres especiais.
+#' Ex: 'R$ 1.059,00' para '1059.00'
 #'
 #' @param x string
 #' 
-#' @examples
-#' "R$ 1.059,00" para "1059,00"
 #'
 #' @export
 
