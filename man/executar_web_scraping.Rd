@@ -43,7 +43,8 @@ tcmbapessoal::executar_web_scraping(ano = 2018,
                                     sgbd = "sqlite",
                                     repetir = "SIM",
                                     backup_local = "SIM",
-                                    backup_nuvem = "NAO")
+                                    backup_nuvem = "NAO",
+                                    exportar_nuvem = "NAO")
 }
 
 

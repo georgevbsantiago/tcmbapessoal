@@ -132,22 +132,22 @@ gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
                         ano = "", mes = "", outros = "", sgbd = "sqlite") {
     
     
-    entrada_resultado <- entrada$result
-    
-    entrada_error <- entrada$error
-    
-    
     if(is.null(entrada$result) == TRUE) {
         
         entrada_resultado <- "NULO"
+        
+        entrada_error <- scraping_html$error$message
+        
     }
     
     if(is.null(entrada$error) == TRUE) {
         
+        entrada_resultado <- scraping_html$result$status_code
+        
         entrada_error <- "NULO"
     }
     
-    
+
     tb_error <- tibble::tibble(
                                data_time = log_request,
                                nm_log_erro = nm_log_erro,

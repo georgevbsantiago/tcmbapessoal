@@ -17,8 +17,15 @@ exportar_csv_dropbox <- function(exportar_nuvem = "NAO") {
         stop("Digite SIM ou NAO para o argumento 'backup' da função")
 
     }
+  
+  
+    if(backup_nuvem == "NAO") {
+    
+        stop("Não realizado a exportação para o DropBox, conforme determinado pelo usuário")
 
-
+    }
+    
+  
     nome_arquivo_zip <- file.path("backup", "bk_arquivos_csv.zip")
 
     lista_arquivos_csv <- file.path("dados_exportados", dir("dados_exportados"))
@@ -92,7 +99,12 @@ exportar_csv_unico_dropbox <- function(backup = "NAO") {
         
         stop("Digite SIM ou NAO para o argumento 'backup' da função")
         
-        
+    }
+  
+    if(backup == "NAO") {
+      
+      stop("Não realizado a exportação do CSV único para o DropBox, conforme determinado pelo usuário")
+      
     }
     
     

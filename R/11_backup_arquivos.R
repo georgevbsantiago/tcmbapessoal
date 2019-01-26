@@ -34,7 +34,7 @@ executar_backup_arquivos <- function(backup_local = "SIM",
     
     if(backup_local == "NAO") {
         
-        stop("Backup Local não realizado, conforme determinado pelo usuário")
+        stop("Não realizado o Backup local, conforme determinado pelo usuário")
         
         
     } else {
@@ -94,7 +94,7 @@ executar_backup_arquivos <- function(backup_local = "SIM",
     
     if(backup_nuvem == "NAO") {
         
-        stop("Backup na nuvem não realizado, conforme determinado pelo usuário")
+        stop("Não realizado o Backup na nuvem, conforme determinado pelo usuário")
         
     } else {
     
