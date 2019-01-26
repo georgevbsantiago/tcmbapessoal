@@ -29,9 +29,8 @@ criar_bd <- function(sgbd = "sqlite") {
                 
                 stop("### Ocorreu um erro durante a criação do Bando de Dados no SQLite!",
                      "### Verifique se o diretório foi criado corretamente ou se você tem permissão para criar o SQLite no diretório!")
-            
-        
             }
+        
         
         print("Banco de Dados do SQLite criado com Sucesso!")
        
@@ -51,7 +50,7 @@ criar_bd <- function(sgbd = "sqlite") {
 #' 
 #' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #'
-#'@export
+#' @export
 
 connect_sgbd <- function(sgbd = "sqlite") {
     
@@ -65,28 +64,29 @@ connect_sgbd <- function(sgbd = "sqlite") {
                                            dbname = file.path("bd_sqlite",
                                                               "bd_tcm_folha_pessoal_municipios.db"))
     
-        while(length(sqlite_bd$result) == 0) {
-    
+        while(is.null(sqlite_bd$result) == TRUE) {
+            
             print("Banco de Dados bloqueado - Tentando conectar novamente...")
             
-            log_request <- tcmbapessoal::log_data_hora()
+            log_data_time <- tcmbapessoal::log_data_hora()
             
-            tibble::tibble(log_request,
-                            nm_log_erro = "Erro ao acesso o SQLite",
-                            sgbd = "sqlite") %>%
-             readr::write_delim(file.path("bd_sqlite",
-                                          "log_sgbd.csv"),
-                                delim = ";", append = TRUE)
+            # Grava uma log em CSV, caso haja problemas em conectar com o SGBD
+            tibble::tibble(data_time = log_data_time,
+                           nm_log_erro = "Erro ao acesso o SQLite",
+                           sgbd = "sqlite") %>%
+            readr::write_delim(file.path("bd_sqlite",
+                                         "log_sgbd.csv"),
+                                delim = ";",
+                                append = TRUE)
             
             # Tentar novamente a conexão com o BD
             sqlite_bd <- conexao_segura_sqlite(RSQLite::SQLite(),
                                                dbname = file.path("bd_sqlite",
                                                                   "bd_tcm_folha_pessoal_municipios.db"))
-    
         }
 
+        
     return(sqlite_bd$result)
-    
     
 }
     

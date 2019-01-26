@@ -1,4 +1,4 @@
-#' @title Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados
+#' @title Função que gera a tabela 'tabela_tcm_dmunicipios' no Banco de Dados
 #'
 #' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #'
@@ -16,7 +16,10 @@ criar_tb_dmunicipios <- function(sgbd = "sqlite") {
     tb_tcm_dmunicipios <- scraping_tcm_municipios()
 
 
-    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_tcm_dmunicipios", tb_tcm_dmunicipios, overwrite = TRUE)
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd),
+                      "tabela_tcm_dmunicipios",
+                      tb_tcm_dmunicipios,
+                      overwrite = TRUE)
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
@@ -37,16 +40,16 @@ scraping_tcm_municipios <- function() {
 
 
     list_tcm_municipios <- httr::GET(url_tcm) %>%
-        xml2::read_html() %>%
-        rvest::html_nodes("#municipios > option")
+                           xml2::read_html() %>%
+                           rvest::html_nodes("#municipios > option")
 
     cod_municipio <- list_tcm_municipios %>%
-        rvest::html_attr("value")
+                     rvest::html_attr("value")
 
     nm_municipio <- list_tcm_municipios %>%
-        rvest::html_text() %>%
-        stringr::str_replace(., "[*/º]", "") %>%
-        stringr::str_trim()
+                    rvest::html_text() %>%
+                    stringr::str_replace(., "[*/º]", "") %>%
+                    stringr::str_trim()
 
     tabela_tcm_dmunicipios <- tibble::tibble(cod_municipio = cod_municipio,
                                              nm_municipio = nm_municipio,

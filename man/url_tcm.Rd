@@ -2,10 +2,10 @@
 % Please edit documentation in R/utils.R
 \name{url_tcm}
 \alias{url_tcm}
-\title{Função utilizadas no Web Scraping}
+\title{Função do URL do TCM-Ba}
 \usage{
 url_tcm()
 }
 \description{
-Função utilizadas no Web Scraping
+Função do URL do TCM-Ba
 }

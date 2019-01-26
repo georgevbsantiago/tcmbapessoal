@@ -2,17 +2,18 @@
 % Please edit documentation in R/09_scraping_html_folhapessoal.R
 \name{executar_scraping_html_folhapessoal}
 \alias{executar_scraping_html_folhapessoal}
-\title{Função que executa o Web Scraping}
+\title{Função que executa as requisições do Web Scraping}
 \usage{
-executar_scraping_html_folhapessoal(repetir = "NAO", sgbd = "sqlite")
+executar_scraping_html_folhapessoal(repetir = "SIM", sgbd = "sqlite")
 }
 \arguments{
-\item{repetir}{É definido como "NAO" por padrão, mas pode ser atribuído SIM
-para realizar o Web Scraping de páginas que retornaram erro ou que ainda não foram informados pelos
-municípios ao TCM-Ba}
+\item{repetir}{É definido "SIM" como padrão. Mas pode ser marcado como "NAO",
+caso não deseje repetir as consulta do Web Scraping que falharam ou que não foram
+identificadas resposta do ente municipal no dia de execução do Web Scraping}
 
 \item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
 }
 \description{
-Executa o Web Scraping das Páginas que tem a Folha de pessoal dos Municípios no site do TCM-ba
+Realiza as requisições das Páginas (HTML)
+que tem a Folha de pessoal dos Municípios no site do TCM-ba.
 }

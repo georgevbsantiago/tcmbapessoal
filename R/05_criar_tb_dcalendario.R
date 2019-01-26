@@ -1,4 +1,4 @@
-#' @title Função que gera a tabela com a relação de meses e ano para o Web Scraping;
+#' @title Função que gera a tabela 'dCalendario' com a relação de meses e ano para o Web Scraping;
 #' 
 #' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #' 
@@ -10,7 +10,7 @@
 
 criar_tb_dcalendario <- function(anos, sgbd = "sqlite"){
 
-    tb_dcalendario <- purrr::map_dfr(anos, tb_anos) %>%
+    tb_dcalendario <- purrr::map_dfr(anos, func_dcalendario) %>%
                       tibble::as_tibble()
 
     DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_dcalendario",
@@ -25,7 +25,7 @@ criar_tb_dcalendario <- function(anos, sgbd = "sqlite"){
 
 ######################################################################################
 
-tb_anos <- function(anos) {
+func_dcalendario <- function(anos) {
 
 
     # Cria a tabela com a relação de meses e ano para o Web Scraping;

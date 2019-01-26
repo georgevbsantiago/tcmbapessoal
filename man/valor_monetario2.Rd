@@ -7,8 +7,8 @@
 valor_monetario2(x)
 }
 \arguments{
-\item{x}{Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75}
+\item{x}{string}
 }
 \description{
-Função utilizadas no Web Scraping
+Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75
 }

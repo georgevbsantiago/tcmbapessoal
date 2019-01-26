@@ -1,4 +1,7 @@
-#' @title Função utilizadas no Web Scraping
+#' @title Função para registrar o fuso horário
+#' 
+#' @description Função usada para registrar o fuso horário do Brasil
+#' mesmo que o servidor tenha o fuso horário de outro país
 #'
 #'
 #' @export
@@ -16,11 +19,14 @@ log_data_hora <- function () {
 
 ###################################################################################
 
-#' @title Função utilizadas no Web Scraping
-#'
-#' @param x Limpa os valores monetários de caracteres especiais
+#' @title Função para padronizar valores monetários
 #' 
-#' @example "R$ 1.059,00" para "1059,00"
+#' @description Limpa os valores monetários de caracteres especiais
+#'
+#' @param x string
+#' 
+#' @examples
+#' "R$ 1.059,00" para "1059,00"
 #'
 #' @export
 
@@ -35,7 +41,7 @@ valor_monetario <- function (x) {
 
 ###################################################################################
 
-#' @title Função utilizadas no Web Scraping
+#' @title Função do URL do TCM-Ba
 #'
 #'
 #' @export
@@ -48,7 +54,7 @@ url_tcm <- function () {
 
 ###################################################################################
 
-#' @title Função utilizadas no Web Scraping
+#' @title Função do Web Service do TCM-Ba
 #'
 #'
 #' @export
@@ -62,8 +68,10 @@ url_tcm_entidades_ws <- function(){
 ###################################################################################
 
 #' @title Função para limpar nomes de caracteres especiais
+#' 
+#' @description Limpa o nome dos entes municipais para retirar caracteres especiais
 #'
-#' @param x Limpa o nome dos entes municipais para retirar caracteres especiais
+#' @param x string
 #'
 #' @export
 
@@ -87,9 +95,13 @@ return(resultado)
 
 #' @title Função utilizadas no Web Scraping
 #' 
-#' @param x Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75
+#' @description Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75
+#' 
+#' @param x string
 #' 
 #' @export
+
+
 valor_monetario2 <- function(x) {
         x %>% 
         stringr::str_remove("R\\$") %>% 
@@ -120,35 +132,36 @@ gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
                         id = "", cod_entidade = "", nm_entidade = "",
                         ano = "", mes = "", outros = "", sgbd = "sqlite") {
     
-                tb_error <- tibble::tibble(
-                                        data_time = log_request,
-                                        nm_log_erro = nm_log_erro,
-                                        entrada_result = entrada$result,
-                                        entrada_error = entrada$error,
-                                        foreign_key = id,
-                                        cod_entidade = cod_entidade,
-                                        nm_entidade = nm_entidade,
-                                        ano = ano,
-                                        mes = mes,
-                                        outros = outros
-                                        )
-    
+    tb_error <- tibble::tibble(
+                            data_time = log_request,
+                            nm_log_erro = nm_log_erro,
+                            entrada_result = entrada$result,
+                            entrada_error = entrada$error,
+                            foreign_key = id,
+                            cod_entidade = cod_entidade,
+                            nm_entidade = nm_entidade,
+                            ano = ano,
+                            mes = mes,
+                            outros = outros
+                            )
+
     write_sqlite <- purrr::safely(DBI::dbWriteTable)
     
     
-    result_sql <- write_sqlite(tcmbapessoal::connect_sgbd(sgbd), "tabela_log",
-                               tb_error, append = TRUE)
+    result_sql <- write_sqlite(tcmbapessoal::connect_sgbd(sgbd),
+                               "tabela_log",
+                               tb_error,
+                               append = TRUE)
     
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
     
     
     while(is.null(result_sql$result) == TRUE) {
         
-        print("Banco de Dados bloqueado - Tentando conectar novamente...")
-        
-        
-        result_sql <- write_sqlite(tcmbapessoal::connect_sgbd(sgbd), "tabela_log",
-                                   tb_error, append = TRUE)
+        result_sql <- write_sqlite(tcmbapessoal::connect_sgbd(sgbd),
+                                   "tabela_log",
+                                   tb_error,
+                                   append = TRUE)
         
         DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
         

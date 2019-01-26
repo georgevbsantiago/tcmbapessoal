@@ -18,11 +18,17 @@ executar_data_wrangling_html_pessoal <- function(sgbd = "sqlite") {
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     print("Iniciando o tratamento dos arquivos HTML")
+    
+    #Variável alocada no ambiente global (com: '<<-') para servir de contador durante o tratamento
+    n_arq_tratado <<- 1L
+    
+    #Variável alocada no ambiente global (com: '<<-') para ser utilizado no contador durante o tratamento
+    total_arq_html <<- nrow(tb_requisicoes)
 
-    print(paste( "Total de Resquisições:", nrow(tb_requisicoes)))
+    print(paste( "Total de Resquisições:", total_arq_html))
 
 
-    if (nrow(tb_requisicoes) == 0) {
+    if (total_arq_html == 0) {
 
         message("Todos os Arquivos HTML das Folhas de Pessoal já foram tratados")
 
@@ -42,6 +48,9 @@ executar_data_wrangling_html_pessoal <- function(sgbd = "sqlite") {
         message("Todos os Arquivos HTML das Folhas de Pessoal foram tratados!!!")
 
     }
+    
+    # Rotina para remove as variáveis alocadas no ambiente global
+    rm(n_arq_tratado, total_arq_html, envir = globalenv())
 
 
 }
@@ -58,11 +67,16 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
 
     subdir_dados_exportados <- "dados_exportados"
 
-    # !!! Implementar esse argumento na função: readHTMLTable(., colClasses = ("character", 10))
-    
     pegar_dados_html <- XML::htmlParse(nm_arq_html, encoding = "UTF-8") %>%
                          XML::readHTMLTable(stringsAsFactors = FALSE) %>%
                          .[[2]]
+    
+    # Rotina para verificar se a tabela tem a coluna '13º Salário' ou não.
+    verificar_colunas <- pegar_dados_html %>%
+        names() %>%
+        stringr::str_detect("13") %>%
+        any()
+        
     
     if( any(stringr::str_detect(names(pegar_dados_html), "13")) ){
 
@@ -161,8 +175,6 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
 
         while(is.null(result_sql$result) == TRUE) {
 
-            print("Banco de Dados bloqueado - Tentando conectar novamente...")
-
             result_sql <- update_sqlite(tcmbapessoal::connect_sgbd(sgbd), 'UPDATE tabela_requisicoes
                                                         SET status_tratamento_arq_csv = "S",
                                                             log_tratamento_arq_csv = :log_tratamento_arq_csv,
@@ -179,13 +191,19 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
 
 
         print(paste("Arquivo HTML Tratado - (ID:", id, ") | -", ano, "-", mes, "-",
-                    tcmbapessoal::limpar_nome(nm_entidade)))
+                    tcmbapessoal::limpar_nome(nm_entidade), "-",
+              paste0(n_arq_tratado,"/",total_arq_html)))
+        
+        # n_arq_tratado e total_arq_html são variáveis alocadas no ambiente global
+        # para ser usada como contador das requisições. Não é a melhor prática no
+        # paradgima da programação funcional, mas o propósito foi alcançado
+        
+        n_arq_tratado <<- n_arq_tratado + 1
 
         # Liberar memória
         # Há uma leve perda de performance
         rm(list = ls())
         gc(reset = TRUE)
-
 
 
 }

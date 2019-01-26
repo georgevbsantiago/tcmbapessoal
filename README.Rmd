@@ -88,3 +88,20 @@ Outras Melhorias:
 
 !!! Determinar quais funções necessitam ser exportadas
 
+!!! Revisar a rotina que retorna TRUE ou FALSE na variável 'detectar_tabela' da função 'scraping_html_folhapessoal'
+    verificar se é melhor permanecer com o teste is.na() ou trocar por isTRUE() ou outra função
+
+!!! Analisar a questão do uso progressivo da memória RAm no Windows (no Linux, isso não ocorre)
+    durante a execução da função 'data_wrangling_html_pessoal'. Foi colocado a rotina (abaixo),
+    mas parece que não surtiu efeito.
+        # Liberar memória
+        # Há uma leve perda de performance
+        rm(list = ls())
+        gc(reset = TRUE)
+        
+!!! Verificar se ao predefinir o tipo da coluna da tabela, há ganho de performace 
+    na rotina 'pegar_dados_html' da função 'data_wrangling_html_pessoal'
+    
+!!! (FALTA TESTAR) Subistituir a rotina 'if( any(stringr::str_detect(names(pegar_dados_html), "13")) )'
+    pela variável verificar_colunas
+

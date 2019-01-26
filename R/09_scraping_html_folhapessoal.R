@@ -1,10 +1,11 @@
-#' @title Função que executa o Web Scraping
+#' @title Função que executa as requisições do Web Scraping
 #'
-#' @description Executa o Web Scraping das Páginas que tem a Folha de pessoal dos Municípios no site do TCM-ba
+#' @description Realiza as requisições das Páginas (HTML)
+#' que tem a Folha de pessoal dos Municípios no site do TCM-ba.
 #' 
-#' @param repetir É definido como "NAO" por padrão, mas pode ser atribuído SIM
-#' para realizar o Web Scraping de páginas que retornaram erro ou que ainda não foram informados pelos
-#' municípios ao TCM-Ba
+#' @param repetir É definido "SIM" como padrão. Mas pode ser marcado como "NAO",
+#' caso não deseje repetir as consulta do Web Scraping que falharam ou que não foram
+#' identificadas resposta do ente municipal no dia de execução do Web Scraping
 #' 
 #' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #'
@@ -12,34 +13,35 @@
 #'
 #' @export
 
-executar_scraping_html_folhapessoal <- function(repetir = "NAO", sgbd = "sqlite") {
+executar_scraping_html_folhapessoal <- function(repetir = "SIM",
+                                                sgbd = "sqlite") {
 
 
-  if(repetir == "NAO") {
+  if(repetir == "SIM") {
 
-    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") %>%
-      tibble::as.tibble() %>%
-      dplyr::filter(status_request_html == "N") %>%
-      dplyr::arrange(dplyr::desc(data), cod_entidade)
-
+    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd),
+                                       "tabela_requisicoes") %>%
+                      tibble::as_tibble() %>%
+                      dplyr::filter(status_request_html == "N" | status_request_html == "R") %>%
+                      dplyr::arrange(dplyr::desc(data), cod_entidade)
+    
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
 
   } else {
-
-    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") %>%
-      tibble::as.tibble() %>%
-      dplyr::filter(status_request_html == "N" | status_request_html == "R") %>%
+    
+    tb_requisicoes <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd),
+                                       "tabela_requisicoes") %>%
+      tibble::as_tibble() %>%
+      dplyr::filter(status_request_html == "N") %>%
       dplyr::arrange(dplyr::desc(data), cod_entidade)
-
+    
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
-
 
   }
 
     print("Iniciando Web Scraping dos arquivos HTML das Despesas")
     
-    #Variável alocada no ambiente global (com: '<<-') para servidir de contador de requisição
+    #Variável alocada no ambiente global (com: '<<-') para servir de contador de requisição
     n_requisicao <<- 1L
     
     #Variável alocada no ambiente global (com: '<<-') para ser utilizado no contador de requisição
@@ -64,10 +66,10 @@ executar_scraping_html_folhapessoal <- function(repetir = "NAO", sgbd = "sqlite"
 
 
 scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_municipio,
-                                   cod_entidade, nm_entidade, status_request_html,
-                                   log_request_htm, nm_arq_html, hash_arq_html,
-                                   status_tratamento_arq_csv, log_tratamento_arq_csv,
-                                   nm_tratamento_arq_csv, sgbd = "sqlite", ...) {
+                                       cod_entidade, nm_entidade, status_request_html,
+                                       log_request_htm, nm_arq_html, hash_arq_html,
+                                       status_tratamento_arq_csv, log_tratamento_arq_csv,
+                                       nm_tratamento_arq_csv, sgbd = "sqlite", ...) {
 
     subdir_resposta_html_mun <- file.path("resposta_scraping_html",
                                           tcmbapessoal::limpar_nome(nm_municipio))
@@ -105,8 +107,6 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
     log_request <- tcmbapessoal::log_data_hora()
 
 
-    #!!! Desenvolver um tratamento melhor para timeout
-    
     if (is.null(scraping_html$result) == TRUE) {
 
         message("#### Erro: 'Timeout' da Primeira tentativa para: ",
@@ -147,7 +147,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                                       id = id,
                                       cod_entidade = cod_entidade,
                                       nm_entidade = nm_entidade,
-                                      ano = ano, 
+                                      ano = ano,
                                       mes = mes,
                                       outros = "",
                                       sgbd = sgbd
@@ -172,7 +172,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                                       id = id,
                                       cod_entidade = cod_entidade,
                                       nm_entidade = nm_entidade,
-                                      ano = ano, 
+                                      ano = ano,
                                       mes = mes,
                                       outros = "",
                                       sgbd = sgbd
@@ -252,7 +252,10 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                   }
        
 
-
+      # n_requisicao e total_requisicao são variáveis alocadas no ambiente global
+      # para ser usada como contador das requisições. Não é a melhor prática no
+      # paradgima da programação funcional, mas o propósito foi alcançado
+       
       print(paste("Scraping - (ID:", id, ") | -", ano, "-", mes, "-",
                   tcmbapessoal::limpar_nome(nm_entidade), "-",
                   paste0(n_requisicao,"/",total_requisicao),

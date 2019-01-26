@@ -2,10 +2,10 @@
 % Please edit documentation in R/utils.R
 \name{url_tcm_entidades_ws}
 \alias{url_tcm_entidades_ws}
-\title{Função utilizadas no Web Scraping}
+\title{Função do Web Service do TCM-Ba}
 \usage{
 url_tcm_entidades_ws()
 }
 \description{
-Função utilizadas no Web Scraping
+Função do Web Service do TCM-Ba
 }

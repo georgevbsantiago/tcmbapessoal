@@ -7,8 +7,8 @@
 limpar_nome(x)
 }
 \arguments{
-\item{x}{Limpa o nome dos entes municipais para retirar caracteres especiais}
+\item{x}{string}
 }
 \description{
-Função para limpar nomes de caracteres especiais
+Limpa o nome dos entes municipais para retirar caracteres especiais
 }

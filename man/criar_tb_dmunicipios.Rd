@@ -2,7 +2,7 @@
 % Please edit documentation in R/06_criar_tb_dmunicipios.R
 \name{criar_tb_dmunicipios}
 \alias{criar_tb_dmunicipios}
-\title{Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados}
+\title{Função que gera a tabela 'tabela_tcm_dmunicipios' no Banco de Dados}
 \usage{
 criar_tb_dmunicipios(sgbd = "sqlite")
 }
@@ -10,5 +10,5 @@ criar_tb_dmunicipios(sgbd = "sqlite")
 \item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
 }
 \description{
-Função que gera a tabela "tabela_tcm_dmunicipios" no Banco de Dados
+Função que gera a tabela 'tabela_tcm_dmunicipios' no Banco de Dados
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/05_criar_tb_dcalendario.R
 \name{criar_tb_dcalendario}
 \alias{criar_tb_dcalendario}
-\title{Função que gera a tabela com a relação de meses e ano para o Web Scraping;}
+\title{Função que gera a tabela 'dCalendario' com a relação de meses e ano para o Web Scraping;}
 \usage{
 criar_tb_dcalendario(anos, sgbd = "sqlite")
 }
@@ -12,5 +12,5 @@ criar_tb_dcalendario(anos, sgbd = "sqlite")
 \item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
 }
 \description{
-Função que gera a tabela com a relação de meses e ano para o Web Scraping;
+Função que gera a tabela 'dCalendario' com a relação de meses e ano para o Web Scraping;
 }

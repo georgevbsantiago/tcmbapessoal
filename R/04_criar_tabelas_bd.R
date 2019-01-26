@@ -11,9 +11,9 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
 
         DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_dcalendario (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                    data TEXT NOT NULL,
-                                                    ano TEXT NOT NULL,
-                                                    mes TEXT NOT NULL
+                                                    data TEXT,
+                                                    ano TEXT,
+                                                    mes TEXT
                                                     );"
         )
 
@@ -27,9 +27,9 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
 
         DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_tcm_dmunicipios (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                    cod_municipio INT NOT NULL,
-                                                    nm_municipio TEXT NOT NULL,
-                                                    log_create TEXT NOT NULL
+                                                    cod_municipio INT,
+                                                    nm_municipio TEXT,
+                                                    log_create TEXT
                                                     );"
         )
 
@@ -42,11 +42,11 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
 
         DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_tcm_dmunicipios_entidades (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                    cod_municipio INT NOT NULL,
-                                                    nm_municipio TEXT NOT NULL,
-                                                    cod_entidade INT NOT NULL,
-                                                    nm_entidade TEXT NOT NULL,
-                                                    log_create TEXT NOT NULL
+                                                    cod_municipio INT,
+                                                    nm_municipio TEXT,
+                                                    cod_entidade INT,
+                                                    nm_entidade TEXT,
+                                                    log_create TEXT
                                                     );"
         )
 
@@ -60,20 +60,20 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
 
         DBI::dbExecute(tcmbapessoal::connect_sgbd(sgbd), "CREATE TABLE tabela_requisicoes (
                                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                    data TEXT NOT NULL,
-                                                    ano TEXT NOT NULL,
-                                                    mes TEXT NOT NULL,
-                                                    cod_municipio INT NOT NULL,
-                                                    nm_municipio TEXT NOT NULL,
-                                                    cod_entidade INT NOT NULL,
-                                                    nm_entidade TEXT NOT NULL,
-                                                    status_request_html TEXT NOT NULL,
-                                                    log_request_html TEXT NOT NULL,
-                                                    nm_arq_html TEXT NOT NULL,
-                                                    hash_arq_html TEXT NOT NULL,
-                                                    status_tratamento_arq_csv TEXT NOT NULL,
-                                                    log_tratamento_arq_csv TEXT NOT NULL,
-                                                    nm_arq_csv TEXT NOT NULL
+                                                    data TEXT,
+                                                    ano TEXT,
+                                                    mes TEXT,
+                                                    cod_municipio INT,
+                                                    nm_municipio TEXT,
+                                                    cod_entidade INT,
+                                                    nm_entidade TEXT,
+                                                    status_request_html TEXT,
+                                                    log_request_html TEXT,
+                                                    nm_arq_html TEXT,
+                                                    hash_arq_html TEXT,
+                                                    status_tratamento_arq_csv TEXT,
+                                                    log_tratamento_arq_csv TEXT,
+                                                    nm_arq_csv TEXT
                                                     );"
         )
 

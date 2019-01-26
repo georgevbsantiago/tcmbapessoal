@@ -6,10 +6,7 @@
 
 criar_diretorios <- function(nome_scraping) {
 
-    # Cria as pastas dos diretórios que serão utilizados;
-    # Sa get() for igual ao diretório atual, então print
-    
-    
+
     dir_raiz_atual <- getwd()
     
     dir_raiz_verificador <- file.path(dir_raiz_atual, "bd_sqlite")
@@ -17,7 +14,6 @@ criar_diretorios <- function(nome_scraping) {
     if (dir.exists(dir_raiz_verificador) == TRUE) {
 
         print("O diretório Raiz foi definido com sucesso!")
-        
         
     } else {
         

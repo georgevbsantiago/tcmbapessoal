@@ -2,15 +2,18 @@
 % Please edit documentation in R/11_backup_arquivos.R
 \name{executar_backup_arquivos}
 \alias{executar_backup_arquivos}
-\title{Função que executa o backup}
+\title{Função que realiza o backup dos arquivos}
 \usage{
-executar_backup_arquivos(backup = "NAO")
+executar_backup_arquivos(backup_local = "SIM", backup_nuvem = "NAO")
 }
 \arguments{
-\item{backup}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
-para realizar o Backup do Banco de Dados e dos arquivos CSV.}
+\item{backup_local}{É definido como "SIM" como padrão para realizar
+o Backup do Banco de Dados e dos arquivos HTML e CSV.
+Mas pode ser marcado como "NAO".}
 }
 \description{
 Função que executa o backup do Banco de Dados, dos arquivos HTML,
-e dos arquivos CSVs.
+e dos arquivos CSVs no ambiente local e na nuvem (DropBox).
+Obs: É preciso configurar o token do DropBox para a função funcionar.
+Saiba como gerar o seu Token em: \link{https://github.com/karthik/rdrop2}
 }

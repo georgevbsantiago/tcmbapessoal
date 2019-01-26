@@ -2,10 +2,11 @@
 % Please edit documentation in R/utils.R
 \name{log_data_hora}
 \alias{log_data_hora}
-\title{Função utilizadas no Web Scraping}
+\title{Função para registrar o fuso horário}
 \usage{
 log_data_hora()
 }
 \description{
-Função utilizadas no Web Scraping
+Função usada para registrar o fuso horário do Brasil
+mesmo que o servidor tenha o fuso horário de outro país
 }

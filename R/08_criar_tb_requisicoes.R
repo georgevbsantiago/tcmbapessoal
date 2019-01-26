@@ -36,8 +36,12 @@ criar_tb_requisicoes_pessoal <- function(sgbd = "sqlite") {
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
-
-    tb_municipios_alvos_anteriores <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes") %>%
+    # Essa rotina foi criado para contemplar situações
+    # em que o usuário altere o ano de início do Web Scraping após a primeira execucação.
+    # Ou caso o mesmo Web Scraping seja executado num mês seguinte.
+    # -----------------------------------------------------------------------------------
+    tb_municipios_alvos_anteriores <- DBI::dbReadTable(tcmbapessoal::connect_sgbd(sgbd),
+                                                       "tabela_requisicoes") %>%
                                       tibble::as_tibble()
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
@@ -46,16 +50,18 @@ criar_tb_requisicoes_pessoal <- function(sgbd = "sqlite") {
         # o sinal ! antes de cod_municipio é um
         # operador lógico para excluir os dados da coluna (Lei de De Morgan)
         dplyr::filter(!tb_requisicao_novos$data %in% tb_municipios_alvos_anteriores$data)
+    
+    # -----------------------------------------------------------------------------------
 
-
-    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_requisicoes",
-                      tb_municipios_alvos_atualizada, append = TRUE)
+    DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd),
+                      "tabela_requisicoes",
+                      tb_municipios_alvos_atualizada,
+                      append = TRUE)
 
 
     DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
 
     print("Tabela 'tabela_requisicoes' gerada com sucesso!")
-
 
 }

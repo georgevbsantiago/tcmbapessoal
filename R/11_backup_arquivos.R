@@ -1,27 +1,44 @@
-#' @title Função que executa o backup
+#' @title Função que realiza o backup dos arquivos
 #'
 #' @description Função que executa o backup do Banco de Dados, dos arquivos HTML,
-#' e dos arquivos CSVs.
+#' e dos arquivos CSVs no ambiente local e na nuvem (DropBox).
+#' Obs: É preciso configurar o token do DropBox para a função funcionar.
+#' Saiba como gerar o seu Token em: \link{https://github.com/karthik/rdrop2}
 #'
-#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
-#' para realizar o Backup do Banco de Dados e dos arquivos CSV.
+#' @param backup_local É definido como "SIM" como padrão para realizar
+#' o Backup do Banco de Dados e dos arquivos HTML e CSV.
+#' Mas pode ser marcado como "NAO". 
 #'
 #' @export
 
-executar_backup_arquivos <- function(backup = "NAO") {
+executar_backup_arquivos <- function(backup_local = "SIM",
+                                     backup_nuvem = "NAO") {
     
     
-    if(!backup %in% c("SIM", "NAO")) {
+    if(!backup_local %in% c("SIM", "NAO")) {
         
-        stop("Digite SIM ou NAO para o argumento 'backup' da função")
+        stop("Digite SIM ou NAO para o argumento 'backup_local' da função")
         
     }
     
+    if(!backup_nuvem %in% c("SIM", "NAO")) {
+        
+        stop("Digite SIM ou NAO para o argumento 'backup_nuvem' da função")
+    }
+    
+    
+    
+    if(backup_local == "NAO") {
+        
+        stop("Backup Local não realizado, conforme determinado pelo usuário")
+        
+        
+    } else {
     
     # Define o padrão do nome a ser utilizado para identificar o BK dos arquivos;
     sufixo <- log_data_hora() %>%
-        stringr::str_replace_all("[:]", "-") %>%
-        stringr::str_replace_all("[ ]", "_")
+               stringr::str_replace_all("[:]", "-") %>%
+               stringr::str_replace_all("[ ]", "_")
     
     
     nome_dir_bk <- file.path("backup", paste0("backup_", sufixo))
@@ -67,6 +84,16 @@ executar_backup_arquivos <- function(backup = "NAO") {
     ####### O DropBox pode ser acessado com um token ou criando uma chave API
     
     # Saiba como gerar o seu Token em: https://github.com/karthik/rdrop2
+    
+    }
+
+    
+    if(backup_nuvem == "NAO") {
+        
+        stop("Backup na nuvem não realizado, conforme determinado pelo usuário")
+        
+    } else {
+    
     
     if(file.exists("token_dropbox.rds") == FALSE) {
         
@@ -122,5 +149,5 @@ executar_backup_arquivos <- function(backup = "NAO") {
     # De: https://www.dropbox.com/s/qwvohhrtrz95mzq2/bk_arquivos_csv.zip?dl=0
     # Para: https://www.dropbox.com/s/qwvohhrtrz95mzq2/bk_arquivos_csv.zip?dl=1
     
-
+    }
 }

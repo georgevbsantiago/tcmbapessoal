@@ -5,24 +5,30 @@
 \title{Função que executa o Web Scraping}
 \usage{
 executar_web_scraping(anos, nome_scraping, sgbd = "sqlite",
-  repetir = "NAO", backup = "NAO")
+  repetir = "SIM", backup_local = "SIM", backup_nuvem = "NAO")
 }
 \arguments{
-\item{anos}{Exercíico (ano) que ser pretende obter}
+\item{anos}{Exercíico (ano) inicial da coleta de dados}
 
-\item{nome_scraping}{Nome do Diretório que será criado para alocar o Web Scraping}
+\item{nome_scraping}{Nome do Diretório que será criado para alocar os dados do Web Scraping}
 
 \item{sgbd}{Define qual é o Banco de Dados a ser utilizado.
-Por padrão, é definido o SQLite}
+Por padrão, é definido o SQLite.}
 
-\item{repetir}{É definido "NAO" como padrão. Mas pode ser marcado como "SIM",
-caso deseje repetir as consulta do Web Scraping que falharam ou que não foram
-identificadas resposta do ente municipal}
+\item{repetir}{É definido "SIM" como padrão. Mas pode ser marcado como "NAO",
+caso não deseje repetir as consulta do Web Scraping que falharam ou que não foram
+identificadas resposta do ente municipal no dia de execução do Web Scraping}
 
-\item{backup}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
-para realizar o Backup do Banco de Dados e dos arquivos CSV.
-É preciso configurar o token Google Drive antes de executar}
+\item{backup_local}{É definido como "SIM" como padrão para realizar
+o Backup do Banco de Dados e dos arquivos HTML e CSV.
+Mas pode ser marcado como "NAO".}
+
+\item{backup_nuvem}{Realiza o Backup dos dados para o DropBox. Como padrão, é definido "NAO".
+Obs: É preciso configurar o token do DropBox antes de executar
+(ver instruções na função 'exportar_csv_dropbox').}
 }
 \description{
 Essa função foi desenvolvida para executar todas as etapas do Web Scraping
+e, então, coletar os dados públicos da Folha de Pessoal dos Municípios do Estado da Bahia
+custodiados no site do TCM-Ba
 }

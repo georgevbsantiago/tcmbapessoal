@@ -2,13 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{valor_monetario}
 \alias{valor_monetario}
-\title{Função utilizadas no Web Scraping}
+\title{Função para padronizar valores monetários}
 \usage{
 valor_monetario(x)
 }
 \arguments{
-\item{x}{Limpa os valores monetários de caracteres especiais}
+\item{x}{string}
 }
 \description{
-Função utilizadas no Web Scraping
+Limpa os valores monetários de caracteres especiais
+}
+\examples{
+"R$ 1.059,00" para "1059,00"
+
 }
