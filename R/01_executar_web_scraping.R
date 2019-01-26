@@ -150,6 +150,11 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
       print(paste("Diretório do Web Scraping:", info_ws$dir_wd))
       print(paste("SGBD do Web Scraping:", info_ws$sgbd_ws))
       print(paste("Data de criação do Web Scraping:", info_ws$data_time_create))
+      
+      # Registrar a data e hora do início da execução do Web Scraping no arquivo RDS
+      inicio_exe_ws_data_time(arq_rds_id_ws)
+      
+      # ---------------------------------------------------------------------------
   
 
       # Função que cria a tabela dCalendario
@@ -191,6 +196,13 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
       
       # Exportar os CSVs para o Dropbox para conectar ao Power BI
       tcmbapessoal::exportar_csv_dropbox(exportar_nuvem)
+      
+      
+      # ---------------------------------------------------------------------------
+      
+      
+      # Registrar a data e hora do fim da execução do Web Scraping no arquivo RDS
+      fim_exe_ws_data_time(arq_rds_id_ws)
 
       
       print("## Web Scraping finalizado com sucesso! ###")

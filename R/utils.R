@@ -136,13 +136,13 @@ gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
         
         entrada_resultado <- "NULO"
         
-        entrada_error <- scraping_html$error$message
+        entrada_error <- entrada$error$message
         
     }
     
     if(is.null(entrada$error) == TRUE) {
         
-        entrada_resultado <- scraping_html$result$status_code
+        entrada_resultado <- entrada$result$status_code
         
         entrada_error <- "NULO"
     }
@@ -187,3 +187,31 @@ gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
 }
 
 ###################################################################################
+
+
+inicio_exe_ws_data_time <- function(arq_rds_id_ws) {
+    
+    
+    ws_id <- readRDS(arq_rds_id_ws)
+    
+    ws_id$inicio_ws_data_time <- tcmbapessoal::log_data_hora()
+    ws_id$fim_ws_data_time <- "- - -"
+    
+    saveRDS(object = ws_id,
+            file = arq_rds_id_ws)
+    
+}
+
+
+###################################################################################
+
+fim_exe_ws_data_time <- function(arq_rds_id_ws) {
+    
+    ws_id <- readRDS(arq_rds_id_ws)
+    
+    ws_id$fim_ws_data_time <- tcmbapessoal::log_data_hora()
+    
+    saveRDS(object = ws_id,
+            file = arq_rds_id_ws)
+    
+}
