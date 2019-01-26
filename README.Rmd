@@ -104,4 +104,7 @@ Outras Melhorias:
     
 !!! (FALTA TESTAR) Subistituir a rotina 'if( any(stringr::str_detect(names(pegar_dados_html), "13")) )'
     pela variável verificar_colunas
+    
+!!! Verificar se a rotina de tratamento de erro na função tcmbapessoal::connect_sgbd(sgbd) possibilita
+    acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd)
 

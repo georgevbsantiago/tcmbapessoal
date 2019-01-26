@@ -131,11 +131,22 @@ gravar_erro <- function(log_request, nm_log_erro = "", entrada = "",
                         id = "", cod_entidade = "", nm_entidade = "",
                         ano = "", mes = "", outros = "", sgbd = "sqlite") {
     
+    if(is.null(entrada$result) == TRUE) {
+        
+        entrada_resultado <- "NULO"
+    }
+    
+    if(is.null(entrada$error) == TRUE) {
+        
+        entrada_error <- "NULO"
+    }
+    
+    
     tb_error <- tibble::tibble(
                             data_time = log_request,
                             nm_log_erro = nm_log_erro,
-                            entrada_result = entrada$result,
-                            entrada_error = entrada$error,
+                            entrada_result = entrada_resultado,
+                            entrada_error = entrada_error,
                             foreign_key = id,
                             cod_entidade = cod_entidade,
                             nm_entidade = nm_entidade,
