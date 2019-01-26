@@ -81,7 +81,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
             }
 
 
-            if(!backup %in% c("SIM", "NAO")) {
+            if(!backup_local %in% c("SIM", "NAO")) {
 
               stop("Digite SIM ou NAO para o argumento 'backup_local' da função")
             }
