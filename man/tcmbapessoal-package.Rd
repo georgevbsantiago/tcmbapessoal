@@ -4,9 +4,20 @@
 \name{tcmbapessoal-package}
 \alias{tcmbapessoal}
 \alias{tcmbapessoal-package}
-\title{tcmbapessoal: What the Package Does (Title Case)}
+\title{tcmbapessoal: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia}
 \description{
-More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia
+                pelo site do TCM-Ba
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/georgevbsantiago/tcmbapessoal}
+}
+
+}
+\author{
+\strong{Maintainer}: George Santiago \email{georgevbsantiago@hotmail.com}
+
 }
 \keyword{internal}

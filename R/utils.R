@@ -1,3 +1,30 @@
+
+#' @title Função do URL do TCM-Ba
+#'
+#'
+#' @export
+
+url_tcm <- function () {
+    
+    url_tcm <-  "http://www.tcm.ba.gov.br/portal-da-cidadania/pessoal/"
+    
+}
+
+###################################################################################
+
+#' @title Função do Web Service do TCM-Ba
+#'
+#'
+#' @export
+
+url_tcm_entidades_ws <- function(){
+    
+    url_tcm_entidades_ws <- "http://www.tcm.ba.gov.br/Webservice/index.php/entidades?cdMunicipio="
+    
+}
+
+###################################################################################
+
 #' @title Função para registrar o fuso horário
 #' 
 #' @description Função usada para registrar o fuso horário do Brasil
@@ -40,29 +67,22 @@ valor_monetario <- function (x) {
 
 ###################################################################################
 
-#' @title Função do URL do TCM-Ba
-#'
-#'
-#' @export
-
-url_tcm <- function () {
-
-    url_tcm <-  "http://www.tcm.ba.gov.br/portal-da-cidadania/pessoal/"
-
-}
-
-###################################################################################
-
-#' @title Função do Web Service do TCM-Ba
-#'
-#'
-#' @export
-
-url_tcm_entidades_ws <- function(){
-
-    url_tcm_entidades_ws <- "http://www.tcm.ba.gov.br/Webservice/index.php/entidades?cdMunicipio="
-
-}
+#' #' @title Função utilizadas no Web Scraping
+#' #' 
+#' #' @description Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75
+#' #' 
+#' #' @param x string
+#' #' 
+#' #' @export
+#' 
+#' 
+#' valor_monetario2 <- function(x) {
+#'     x %>% 
+#'         stringr::str_remove("R\\$") %>% 
+#'         stringr::str_remove(".") %>% 
+#'         stringr::str_replace_all(",", "\\.") %>% 
+#'         as.character()
+#' }
 
 ###################################################################################
 
@@ -91,25 +111,6 @@ return(resultado)
 
 ###################################################################################
 
-
-#' @title Função utilizadas no Web Scraping
-#' 
-#' @description Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75
-#' 
-#' @param x string
-#' 
-#' @export
-
-
-valor_monetario2 <- function(x) {
-        x %>% 
-        stringr::str_remove("R\\$") %>% 
-        stringr::str_remove(".") %>% 
-        stringr::str_replace_all(",", "\\.") %>% 
-        as.numeric()
-}
-
-###################################################################################
 
 
 #' @title Função para gravar erro da execução do código

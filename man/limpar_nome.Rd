@@ -12,3 +12,20 @@ limpar_nome(x)
 \description{
 Limpa o nome dos entes municipais para retirar caracteres especiais
 }
+\details{
+#' @title Função utilizadas no Web Scraping
+#'
+#' @description Transforma valores Ex: c("R$ 10.000,89", "R$ 123,75") em 10000.89 e 123.75
+#'
+#' @param x string
+#'
+#' @export
+
+valor_monetario2 <- function(x) {
+x %>%
+stringr::str_remove("R\$") %>%
+stringr::str_remove(".") %>%
+stringr::str_replace_all(",", "\.") %>%
+as.character()
+}
+}

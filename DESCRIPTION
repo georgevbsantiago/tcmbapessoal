@@ -1,11 +1,13 @@
 Package: tcmbapessoal
 Type: Package
-Title: What the Package Does (Title Case)
+Date: 2019-01-26
+Title: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: person("George", "Santiago", role = c("aut", "cre"), email = "georgevbsantiago@hotmail.com")
+Maintainer: George Santiago <georgevbsantiago@hotmail.com>
+Description: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia
+                pelo site do TCM-Ba
+URL: https://github.com/georgevbsantiago/tcmbapessoal
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
