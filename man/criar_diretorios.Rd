@@ -4,10 +4,7 @@
 \alias{criar_diretorios}
 \title{Função que cria os diretório do Web Scraping}
 \usage{
-criar_diretorios(nome_scraping)
-}
-\arguments{
-\item{nome_scraping}{Nome do Web Scraping e do seu diretório raiz}
+criar_diretorios()
 }
 \description{
 Função que cria os diretório do Web Scraping

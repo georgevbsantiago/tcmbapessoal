@@ -99,21 +99,58 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
             }
 
     
-    # Função que cria as pastas dos arquivos e define o diretório Raiz
-    tcmbapessoal::criar_diretorios(nome_scraping)
-    
-
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
-    # !!! Mudar essa rotina para algo mais genérico que seja aceito no SQLite e no MySQL
-    if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE) {
-
-          # Função que cria o Banco de Dados
-            tcmbapessoal::criar_bd(sgbd)
-      
-          # Função que cria 5 tabelas no Banco de Dados.
-            tcmbapessoal::criar_tabelas_bd(sgbd)
-    }
-     
+  
+  arq_rds_id_ws <- paste0("id_ws_", nome_scraping, ".rds")
+  
+  if (dir.exists(nome_scraping) == FALSE &
+      file.exist(arq_rds_id_ws) == FALSE) {
+    
+    # Função que cria o diretório com o nome do Web Scraping
+    dir.create(nome_scraping)
+    
+    # Função que define o diretório Raiz
+    setwd(nome_scraping)
+    
+    print("O Diretório principal foi criado com Sucesso!")
+    
+    # Função que define o Diretório Raiz e crias demais diretórios
+    tcmbapessoal::criar_diretorios()
+    
+    # Função que cria a identidade do Web Scraping
+    tcmbapessoal::criar_ws_id(nome_scraping, sgbd)
+    
+    # Função que cria o Banco de Dados
+    tcmbapessoal::criar_bd(sgbd)
+    
+    # Função que cria 5 tabelas no Banco de Dados.
+    tcmbapessoal::criar_tabelas_bd(sgbd)
+    
+  } else {
+    
+    print("Executado Web Sacraping...")
+    
+  }
+  
+  
+  if(dir.exists(nome_scraping) == TRUE) {
+    
+    setwd(file.path(getwd(), nome_scraping))
+    
+    print("O Diretório Raiz foi definido com Sucesso!")
+    
+  }
+  
+  
+  if(file.exist(arq_rds_id_ws) == TRUE) {
+  
+      info_ws <- readRDS(arq_rds_id_ws)
+    
+      print(paste("Nome do Web Scraping:", info_ws$nome))
+      print(paste("Diretório do Web Scraping:", info_ws$dir_wd))
+      print(paste("SGBD do Web Scraping:", info_ws$sgbd_ws))
+      print(paste("Data de criação do Web Scraping:", info_ws$data_time_create))
+  
 
       # Função que cria a tabela dCalendario
       tcmbapessoal::criar_tb_dcalendario(anos, sgbd)
@@ -157,5 +194,13 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
 
       
       print("## Web Scraping finalizado com sucesso! ###")
+      
+  } else {
+    
+    stop("Ocorreu algum problema durante a execução do Web Scraping!!!")
+    
+  }
+  
 
 }
+
