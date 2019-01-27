@@ -61,7 +61,12 @@ Upload para o Google Drive:
 
 4 - Tornar o Web Scraping agnóstico de Sistema de Banco de Dados Relacional (pelo menos, aceite o SQLite e MySQL).
 
-5 - Exportar o resultado do Scraping para um repositório público para que qualquer pessoa possa baixar os dados.
+5 - Tornar o Web Scraping reprodutível em um ambiente RStuido implantado via Docker
+
+6 - Exportar o resultado do Scraping para um repositório público (ex: Docker) para que qualquer pessoa possa baixar os dados.
+
+7 - Desenvolver um ChatBot no Telegram para sinalizar ao mantenedor do Web Scraping quando ele inicia e termina, ou quando ocorre um erro que interrompe a execução.
+
 
 # BUGS e Melhorias
 
@@ -69,8 +74,6 @@ Upload para o Google Drive:
 1º - Resolver o problema do progressivo consumo de memória durante o tratamento dos arquivos HTML para CSV;
 
 2º - Agregar possíveis insights aplicados no pacote RCrawler
-
-3º - Aprimorar elementos da Documentação
 
 Outras Melhorias:
 !!!Criar um loop seguro para a função salvar_html de erros ao salvar o artquivo html por ser muito grande (maior que 260 caracteres) ou por ter um conteúdo vazio.
@@ -84,9 +87,6 @@ Outras Melhorias:
 > readr::parse_number("R$ 3.312.200,35", locale = readr::locale(grouping_mark = ".", decimal_mark = ","))
 [1] 3312200
 
-!!! Mudar a lógica da rotina de verificação em " if (file.exists(file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")) == FALSE)" para algo mais genérico, já que o código, agora, é agnóstico.
-
-!!! Determinar quais funções necessitam ser exportadas
 
 !!! Revisar a rotina que retorna TRUE ou FALSE na variável 'detectar_tabela' da função 'scraping_html_folhapessoal'
     verificar se é melhor permanecer com o teste is.na() ou trocar por isTRUE() ou outra função
@@ -108,8 +108,6 @@ Outras Melhorias:
 !!! Verificar se a rotina de tratamento de erro na função tcmbapessoal::connect_sgbd(sgbd) possibilita
     acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd)
     
-!!! Restruturar o print para sinalizar o Scraping
-
 !!! Bug de recomeço da execução. Se estiver no mesmo diretório dará problema. Já se estiver um nível acima, funciona normalmente.
 Quado se estar dentro do diretório do Web Scraping
 [1] "O diretório Raiz foi definido com sucesso!"
