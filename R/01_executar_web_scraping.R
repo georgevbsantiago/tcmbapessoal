@@ -4,7 +4,7 @@
 #' e, então, coletar os dados públicos da Folha de Pessoal dos Municípios do Estado da Bahia
 #' custodiados no site do TCM-Ba
 #' 
-#' @param anos Exercíico (ano) inicial da coleta de dados
+#' @param ano_inicio Exercíico (ano) inicial da coleta de dados
 #' @param nome_scraping Nome do Diretório que será criado para alocar os dados do Web Scraping
 #' @param repetir É definido "SIM" como padrão. Mas pode ser marcado como "NAO",
 #' caso não deseje repetir as consulta do Web Scraping que falharam ou que não foram
@@ -22,7 +22,7 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' tcmbapessoal::executar_web_scraping(ano = 2018,
+#' tcmbapessoal::executar_web_scraping(ano_inicio = 2018,
 #'                                     nome_scraping = "ws_tcmba_pessoal",
 #'                                     sgbd = "sqlite",
 #'                                     repetir = "SIM",
@@ -34,14 +34,14 @@
 #'
 #' @export
 
-executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
+executar_web_scraping <- function(ano_inicio, nome_scraping, sgbd = "sqlite",
                                   repetir = "SIM", backup_local = "SIM",
                                   backup_nuvem = "NAO",
                                   exportar_nuvem = "NAO") {
 
   
   # Etapas de padronização dos argumentos preenchidos pelo usuário
-  anos <- as.integer(anos)
+  ano_inicio <- as.integer(ano_inicio)
   nome_scraping <- as.character(nome_scraping)
   sgbd <- stringr::str_to_lower(as.character(sgbd))
   repetir <- stringr::str_to_upper(as.character(repetir))
@@ -50,13 +50,13 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
 
   
   # Etapas de verificação dos argumentos preenchidos pelo usuário
-            if(length(anos) > 1){
+            if(length(ano_inicio) > 1){
               
               stop("Informe o ano de início do Web Scraping: 2016, 2017, 2018 ou 2019")
               
             }
       
-            if(!anos %in% c(2016, 2017, 2018, 2019)){
+            if(!ano_inicio %in% c(2016, 2017, 2018, 2019)){
 
               stop("Informe um dos seguintes anos: 2016, 2017, 2018 ou 2019")
 
@@ -158,7 +158,7 @@ executar_web_scraping <- function(anos, nome_scraping, sgbd = "sqlite",
   
 
       # Função que cria a tabela dCalendario
-      tcmbapessoal::criar_tb_dcalendario(anos, sgbd)
+      tcmbapessoal::criar_tb_dcalendario(ano_inicio, sgbd)
       
       # Função que faz o Web Scraping do código e nome dos Municípios
       tcmbapessoal::criar_tb_dmunicipios(sgbd)

@@ -2,15 +2,15 @@
 #' 
 #' @param sgbd Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite
 #' 
-#' @param anos Define o ano de início do Web Scraping
+#' @param ano_inicio Define o ano de início do Web Scraping
 #'
 #' @importFrom magrittr %>%
 #'
 #' @export
 
-criar_tb_dcalendario <- function(anos, sgbd = "sqlite"){
+criar_tb_dcalendario <- function(ano_inicio, sgbd = "sqlite"){
 
-    tb_dcalendario <- purrr::map_dfr(anos, func_dcalendario) %>%
+    tb_dcalendario <- purrr::map_dfr(ano_inicio, func_dcalendario) %>%
                       tibble::as_tibble()
 
     DBI::dbWriteTable(tcmbapessoal::connect_sgbd(sgbd),
@@ -27,11 +27,11 @@ criar_tb_dcalendario <- function(anos, sgbd = "sqlite"){
 
 ######################################################################################
 
-func_dcalendario <- function(anos) {
+func_dcalendario <- function(ano_inicio) {
 
 
     # Cria a tabela com a relação de meses e ano para o Web Scraping;
-    tb_calendario <- tibble::tibble(data = seq(lubridate::ymd(paste0(anos, "-01-01")),
+    tb_calendario <- tibble::tibble(data = seq(lubridate::ymd(paste0(ano_inicio, "-01-01")),
                                                (lubridate::today() - lubridate::day(lubridate::today()) + 1 - months(2)),
                                                by = "month"),
                                     ano = lubridate::year(data),
