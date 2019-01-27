@@ -8,7 +8,8 @@ conectar com o Power BI}
 exportar_csv_dropbox(exportar_nuvem = "NAO")
 }
 \arguments{
-\item{exportar_nuvem}{Como padrão, é definido "NAO".}
+\item{exportar_nuvem}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+para realizar a Exportação do arquivo .zip (com diversos CSVs) para o DropBox.}
 }
 \description{
 Obs: É preciso configurar o token do DropBox para a função funcionar.

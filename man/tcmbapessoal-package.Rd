@@ -6,8 +6,7 @@
 \alias{tcmbapessoal-package}
 \title{tcmbapessoal: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia}
 \description{
-Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia
-                pelo site do TCM-Ba
+Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia pelo sdevtite do TCM-Ba
 }
 \seealso{
 Useful links:

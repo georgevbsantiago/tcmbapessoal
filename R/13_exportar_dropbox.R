@@ -6,7 +6,8 @@
 #' Obs: É preciso configurar o token do DropBox para a função funcionar.
 #' Saiba como gerar o seu Token em: [linked phrase](https://github.com/karthik/rdrop2)
 #' 
-#' @param exportar_nuvem Como padrão, é definido "NAO".
+#' @param exportar_nuvem É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar a Exportação do arquivo .zip (com diversos CSVs) para o DropBox.
 #'
 #' @export
 
@@ -14,12 +15,12 @@ exportar_csv_dropbox <- function(exportar_nuvem = "NAO") {
 
     if(!exportar_nuvem %in% c("SIM", "NAO")) {
 
-        stop("Digite SIM ou NAO para o argumento 'backup' da função")
+        stop("Digite SIM ou NAO para o argumento 'exportar_nuvem' da função")
 
     }
   
   
-    if(backup_nuvem == "NAO") {
+    if(exportar_nuvem == "NAO") {
     
         stop("Não realizado a exportação para o DropBox, conforme determinado pelo usuário")
 
@@ -88,22 +89,26 @@ exportar_csv_dropbox <- function(exportar_nuvem = "NAO") {
 #' @title Função que exporta os arquivos CSV único para o DropBox, com o objetivo
 #' conectar com o Power BI
 #'
-#' @param backup É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
-#' para realizar o Backup do Banco de Dados e dos arquivos CSV.
+#' @description 
+#' Obs: É preciso configurar o token do DropBox para a função funcionar.
+#' Saiba como gerar o seu Token em: [linked phrase](https://github.com/karthik/rdrop2)
+#'
+#' @param exportar_nuvem É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+#' para realizar a Exportação do arquivo CSV para o DropBox.
 #'
 #' @export
 
-exportar_csv_unico_dropbox <- function(backup = "NAO") {
+exportar_csv_unico_dropbox <- function(exportar_nuvem = "NAO") {
     
-    if(!backup %in% c("SIM", "NAO")) {
+    if(!exportar_nuvem %in% c("SIM", "NAO")) {
         
-        stop("Digite SIM ou NAO para o argumento 'backup' da função")
+        stop("Digite SIM ou NAO para o argumento 'exportar_nuvem' da função")
         
     }
   
-    if(backup == "NAO") {
+    if(exportar_nuvem == "NAO") {
       
-      stop("Não realizado a exportação do CSV único para o DropBox, conforme determinado pelo usuário")
+        stop("Não realizado a exportação do CSV único para o DropBox, conforme determinado pelo usuário")
       
     }
     
@@ -126,26 +131,27 @@ exportar_csv_unico_dropbox <- function(backup = "NAO") {
     purrr::walk(lista_arquivos_csv, function(lista_arquivos_csv) {
         
         arq_csv <- readr::read_delim(lista_arquivos_csv,
-                                     delim = ";", col_types = cols(
-                                         data = col_character(),
-                                         ano = col_character(),
-                                         mes = col_character(),
-                                         cod_municipio = col_character(),
-                                         nm_municipio = col_character(),
-                                         cod_entidade = col_character(),
-                                         nm_entidade = col_character(),
-                                         nome = col_character(),
-                                         matricula = col_character(),
-                                         tipo_servidor = col_character(),
-                                         cargo = col_character(),
-                                         salario_base = col_character(),
-                                         salario_vantagens = col_character(),
-                                         salario_gratificacao = col_character(),
-                                         decimo_terceiro = col_character(),
-                                         carga_horaria = col_character(),
-                                         area_atuacao = col_character()
-                                     )
-        )
+                                     delim = ";",
+                                     col_types = readr::cols(
+                                                             data = readr::col_character(),
+                                                             ano = readr::col_character(),
+                                                             mes = readr::col_character(),
+                                                             cod_municipio = readr::col_character(),
+                                                             nm_municipio = readr::col_character(),
+                                                             cod_entidade = readr::col_character(),
+                                                             nm_entidade = readr::col_character(),
+                                                             nome = readr::col_character(),
+                                                             matricula = readr::col_character(),
+                                                             tipo_servidor = readr::col_character(),
+                                                             cargo = readr::col_character(),
+                                                             salario_base = readr::col_character(),
+                                                             salario_vantagens = readr::col_character(),
+                                                             salario_gratificacao = readr::col_character(),
+                                                             decimo_terceiro = readr::col_character(),
+                                                             carga_horaria = readr::col_character(),
+                                                             area_atuacao = readr::col_character()
+                                                             )
+                                                             )
         
         readr::write_delim(arq_csv,
                            nome_arquivo_csv,
@@ -154,7 +160,7 @@ exportar_csv_unico_dropbox <- function(backup = "NAO") {
     }
     )
     
-    message("Consolidação realizada com sucesso!")
+    print("Consolidação realizada com sucesso!")
     
     zip::zip(nome_arquivo_zip, nome_arquivo_csv,
              compression_level = 9)

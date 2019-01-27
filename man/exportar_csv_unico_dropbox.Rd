@@ -5,13 +5,13 @@
 \title{Função que exporta os arquivos CSV único para o DropBox, com o objetivo
 conectar com o Power BI}
 \usage{
-exportar_csv_unico_dropbox(backup = "NAO")
+exportar_csv_unico_dropbox(exportar_nuvem = "NAO")
 }
 \arguments{
-\item{backup}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
-para realizar o Backup do Banco de Dados e dos arquivos CSV.}
+\item{exportar_nuvem}{É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
+para realizar a Exportação do arquivo CSV para o DropBox.}
 }
 \description{
-Função que exporta os arquivos CSV único para o DropBox, com o objetivo
-conectar com o Power BI
+Obs: É preciso configurar o token do DropBox para a função funcionar.
+Saiba como gerar o seu Token em: \href{https://github.com/karthik/rdrop2}{linked phrase}
 }
