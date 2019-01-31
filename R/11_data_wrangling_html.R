@@ -133,7 +133,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                                      salario_gratificacao, decimo_terceiro),
                          ~stringr::str_replace(., "[.]", ",")) %>%
         dplyr::mutate_all(stringr::str_trim) %>%
-        dplyr::mutate_all(dplyr::funs(stringi::stri_trans_general(., "latin-ascii")))
+        dplyr::mutate_all(~stringi::stri_trans_general(., "latin-ascii"))
 
 
     log_tratamento_arq_csv <- tcmbapessoal::log_data_hora()
