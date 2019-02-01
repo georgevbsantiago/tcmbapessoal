@@ -65,12 +65,12 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
     subdir_dados_exportados <- "dados_exportados"
 
     pegar_dados_html <- XML::htmlParse(nm_arq_html, encoding = "UTF-8") %>%
-                        XML::readHTMLTable(stringsAsFactors = FALSE) %>%
-                        .[[2]] %>% 
+                        XML::readHTMLTable(stringsAsFactors = FALSE, which = 2) %>% 
                         tibble::as_tibble(.name_repair = "universal") %>% 
                         tidyr::fill(-...1, .direction = "down") %>% 
                         dplyr::filter(...1 != "") %>% 
                         tidyr::separate(...1, sep = ":", into = c(NA, "data_admissao"))
+    
     
     # Rotina para verificar se a tabela tem a coluna '13º Salário' ou não.
     verificar_colunas <- pegar_dados_html %>%
@@ -202,6 +202,5 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
         # paradgima da programação funcional, mas o propósito foi alcançado
         
         n_arq_tratado <<- n_arq_tratado + 1
-
 
 }
