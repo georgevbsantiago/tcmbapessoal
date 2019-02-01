@@ -37,13 +37,10 @@ executar_data_wrangling_html_pessoal <- function(sgbd = "sqlite") {
 
         purrr::pwalk(tb_requisicoes, data_wrangling_html_pessoal, sgbd)
 
-        #future::plan(strategy = future::multisession)
         # Substituir futuramente por furrr::future_pwalk que já está disponível no github
-        # Lembrar de acidionar o banco de dados na função
-        # furrr::future_pmap(tb_requisicoes, data_wrangling_html_pessoal, sgbd, .progress = TRUE)
-        # furrr::future_pwalk(tb_requisicoes, data_wrangling_html_pessoal, sgbd, .progress = TRUE)
         
-        # abjutils::pvec()
+        # future::plan(strategy = future::multisession)
+        # furrr::future_pwalk(tb_requisicoes, data_wrangling_html_pessoal, sgbd, .progress = TRUE)
 
         message("Todos os Arquivos HTML das Folhas de Pessoal foram tratados!!!")
 
@@ -123,14 +120,14 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                       tipo_servidor, cargo, salario_base,
                       salario_vantagens, salario_gratificacao,
                       decimo_terceiro, carga_horaria, area_atuacao) %>%
-        dplyr::mutate_at(dplyr::vars(nm_municipio, nm_entidade, nome,
-                                     tipo_servidor, cargo, area_atuacao),
+        dplyr::mutate_at(c("nm_municipio", "nm_entidade", "nome",
+                           "tipo_servidor", "cargo", "area_atuacao"),
                          ~stringr::str_to_upper(.)) %>%
-        dplyr::mutate_at(dplyr::vars(salario_base, salario_vantagens,
-                                     salario_gratificacao, decimo_terceiro),
+        dplyr::mutate_at(c("salario_base", "salario_vantagens",
+                           "salario_gratificacao", "decimo_terceiro"),
                          ~tcmbapessoal::valor_monetario(.)) %>%
-        dplyr::mutate_at(dplyr::vars(salario_base, salario_vantagens,
-                                     salario_gratificacao, decimo_terceiro),
+        dplyr::mutate_at(c("salario_base", "salario_vantagens",
+                           "salario_gratificacao", "decimo_terceiro"),
                          ~stringr::str_replace(., "[.]", ",")) %>%
         dplyr::mutate_all(~stringr::str_trim(.)) %>%
         dplyr::mutate_all(~stringi::stri_trans_general(., "latin-ascii"))
