@@ -4,10 +4,10 @@
 \alias{criar_tb_dcalendario}
 \title{Função que gera a tabela 'dCalendario' com a relação de meses e ano para o Web Scraping;}
 \usage{
-criar_tb_dcalendario(anos, sgbd = "sqlite")
+criar_tb_dcalendario(ano_inicio, sgbd = "sqlite")
 }
 \arguments{
-\item{anos}{Define o ano de início do Web Scraping}
+\item{ano_inicio}{Define o ano de início do Web Scraping}
 
 \item{sgbd}{Define o Sistema de Banco de Dados a ser utilizado. Por padrão, é definido como sqlite}
 }

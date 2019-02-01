@@ -6,7 +6,9 @@
 \alias{tcmbapessoal-package}
 \title{tcmbapessoal: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia}
 \description{
-Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia pelo sdevtite do TCM-Ba
+Web Scraping desenvolvido pelo Observatório Social de Santo Antonio de Jesus (Brasil/Bahia).
+    Tem como objetivo obter e tratar os dados das Folhas de Pessoas dos Municipios do Estado da Bahia
+    disponibilizados no site (na estrutura HTML) do TCM-Ba.
 }
 \seealso{
 Useful links:

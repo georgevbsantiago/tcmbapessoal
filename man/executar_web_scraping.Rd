@@ -4,12 +4,12 @@
 \alias{executar_web_scraping}
 \title{Função que executa o Web Scraping}
 \usage{
-executar_web_scraping(anos, nome_scraping, sgbd = "sqlite",
+executar_web_scraping(ano_inicio, nome_scraping, sgbd = "sqlite",
   repetir = "SIM", backup_local = "SIM", backup_nuvem = "NAO",
   exportar_nuvem = "NAO")
 }
 \arguments{
-\item{anos}{Exercíico (ano) inicial da coleta de dados}
+\item{ano_inicio}{Exercíico (ano) inicial da coleta de dados}
 
 \item{nome_scraping}{Nome do Diretório que será criado para alocar os dados do Web Scraping}
 
@@ -17,8 +17,9 @@ executar_web_scraping(anos, nome_scraping, sgbd = "sqlite",
 Por padrão, é definido o SQLite.}
 
 \item{repetir}{É definido "SIM" como padrão. Mas pode ser marcado como "NAO",
-caso não deseje repetir as consulta do Web Scraping que falharam ou que não foram
-identificadas resposta do ente municipal no dia de execução do Web Scraping}
+caso não deseje repetir (na próxima execução) as consulta do Web Scraping
+que falharam ou que não foram identificadas resposta do ente municipal
+no dia de execução do Web Scraping}
 
 \item{backup_local}{É definido como "SIM" como padrão para realizar
 o Backup do Banco de Dados e dos arquivos HTML e CSV.
@@ -38,7 +39,7 @@ custodiados no site do TCM-Ba
 }
 \examples{
 \dontrun{
-tcmbapessoal::executar_web_scraping(ano = 2018,
+tcmbapessoal::executar_web_scraping(ano_inicio = 2018,
                                     nome_scraping = "ws_tcmba_pessoal",
                                     sgbd = "sqlite",
                                     repetir = "SIM",
