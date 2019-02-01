@@ -59,13 +59,13 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             id_ws <- dir(pattern = "id_ws")
             
             
-            zip_bd_sqlite <- file.path(nome_dir_bk, paste0("bk_bd_", sufixo))
+            zip_bd_sqlite <- file.path(nome_dir_bk, paste0("bk_bd_", sufixo, ".zip"))
             
-            zip_arquivos_html <- file.path(nome_dir_bk, paste0("bk_html_", sufixo))
+            zip_arquivos_html <- file.path(nome_dir_bk, paste0("bk_html_", sufixo, ".zip"))
             
-            zip_arquivos_csv <- file.path(nome_dir_bk, paste0("bk_csv_", sufixo))
+            zip_arquivos_csv <- file.path(nome_dir_bk, paste0("bk_csv_", sufixo, ".zip"))
             
-            zip_arquivo_id_ws <- file.path(nome_dir_bk, paste0("bk_id_ws", sufixo))
+            zip_arquivo_id_ws <- file.path(nome_dir_bk, paste0("bk_id_ws", sufixo, ".zip"))
             
             
             zip::zip(zip_bd_sqlite, bd_sqlite,
