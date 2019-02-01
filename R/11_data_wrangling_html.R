@@ -78,32 +78,30 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
     if( any(stringr::str_detect(names(pegar_dados_html), "13")) ){
 
         data_wrangling <- pegar_dados_html %>%
-            tibble::as_tibble() %>%
-            purrr::set_names(c("nome",
-                               "matricula",
-                               "tipo_servidor",
-                               "cargo",
-                               "salario_base",
-                               "salario_vantagens",
-                               "salario_gratificacao",
-                               "decimo_terceiro",
-                               "carga_horaria",
-                               "area_atuacao"))
+            tibble::as_tibble(.name_repair = ~c("nome",
+                                                "matricula",
+                                                "tipo_servidor",
+                                                "cargo",
+                                                "salario_base",
+                                                "salario_vantagens",
+                                                "salario_gratificacao",
+                                                "decimo_terceiro",
+                                                "carga_horaria",
+                                                "area_atuacao"))
 
     } else {
 
 
         data_wrangling <- pegar_dados_html %>%
-            tibble::as_tibble() %>%
-            purrr::set_names(c("nome",
-                               "matricula",
-                               "tipo_servidor",
-                               "cargo",
-                               "salario_base",
-                               "salario_vantagens",
-                               "salario_gratificacao",
-                               "carga_horaria",
-                               "area_atuacao")) %>%
+            tibble::as_tibble(.name_repair = ~c("nome",
+                                                "matricula",
+                                                "tipo_servidor",
+                                                "cargo",
+                                                "salario_base",
+                                                "salario_vantagens",
+                                                "salario_gratificacao",
+                                                "carga_horaria",
+                                                "area_atuacao")) %>%
             dplyr::mutate(decimo_terceiro = "0")
     }
 
@@ -196,11 +194,6 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
         # paradgima da programação funcional, mas o propósito foi alcançado
         
         n_arq_tratado <<- n_arq_tratado + 1
-
-        # Liberar memória
-        # Há uma leve perda de performance
-        rm(list = ls())
-        gc(reset = TRUE)
 
 
 }
