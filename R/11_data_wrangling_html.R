@@ -65,8 +65,12 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
     subdir_dados_exportados <- "dados_exportados"
 
     pegar_dados_html <- XML::htmlParse(nm_arq_html, encoding = "UTF-8") %>%
-                         XML::readHTMLTable(stringsAsFactors = FALSE) %>%
-                         .[[2]]
+                        XML::readHTMLTable(stringsAsFactors = FALSE) %>%
+                        .[[2]] %>% 
+                        tibble::as_tibble(.name_repair = "universal") %>% 
+                        tidyr::fill(-...1, .direction = "down") %>% 
+                        dplyr::filter(...1 != "") %>% 
+                        tidyr::separate(...1, sep = ":", into = c(NA, "data_admissao"))
     
     # Rotina para verificar se a tabela tem a coluna '13º Salário' ou não.
     verificar_colunas <- pegar_dados_html %>%
@@ -78,7 +82,8 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
     if( verificar_colunas == TRUE ) {
 
         data_wrangling <- pegar_dados_html %>%
-            tibble::as_tibble(.name_repair = ~c("nome",
+            tibble::as_tibble(.name_repair = ~c("data_admissao",
+                                                "nome",
                                                 "matricula",
                                                 "tipo_servidor",
                                                 "cargo",
@@ -93,7 +98,8 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
 
 
         data_wrangling <- pegar_dados_html %>%
-            tibble::as_tibble(.name_repair = ~c("nome",
+            tibble::as_tibble(.name_repair = ~c("data_admissao",
+                                                "nome",
                                                 "matricula",
                                                 "tipo_servidor",
                                                 "cargo",
@@ -115,7 +121,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                       nm_entidade = nm_entidade) %>%
         dplyr::select(data, ano, mes, cod_municipio, nm_municipio,
                       cod_entidade, nm_entidade, nome, matricula,
-                      tipo_servidor, cargo, salario_base,
+                      data_admissao, tipo_servidor, cargo, salario_base,
                       salario_vantagens, salario_gratificacao,
                       decimo_terceiro, carga_horaria, area_atuacao) %>%
         dplyr::mutate_at(c("nm_municipio", "nm_entidade", "nome",
