@@ -7,8 +7,9 @@
 #' @param ano_inicio Exercíico (ano) inicial da coleta de dados
 #' @param nome_scraping Nome do Diretório que será criado para alocar os dados do Web Scraping
 #' @param repetir É definido "SIM" como padrão. Mas pode ser marcado como "NAO",
-#' caso não deseje repetir as consulta do Web Scraping que falharam ou que não foram
-#' identificadas resposta do ente municipal no dia de execução do Web Scraping
+#' caso não deseje repetir (na próxima execução) as consulta do Web Scraping
+#' que falharam ou que não foram identificadas resposta do ente municipal
+#' no dia de execução do Web Scraping
 #' @param backup_local É definido como "SIM" como padrão para realizar
 #' o Backup do Banco de Dados e dos arquivos HTML e CSV.
 #' Mas pode ser marcado como "NAO". 

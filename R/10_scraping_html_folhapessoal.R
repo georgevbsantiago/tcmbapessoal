@@ -113,7 +113,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
                 nm_entidade, " ano: ", ano, " mês:", mes, " ####")
         
       tcmbapessoal::gravar_erro(log_request = log_request,
-                                nm_log_erro ="timeout - primeira tentativa",
+                                nm_log_erro = "timeout - primeira tentativa",
                                 entrada = scraping_html,
                                 id = id,
                                 cod_entidade = cod_entidade,
@@ -142,7 +142,7 @@ scraping_html_folhapessoal <- function(id, data, ano, mes, cod_municipio, nm_mun
         if (is.null(scraping_html$result) == TRUE) {
           
             tcmbapessoal::gravar_erro(log_request = log_request,
-                                      nm_log_erro ="timeout - segunda tentativa",
+                                      nm_log_erro = "timeout - segunda tentativa",
                                       entrada = scraping_html,
                                       id = id,
                                       cod_entidade = cod_entidade,

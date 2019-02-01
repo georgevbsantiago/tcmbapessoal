@@ -1,36 +1,36 @@
 Package: tcmbapessoal
 Type: Package
-Date: 2019-01-26
 Title: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia
+Description: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia pelo site do TCM-Ba
 Version: 0.1.0
-Authors@R:
-    person("George", "Santiago", role = c("aut", "cre"), email = "georgevbsantiago@hotmail.com")
+Authors@R: 
+    person(given = "George",
+           family = "Santiago",
+           role = c("aut", "cre"),
+           email = "georgevbsantiago@hotmail.com")
 Maintainer: George Santiago <georgevbsantiago@hotmail.com>
-Description: Web Scraping das Folhas de Pessoas dos Municipios do Estado da Bahia pelo sdevtite do TCM-Ba
 URL: https://github.com/georgevbsantiago/tcmbapessoal
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    magrittr,
     httr,
     rvest,
     xml2,
     XML,
     tibble (>= 2.0.1),
     readr,
-    dplyr,
-    magrittr,
-    tidyr,
+    dplyr (>= 0.7.8),
+    tidyr (>= 0.8.2),
     janitor,
     stringr,
     stringi,
     lubridate,
     purrr,
-    furrr,
     DBI,
     RSQLite,
     zip,
-    googledrive,
     rdrop2,
     digest
 Roxygen: list(markdown = TRUE)

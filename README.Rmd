@@ -113,3 +113,14 @@ Quado se estar dentro do diretório do Web Scraping
 [1] "O diretório Raiz foi definido com sucesso!"
 Error in (function (classes, fdef, mtable)  : 
   unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"SQLiteConnection", "character"’
+  
+  
+!!! Verificar esse erro no arquivo html após a Prefeitura Municipal de Salinas (Talvez seja Salvador)
+    Talvez seja a necessidade de apagar a lixeira do Linux
+Error in node_write_file(x$node, file, options = options, encoding = encoding) : 
+  Error closing file
+In addition: Warning messages:
+1: In node_write_file(x$node, file, options = options, encoding = encoding) :
+  No space left on devic [1528]
+2: In node_write_file(x$node, file, options = options, encoding = encoding) :
+  write erro [1546]
