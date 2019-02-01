@@ -124,8 +124,10 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
                       data_admissao, tipo_servidor, cargo, salario_base,
                       salario_vantagens, salario_gratificacao,
                       decimo_terceiro, carga_horaria, area_atuacao) %>%
-        dplyr::mutate(data_admissao = lubridate::dmy(data_admissao)) %>%
-        dplyr::mutate(data_admissao = tidyr::replace_na(data_admissao, "1900-01-01")) %>% 
+        dplyr::mutate(data_admissao = lubridate::dmy(data_admissao, 
+                                                     quiet = TRUE)) %>%
+        dplyr::mutate(data_admissao = tidyr::replace_na(data_admissao,
+                                                        "1900-01-01")) %>% 
         dplyr::mutate_at(c("nm_municipio", "nm_entidade", "nome",
                            "tipo_servidor", "cargo", "area_atuacao"),
                          ~stringr::str_to_upper(.)) %>%
