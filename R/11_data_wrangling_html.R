@@ -75,7 +75,7 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
         any()
         
     
-    if( any(stringr::str_detect(names(pegar_dados_html), "13")) ){
+    if( verificar_colunas == TRUE ) {
 
         data_wrangling <- pegar_dados_html %>%
             tibble::as_tibble(.name_repair = ~c("nome",
