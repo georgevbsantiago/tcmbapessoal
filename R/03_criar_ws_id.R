@@ -16,7 +16,7 @@ criar_ws_id <- function(nome_scraping, arq_rds_id_ws, sgbd) {
                       sgbd_ws = sgbd,
                       data_time_create = tcmbapessoal::log_data_hora(),
                       inicio_ws_data_time = "-",
-                      fim_ws_data_time = "-",
+                      fim_ws_data_time = "-"
                       )
 
         saveRDS(object = ws_id,
