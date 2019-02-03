@@ -23,8 +23,8 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' tcmbapessoal::executar_web_scraping(ano_inicio = 2018,
-#'                                     nome_scraping = "ws_tcmba_pessoal",
+#' tcmbapessoal::executar_web_scraping(nome_scraping = "ws_tcmba_pessoal",
+#'                                     ano_inicio = 2018,                                     
 #'                                     sgbd = "sqlite",
 #'                                     repetir = "SIM",
 #'                                     backup_local = "SIM",
@@ -35,8 +35,11 @@
 #'
 #' @export
 
-executar_web_scraping <- function(ano_inicio, nome_scraping, sgbd = "sqlite",
-                                  repetir = "SIM", backup_local = "SIM",
+executar_web_scraping <- function(nome_scraping,
+                                  ano_inicio,
+                                  sgbd = "sqlite",
+                                  repetir = "SIM",
+                                  backup_local = "SIM",
                                   backup_nuvem = "NAO",
                                   exportar_nuvem = "NAO") {
 
