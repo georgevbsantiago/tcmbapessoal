@@ -66,10 +66,10 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
 
     pegar_dados_html <- XML::htmlParse(nm_arq_html, encoding = "UTF-8") %>%
                         XML::readHTMLTable(stringsAsFactors = FALSE, which = 2) %>% 
-                        tibble::as_tibble(.name_repair = "universal") %>% 
-                        tidyr::fill(-...1, .direction = "down") %>% 
-                        dplyr::filter(...1 != "") %>% 
-                        tidyr::separate(...1, sep = ":", into = c(NA, "data_admissao"))
+                        tibble::as_tibble(.name_repair = ~make.names(.)) %>% 
+                        tidyr::fill(-X, .direction = "down") %>% 
+                        dplyr::filter(X != "") %>% 
+                        tidyr::separate(X, sep = ":", into = c(NA, "data_admissao"))
     
     
     # Rotina para verificar se a tabela tem a coluna '13º Salário' ou não.
