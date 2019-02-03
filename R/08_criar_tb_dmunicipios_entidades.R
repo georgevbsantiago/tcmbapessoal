@@ -42,7 +42,7 @@ scraping_tcm_entidades_ws <- function(cod_municipio, nm_municipio, log_create) {
     resultado <- paste0(url_tcm_entidades_ws, cod_municipio) %>%
                  httr::GET() %>%
                  httr::content() %>%
-                 purrr::map_dfr(tibble::as_tibble)
+                 purrr::map_dfr(~tibble::as_tibble(.))
 
 
     # Tratamento dos dados obtidos via Web Service;
@@ -52,8 +52,8 @@ scraping_tcm_entidades_ws <- function(cod_municipio, nm_municipio, log_create) {
                          dplyr::mutate(cod_municipio = cod_municipio,
                                        nm_municipio = nm_municipio,
                                        log_create = tcmbapessoal::log_data_hora()) %>%
-                         dplyr::mutate_all(stringr::str_to_upper) %>%
-                         dplyr::mutate_all(stringr::str_trim) %>%
+                         dplyr::mutate_all(~stringr::str_to_upper(.)) %>%
+                         dplyr::mutate_all(~stringr::str_trim(.)) %>%
                          dplyr::select(cod_municipio,
                                        nm_municipio,
                                        cod_entidade,
