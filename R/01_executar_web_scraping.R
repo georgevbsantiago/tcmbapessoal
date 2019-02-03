@@ -4,7 +4,7 @@
 #' e, então, coletar os dados públicos da Folha de Pessoal dos Municípios do Estado da Bahia
 #' custodiados no site do TCM-Ba
 #' 
-#' @param ano_inicio Exercíico (ano) inicial da coleta de dados
+#' @param ano_inicio Exercíco (ano) inicial da coleta de dados
 #' @param nome_scraping Nome do Diretório que será criado para alocar os dados do Web Scraping
 #' @param repetir É definido "SIM" como padrão. Mas pode ser marcado como "NAO",
 #' caso não deseje repetir (na próxima execução) as consulta do Web Scraping
@@ -24,7 +24,7 @@
 #' @examples 
 #' \dontrun{
 #' tcmbapessoal::executar_web_scraping(nome_scraping = "ws_tcmba_pessoal",
-#'                                     ano_inicio = 2018,                                     
+#'                                     ano_inicio = 2019,                                     
 #'                                     sgbd = "sqlite",
 #'                                     repetir = "SIM",
 #'                                     backup_local = "SIM",
@@ -35,8 +35,8 @@
 #'
 #' @export
 
-executar_web_scraping <- function(nome_scraping,
-                                  ano_inicio,
+executar_web_scraping <- function(nome_scraping = "ws_tcmba_pessoal",
+                                  ano_inicio = 2019,
                                   sgbd = "sqlite",
                                   repetir = "SIM",
                                   backup_local = "SIM",
@@ -102,7 +102,9 @@ executar_web_scraping <- function(nome_scraping,
               stop("Digite SIM ou NAO para o argumento 'backup_nuvem' da função")
             }
 
-    
+  
+# ----------------------------------------------------------------------------------------------------
+   
     # Rotina para verificar se o Web Scraping está executando pela primeira vez, ou se é uma continuação.
   
   arq_rds_id_ws <- paste0("id_", nome_scraping, ".rds")
