@@ -139,7 +139,7 @@ Entretanto, registramos os seguintes tópicos para relatar: Prioridades, Bugs, M
 
 ## Infraestrutura
 
-Caso o usuário deseje executar o  "Web Scraping" do seu computador pessoas, precisará apensas seguir a sugestão de nomenclattura dos arguimentos abaixo:
+Caso o usuário deseje executar o  "Web Scraping" do seu computador pessoal, precisará apensas seguir a sugestão de nomenclattura dos arguimentos abaixo:
 
 ```{r eval=FALSE, include=FALSE}
 
