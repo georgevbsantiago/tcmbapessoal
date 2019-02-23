@@ -40,7 +40,7 @@ Como citado no material disponibilizado pelo do [Curso-R](https://www.curso-r.co
 
 Os dois primeiros "macro desafios de Web Scraping" são os mais "fáceis", não exigindo maiores técnicas ou estratégias, especificamente no controle das requisição das páginas HTML. Já os dois últimos, podem representar grandes desafios no desenvolvimento do "Web Scraping", em especial no controle das requisição das páginas HTML, a depender, por exemplo: _i)_ do volume (quantidade) de requisições a serem realizadas; _ii)_ de como o Servidor requisitado se comporta com o crescente número de requisições; _iii)_ das estratégias de controle a serem adotadas para não obter dados duplicados ou "esquecer" de raspar determinadas páginas; _iv)_ da infraestrutura que será utilizada para executar o Web Scraping... dentre outros desafios enfrentados a depender do caso concreto.
 
-No caso do "Web Scraping" em apreço, estaremos enfrentado o Web Scraping de razoável desafio técnico *Muitas buscas e uma paginação por busca*, pelo menos do ponto de vista da arquitetura de execução do código.
+Neste Web Scraping, esfrentamos um defasio de razoável dificuldade técnica *Muitas buscas e uma paginação por busca*, pelo menos do ponto de vista da arquitetura de execução do código.
 
 A título de exemplo, obter a Folha de Pessoal das cerca de 900 Unidades Jurisdicionadas do TCM-Ba (entidades da administração municipal direta e indireta) que prestam contas, referente ao exercício de 2018, chegamos ao número aproximado de 10.800 requisições ao site do TCM-Ba! A partir desta informação, ao considerar que o tempo médio de cada requisição gira em torno de 4 segundos, o Web Scraping demorará cerca de 12 horas para obter todos os dados.
 
