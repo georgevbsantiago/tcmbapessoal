@@ -122,10 +122,7 @@ Entretanto, registramos os seguintes tópicos para relatar: Prioridades, Bugs, M
         
 # !!! Verificar se ao predefinir o tipo da coluna da tabela, há ganho de performace 
 #     na rotina 'pegar_dados_html' da função 'data_wrangling_html_pessoal'
-    
-# !!! (FALTA TESTAR) Subistituir a rotina 'if( any(stringr::str_detect(names(pegar_dados_html), "13")) )'
-#     pela variável verificar_colunas
-    
+
 # !!! Verificar se a rotina de tratamento de erro na função tcmbapessoal::connect_sgbd(sgbd) possibilita
 #     acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd)
     
@@ -154,7 +151,7 @@ library(tcmbapessoal)
 # Selecionar a pasta de trabalho (Work Directory) que será armazenado os dados coletados pelo 'Web Scraping'.
 setwd("/home/rstudio/os_saj_web_scraping")
 
-tcmbapessoal::executar_web_scraping(ano_inicio = 2016,
+tcmbapessoal::executar_web_scraping(ano_inicio = 2018,
                                     nome_scraping = "ws_tcmba_pessoal",
                                     sgbd = "sqlite",
                                     repetir = "SIM",
