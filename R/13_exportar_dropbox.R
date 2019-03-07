@@ -102,19 +102,19 @@ exportar_csv_unico_dropbox <- function(exportar_nuvem = "NAO") {
     }
     
     
-    print("Iniciando o UPLOAD do arquivo 'bk_arquivos_one_csv.zip' para o DropBox...")
+    print("Iniciando o UPLOAD do arquivo 'bd_tcm_pessoal.csv.gz' para o DropBox...")
     
     rdrop2::drop_upload(nome_arquivo_csv_gz,
                         path = dir_arquivo_dropbox,
                         mode = "overwrite",
                         dtoken = token_dropbox)
     
-    print("Arquivo 'bk_arquivos_one_csv.zip' exportado com sucesso para o DropBox!")
+    print("Arquivo 'bd_tcm_pessoal.csv.gz' exportado com sucesso para o DropBox!")
     
     # Para realizar o download direto do arquivo, é preciso
     # Alterar o p número (ano final do URL) do 'dl' de 0 para 1
-    # De: https://www.dropbox.com/s/qwvohhrtrz95mzq2/bk_arquivos_csv.zip?dl=0
-    # Para: https://www.dropbox.com/s/qwvohhrtrz95mzq2/bk_arquivos_csv.zip?dl=1
+    # De: https://www.dropbox.com/s/qwvohhrtrz95mzq2/bd_tcm_pessoal.csv.gz?dl=0
+    # Para: https://www.dropbox.com/s/qwvohhrtrz95mzq2/bd_tcm_pessoal.csv.gz?dl=1
     
 }
 
