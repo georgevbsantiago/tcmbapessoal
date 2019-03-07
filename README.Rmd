@@ -138,7 +138,7 @@ Entretanto, registramos os seguintes tópicos para relatar: Prioridades, Bugs, M
 # Error in (function (classes, fdef, mtable)  : 
 #   unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"SQLiteConnection", "character"’
   
-
+# Barra de progressão no purrr::walk na função do dropbox
 
 ```
 

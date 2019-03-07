@@ -7,6 +7,8 @@
 #'
 #' @param exportar_nuvem É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
 #' para realizar a Exportação do arquivo CSV para o DropBox.
+#' 
+#' @importFrom R.utils gzip
 #'
 #' @export
 
@@ -27,13 +29,16 @@ exportar_csv_unico_dropbox <- function(exportar_nuvem = "NAO") {
     
     lista_arquivos_csv <- file.path("dados_exportados", dir("dados_exportados"))
     
+    nome_arquivo_csv <- file.path("backup", "bd_tcm_pessoal.csv")
+    
     nome_arquivo_csv_gz <- file.path("backup", "bd_tcm_pessoal.csv.gz")
     
 
     message(paste("Consolidação de", length(lista_arquivos_csv),
-                  "arquivos CSV. Esse processo pode levar alguns minutos"))
+                  "arquivos CSV compactado (csv.gz). Esse processo pode levar alguns minutos"))
     
     # Remove o arquivo CSV consolidado, caso ele já exista.
+    file.remove(nome_arquivo_csv)
     file.remove(nome_arquivo_csv_gz)
     
     
@@ -64,12 +69,19 @@ exportar_csv_unico_dropbox <- function(exportar_nuvem = "NAO") {
                                                              )
         
         readr::write_delim(arq_csv,
-                           nome_arquivo_csv_gz,
+                           nome_arquivo_csv,
                            append = TRUE)
         
     }
     )
     
+    
+    R.utils::gzip(nome_arquivo_csv,
+                  nome_arquivo_csv_gz,
+                  overwrite = TRUE,
+                  remove = TRUE)
+    
+
     print("Consolidação realizada com sucesso!")
 
     
