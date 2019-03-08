@@ -123,7 +123,7 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             
             print("Iniciando processo de Autenticação do Token no DropBox!")
             
-            dir_bk_dropbox <- "web_scraping_tcmba_pessoal/backup"
+            dir_arquivo_dropbox <- "web_scraping_tcmba_pessoal/backup"
             
             if(rdrop2::drop_exists(dir_arquivo_dropbox,
                                    dtoken = token_dropbox) == FALSE) {
@@ -138,7 +138,7 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             
             
             rdrop2::drop_upload(zip_bd_sqlite,
-                                path = dir_bk_dropbox,
+                                path = dir_arquivo_dropbox,
                                 dtoken = token_dropbox)
             
             print("Backup do Banco de Dados (.zip) exportado com sucesso para o DropBox!")
@@ -146,7 +146,7 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             
             
             rdrop2::drop_upload(zip_arquivos_html,
-                                path = dir_bk_dropbox,
+                                path = dir_arquivo_dropbox,
                                 dtoken = token_dropbox)
             
             print("Backup do Arquivos HTMLs exportado com sucesso para o DropBox!")
@@ -154,14 +154,14 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             
             
             rdrop2::drop_upload(zip_arquivos_csv,
-                                path = dir_bk_dropbox,
+                                path = dir_arquivo_dropbox,
                                 dtoken = token_dropbox)
             
             print("Backup dos Arquivos CSVs exportado com sucesso para o DropBox!")
             
             
             rdrop2::drop_upload(zip_arquivo_id_ws,
-                                path = dir_bk_dropbox,
+                                path = dir_arquivo_dropbox,
                                 dtoken = token_dropbox)
             
             print("Backup dos Arquivos ID_WS exportado com sucesso para o DropBox!")
