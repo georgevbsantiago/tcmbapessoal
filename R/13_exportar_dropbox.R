@@ -35,7 +35,7 @@ exportar_csv_unico_dropbox <- function(exportar_nuvem = "NAO") {
     
 
     message(paste("Consolidação de", length(lista_arquivos_csv),
-                  "arquivos CSV compactado (csv.gz). Esse processo pode levar alguns minutos"))
+                  "arquivos CSV . Esse processo pode levar alguns minutos"))
     
     # Remove o arquivo CSV consolidado, caso ele já exista.
     file.remove(nome_arquivo_csv)
@@ -76,13 +76,16 @@ exportar_csv_unico_dropbox <- function(exportar_nuvem = "NAO") {
     )
     
     
+    print("Compactando o arquivo CSV. Esse processo pode levar alguns minutos")
+    
+    
     R.utils::gzip(nome_arquivo_csv,
                   nome_arquivo_csv_gz,
                   overwrite = TRUE,
                   remove = TRUE)
     
 
-    print("Consolidação realizada com sucesso!")
+    print("Consolidação e compactação realizadas com sucesso!")
 
     
     # ---------------------------------------------------------------------------
@@ -109,8 +112,8 @@ exportar_csv_unico_dropbox <- function(exportar_nuvem = "NAO") {
     if(rdrop2::drop_exists(dir_arquivo_dropbox,
                            dtoken = token_dropbox) == FALSE) {
         
-        rdrop2::drop_create(dir_arquivo_dropbox,
-                            dtoken = token_dropbox)
+              rdrop2::drop_create(dir_arquivo_dropbox,
+                                  dtoken = token_dropbox)
     }
     
     
