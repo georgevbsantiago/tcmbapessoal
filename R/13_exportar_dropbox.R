@@ -134,44 +134,36 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
     # Definido função anônima para iterar com os arquivos CSV
     purrr::walk(lista_arquivos_csv, function(lista_arquivos_csv) {
         
-        arq_csv <- readr::read_delim(lista_arquivos_csv,
-                                     delim = ";",
-                                     col_types = readr::cols(
-                                                             data = readr::col_character(),
-                                                             ano = readr::col_character(),
-                                                             mes = readr::col_character(),
-                                                             cod_municipio = readr::col_character(),
-                                                             nm_municipio = readr::col_character(),
-                                                             cod_entidade = readr::col_character(),
-                                                             nm_entidade = readr::col_character(),
-                                                             nome = readr::col_character(),
-                                                             matricula = readr::col_character(),
-                                                             tipo_servidor = readr::col_character(),
-                                                             cargo = readr::col_character(),
-                                                             salario_base = readr::col_character(),
-                                                             salario_vantagens = readr::col_character(),
-                                                             salario_gratificacao = readr::col_character(),
-                                                             decimo_terceiro = readr::col_character(),
-                                                             carga_horaria = readr::col_character(),
-                                                             area_atuacao = readr::col_character()
-                                                             )
-                                                             )
-        
-        readr::write_delim(arq_csv,
-                           nome_arquivo_csv,
-                           append = TRUE)
+           readr::read_delim(lista_arquivos_csv,
+                             delim = ";",
+                             col_types = readr::cols(
+                                                     data = readr::col_character(),
+                                                     ano = readr::col_character(),
+                                                     mes = readr::col_character(),
+                                                     cod_municipio = readr::col_character(),
+                                                     nm_municipio = readr::col_character(),
+                                                     cod_entidade = readr::col_character(),
+                                                     nm_entidade = readr::col_character(),
+                                                     nome = readr::col_character(),
+                                                     matricula = readr::col_character(),
+                                                     tipo_servidor = readr::col_character(),
+                                                     cargo = readr::col_character(),
+                                                     salario_base = readr::col_character(),
+                                                     salario_vantagens = readr::col_character(),
+                                                     salario_gratificacao = readr::col_character(),
+                                                     decimo_terceiro = readr::col_character(),
+                                                     carga_horaria = readr::col_character(),
+                                                     area_atuacao = readr::col_character()
+                                                     )
+                                                     ) %>% 
+            readr::write_delim(nome_arquivo_csv_gz,
+                               append = TRUE)
+      
+      # Remove as variáveis da memória. Assim, evita o seu consumo progressivo
+      rm(list = ls())
         
     }
     )
-    
-    
-    print("Compactando o arquivo CSV. Esse processo pode levar alguns minutos")
-    
-    
-    R.utils::gzip(nome_arquivo_csv,
-                  nome_arquivo_csv_gz,
-                  overwrite = TRUE,
-                  remove = TRUE)
     
 
     print("Consolidação e compactação realizadas com sucesso!")
