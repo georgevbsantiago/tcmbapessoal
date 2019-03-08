@@ -202,7 +202,7 @@ executar_web_scraping <- function(nome_scraping = "ws_tcmba_pessoal",
           tcmbapessoal::executar_backup_arquivos(backup_local, backup_nuvem)
           
           # Exportar os CSVs para o Dropbox para conectar ao Power BI
-          tcmbapessoal::exportar_csv_unico_dropbox(exportar_nuvem)
+          tcmbapessoal::exportar_csv_zip_dropbox(exportar_nuvem)
           
           
           # ---------------------------------------------------------------------------
