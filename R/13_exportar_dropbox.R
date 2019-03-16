@@ -124,11 +124,11 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
     
 
     message(paste("Consolidação de", length(lista_arquivos_csv),
-                  "arquivos CSV . Esse processo pode levar alguns minutos"))
+                  "arquivos CSV. Esse processo pode levar alguns minutos"))
     
     # Remove o arquivo CSV consolidado, caso ele já exista.
-    file.remove(nome_arquivo_csv)
-    file.remove(nome_arquivo_csv_gz)
+    file.remove(nome_arquivo_csv, showWarnings = FALSE)
+    file.remove(nome_arquivo_csv_gz, showWarnings = FALSE)
     
     
     # Definido função anônima para iterar com os arquivos CSV
@@ -157,7 +157,9 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
                                                      )
                                                      ) %>% 
             readr::write_delim(nome_arquivo_csv_gz,
-                               append = TRUE)
+                               delim = ";",
+                               append = TRUE,
+                               col_names = FALSE)
       
       # Remove as variáveis da memória. Assim, evita o seu consumo progressivo
       rm(list = ls())
