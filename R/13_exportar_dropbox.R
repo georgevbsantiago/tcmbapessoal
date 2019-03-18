@@ -97,7 +97,6 @@ exportar_csv_zip_dropbox <- function(exportar_nuvem = "NAO") {
 #' @param exportar_nuvem É definido como "NAO" como padrão. Mas pode ser marcado como "SIM"
 #' para realizar a Exportação do arquivo CSV para o DropBox.
 #' 
-#' @importFrom R.utils gzip
 #'
 #' @export
 
@@ -145,6 +144,7 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
                                                      cod_entidade = readr::col_character(),
                                                      nm_entidade = readr::col_character(),
                                                      nome = readr::col_character(),
+                                                     data_admissao = readr::col_character(),
                                                      matricula = readr::col_character(),
                                                      tipo_servidor = readr::col_character(),
                                                      cargo = readr::col_character(),
@@ -154,9 +154,9 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
                                                      decimo_terceiro = readr::col_character(),
                                                      carga_horaria = readr::col_character(),
                                                      area_atuacao = readr::col_character()
-                                                     )
-                                                     ) %>% 
-            readr::write_delim(nome_arquivo_csv,
+                                                    )
+                                                    ) %>% 
+            readr::write_delim(nome_arquivo_csv_gz,
                                delim = ";",
                                append = TRUE,
                                col_names = FALSE)
@@ -167,12 +167,8 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
     }
     )
     
-    R.utils::gzip(nome_arquivo_csv)
+    print("Consolidação e Compactação do arquivo CSV realizada com sucesso para Gzip.")
     
-    rm(list = ls())
-    
-    
-    print("Consolidação e compactação realizadas com sucesso!")
 
     
     # ---------------------------------------------------------------------------

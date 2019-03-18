@@ -33,7 +33,6 @@ Imports:
     RSQLite,
     zip,
     rdrop2,
-    digest,
-    R.utils
+    digest
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
