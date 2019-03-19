@@ -156,7 +156,7 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
                                                      area_atuacao = readr::col_character()
                                                     )
                                                     ) %>% 
-            readr::write_delim(nome_arquivo_csv_gz,
+            readr::write_delim(nome_arquivo_csv,
                                delim = ";",
                                append = TRUE,
                                col_names = FALSE)
@@ -166,6 +166,8 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
         
     }
     )
+    
+    system2("gzip", paste("-9", nome_arquivo_csv))
     
     print("Consolidação e Compactação do arquivo CSV realizada com sucesso para Gzip.")
     
