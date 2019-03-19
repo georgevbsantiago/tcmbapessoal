@@ -126,8 +126,8 @@ exportar_csv_gzip_dropbox <- function(exportar_nuvem = "NAO") {
                   "arquivos CSV. Esse processo pode levar alguns minutos"))
     
     # Remove o arquivo CSV consolidado, caso ele já exista.
-    file.remove(nome_arquivo_csv)
-    file.remove(nome_arquivo_csv_gz)
+    suppressWarnings(file.remove(nome_arquivo_csv))
+    suppressWarnings(file.remove(nome_arquivo_csv_gz))
     
     
     # Definido função anônima para iterar com os arquivos CSV
