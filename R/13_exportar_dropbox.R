@@ -33,7 +33,7 @@ exportar_csv_zip_dropbox <- function(exportar_nuvem = "NAO") {
       message(paste("Compressão de", length(lista_arquivos_csv),
                     "arquivos CSV. Esse processo pode levar alguns minutos"))
       
-      zip::zip(nome_arquivo_zip, lista_arquivos_csv,
+      zip::zipr(nome_arquivo_zip, lista_arquivos_csv,
                recurse = FALSE, compression_level = 9)
       
       print("Arquivo 'bk_arquivos_csv.zip' gerado com sucesso!")

@@ -37,10 +37,10 @@ func_dcalendario <- function(ano_inicio) {
                                     mes = lubridate::month(data),
                                     log_create = tcmbapessoal::log_data_hora()) %>%
                      dplyr::mutate(data = as.character(data),
-                      # A coluna 'data', 'ano' e 'mês' foram transformados em 'character'
-                      # para ser registrada no SQLite como TEXT, já que ele não suporta o formato DATE;
                                    ano = as.character(ano),
                                    mes = as.character(mes))
+    # A coluna 'data', 'ano' e 'mês' foram transformados em 'character'
+    # para ser registrada no SQLite como TEXT, já que ele não suporta o formato DATE;
 
     return(tb_calendario)
 

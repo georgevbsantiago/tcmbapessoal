@@ -74,9 +74,9 @@ data_wrangling_html_pessoal <- function(id, data, ano, mes,  cod_municipio, nm_m
     
     # Rotina para verificar se a tabela tem a coluna '13º Salário' ou não.
     verificar_colunas <- pegar_dados_html %>%
-        names() %>%
-        stringr::str_detect("13") %>%
-        any()
+                         names() %>%
+                         stringr::str_detect("13") %>%
+                         any()
         
     
     if( verificar_colunas == TRUE ) {

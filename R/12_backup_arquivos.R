@@ -68,24 +68,24 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             zip_arquivo_id_ws <- file.path(nome_dir_bk, paste0("bk_id_ws", sufixo, ".zip"))
             
             
-            zip::zip(zip_bd_sqlite, bd_sqlite,
+            zip::zipr(zip_bd_sqlite, bd_sqlite,
                      recurse = FALSE, compression_level = 9)
             
             print("Arquivo de Backup do BD gerado com sucesso!")
             
             
-            zip::zip(zip_arquivos_html, lista_arquivos_html,
+            zip::zipr(zip_arquivos_html, lista_arquivos_html,
                      recurse = FALSE, compression_level = 9)
             
             print("Arquivo de Backup dos HTMLs gerado com sucesso!")
             
             
-            zip::zip(zip_arquivos_csv, lista_arquivos_csv,
+            zip::zipr(zip_arquivos_csv, lista_arquivos_csv,
                      recurse = FALSE, compression_level = 9)
             
             print("Arquivo de Backup dos CSVs gerado com sucesso!")
             
-            zip::zip(zip_arquivo_id_ws, id_ws,
+            zip::zipr(zip_arquivo_id_ws, id_ws,
                      recurse = FALSE, compression_level = 9)
             
             print("Arquivo de Backup dos ID_WS gerado com sucesso!")
