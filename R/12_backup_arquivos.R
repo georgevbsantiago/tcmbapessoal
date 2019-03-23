@@ -52,7 +52,7 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             
             bd_sqlite <- file.path("bd_sqlite", "bd_tcm_folha_pessoal_municipios.db")
             
-            lista_arquivos_html <- file.path("resposta_scraping_html", dir("resposta_scraping_html"))
+            lista_arquivos_html <- file.path("resposta_scraping_html")
                 
             lista_arquivos_csv <- file.path("dados_exportados", dir("dados_exportados"))
             
@@ -75,7 +75,7 @@ executar_backup_arquivos <- function(backup_local = "SIM",
             
             
             zip::zipr(zip_arquivos_html, lista_arquivos_html,
-                     recurse = FALSE, compression_level = 9)
+                     recurse = TRUE, compression_level = 9)
             
             print("Arquivo de Backup dos HTMLs gerado com sucesso!")
             

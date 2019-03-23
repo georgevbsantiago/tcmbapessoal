@@ -88,51 +88,16 @@ Numa perspectiva de arquitetura das etapas e de organização dos arquivos .R, a
 
 7 - Desenvolver um ChatBot no Telegram para sinalizar ao mantenedor do Web Scraping quando ele inicia e termina, ou quando ocorre um erro que interrompe a execução. (em desenvolvimento)
 
+## Base de dados obtidas pelo Web Scraping (Folha de Pessoal dos Municípios - TCM/BA)
+
+É possível ter acesso à [base de dados da Folha de Pessoal dos municípios do Estado da Bahia de 2016 a 2019, por meio deste link](https://www.dropbox.com/s/ao6mpyy8k98dpo9/bd_tcm_pessoal.csv.gz?dl=1). Os dados estão armazenados em um único arquino no formato CSV (compactados com GZip) e armazenados no DropBox.
+
 
 # Comunidade e Colaboração
 
 O Observatório Social do Brasil, aqui representado pelo Observatório Social do Município de Santo Antônio de Jesus - Ba, gostaria de agradecer ao apoio da Comunidade R para o desenvolvimento do presente pacote, em especial à comunidade [TidyVerse]("https://www.tidyverse.org/), ao [Curso-R](https://www.curso-r.com/) pela colaboração ativa e material disponibilizado, à comunidade R Brasil (no Telegram), e todos aqueles de disponibilizam ebook sobre a linguagem R [link](https://bookdown.org/), posts e desenvolvem pacotes e soluções de infraestrutura para a linguagem R. Sem o esforço, colaboração, cooperativismo e abnegação de todos, esse trabalho não seria possível.
 
 Ademais, quaisquer sugestões, reclamações ou críticas podem ser realizadas no área `issues` do GitHub.
-
-
-# BUGS e Melhorias
-
-Sabemos que o código disponibilizado na versão 1.0 pode ser melhorado e otimizado a sua performance. Contudo, até onde testamos, os resultados obtidos mostraram-se consistentes ao objetivo final que é alimentar o 'Painel de Monitoramento das Despesas dos Municípios do Estado da Bahia', que tem o acesso disponibilizado a qualquer pessoa por meio do site do Observatório Social de Santo Antônio de Jesus.
-
-Entretanto, registramos os seguintes tópicos para relatar: Prioridades, Bugs, Melhorias, Implementações, Ajuste na Infraestrutura... do código:
-
-```{r eval=FALSE, include=FALSE}
-
-### MELHORIAS:
-
-# !!!Criar um loop seguro para a função salvar_html de erros ao salvar o artquivo html por ser muito grande (maior que 260 caracteres) ou por ter um conteúdo vazio.
-
-
-# !!! Revisar a rotina que retorna TRUE ou FALSE na variável 'detectar_tabela' da função 'scraping_html_folhapessoal'
-#     verificar se é melhor permanecer com o teste is.na() ou trocar por isTRUE() ou outra função
-
-# !!! Analisar a questão do uso progressivo da memória RAm no Windows (no Linux, isso não ocorre)
-#     durante a execução da função 'data_wrangling_html_pessoal'. Foi colocado a rotina (abaixo),
-#     mas parece que não surtiu efeito.
-#         # Liberar memória
-#         # Há uma leve perda de performance
-#         rm(list = ls())
-#         gc(reset = TRUE)
-        
-# !!! Verificar se ao predefinir o tipo da coluna da tabela, há ganho de performace 
-#     na rotina 'pegar_dados_html' da função 'data_wrangling_html_pessoal'
-
-# !!! Verificar se a rotina de tratamento de erro na função tcmbapessoal::connect_sgbd(sgbd) possibilita
-#     acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd)
-    
-# !!!
-# Error in (function (classes, fdef, mtable)  : 
-#   unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"SQLiteConnection", "character"’
-  
-
-
-```
 
 
 # Preparando e Executando o pacote `tcmbapessoal`
@@ -201,3 +166,43 @@ docker exec -d web_scraping_ossaj sudo chmod -R 770 /home/rstudio/os_saj_web_scr
 ```
 
 Após implementar o VPS do RStudio via Docker na DigitalOcean com as diretrizes indicadas acima, será necessário instalar o pacote `tcmbapessoal`por meio do comando: `devtools::install_github("georgevbsantiago/tcmbapessoal")`. Concluída a instalção, basta executar o Web Scraping com o exemplo de código demonstado acima.
+
+
+# BUGS e Melhorias
+
+Sabemos que o código disponibilizado na versão 1.0 pode ser melhorado e otimizado a sua performance. Contudo, até onde testamos, os resultados obtidos mostraram-se consistentes ao objetivo final que é alimentar o 'Painel de Monitoramento das Despesas dos Municípios do Estado da Bahia', que tem o acesso disponibilizado a qualquer pessoa por meio do site do Observatório Social de Santo Antônio de Jesus.
+
+Entretanto, registramos os seguintes tópicos para relatar: Prioridades, Bugs, Melhorias, Implementações, Ajuste na Infraestrutura... do código:
+
+```{r eval=FALSE, include=FALSE}
+
+### MELHORIAS:
+
+# !!!Criar um loop seguro para a função salvar_html de erros ao salvar o artquivo html por ser muito grande (maior que 260 caracteres) ou por ter um conteúdo vazio.
+
+
+# !!! Revisar a rotina que retorna TRUE ou FALSE na variável 'detectar_tabela' da função 'scraping_html_folhapessoal'
+#     verificar se é melhor permanecer com o teste is.na() ou trocar por isTRUE() ou outra função
+
+# !!! Analisar a questão do uso progressivo da memória RAm no Windows (no Linux, isso não ocorre)
+#     durante a execução da função 'data_wrangling_html_pessoal'. Foi colocado a rotina (abaixo),
+#     mas parece que não surtiu efeito.
+#         # Liberar memória
+#         # Há uma leve perda de performance
+#         rm(list = ls())
+#         gc(reset = TRUE)
+        
+# !!! Verificar se ao predefinir o tipo da coluna da tabela, há ganho de performace 
+#     na rotina 'pegar_dados_html' da função 'data_wrangling_html_pessoal'
+
+# !!! Verificar se a rotina de tratamento de erro na função tcmbapessoal::connect_sgbd(sgbd) possibilita
+#     acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd)
+    
+# !!!
+# Error in (function (classes, fdef, mtable)  : 
+#   unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"SQLiteConnection", "character"’
+  
+# Barra de progressão no purrr::walk na função do dropbox
+
+```
+
