@@ -6,6 +6,7 @@
 
 criar_tabelas_bd <- function(sgbd = "sqlite") {
 
+        DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))
 
     if (DBI::dbExistsTable(tcmbapessoal::connect_sgbd(sgbd), "tabela_dcalendario") == FALSE) {
 
@@ -13,7 +14,8 @@ criar_tabelas_bd <- function(sgbd = "sqlite") {
                                                             id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                             data TEXT,
                                                             ano TEXT,
-                                                            mes TEXT
+                                                            mes TEXT,
+                                                            log_create TEXT
                                                             );"
         )
 
