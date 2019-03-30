@@ -15,15 +15,23 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
 # O Projeto
 
 O pacote `tcmbapessoal` é uma das ferramentas utilizadas no projeto de "Transparência das Contas Públicas", desenvolvido e executado pelo Observatório Social do Brasil - Município de Santo Antônio de Jesus - Estado da Bahia.
 
-Atualmente, o projeto conta com os seguintes pacotes em Linguagem R:
+Atualmente, o projeto é composto das seguintes ferramentas:
 
-* Pacote [`tcmbapessoal`](https://github.com/georgevbsantiago/tcmbapessoal) 
-* Pacote [`tcmbadespesas`](https://github.com/georgevbsantiago/tcmbadespesas)
-* Pacote [`qsacnpj`](https://github.com/georgevbsantiago/qsacnpj)
+Pacotes desenvolvidos em Linguagem R:
+
+* [`tcmbapessoal`](https://github.com/georgevbsantiago/tcmbapessoal) 
+* [`tcmbadespesas`](https://github.com/georgevbsantiago/tcmbadespesas)
+* [`qsacnpj`](https://github.com/georgevbsantiago/qsacnpj)
+
+Paineis desenvolvidos em Power BI:
+
+* [`Painel de Monitoramento das Despesas dos Municípios do Estado da Bahia`](https://goo.gl/rQhwsg)
+* [`Painel de Monitoramento da Folha de Pessoal dos Municípios do Estado da Bahia`](https://goo.gl/4zHpZp)
 
 
 ## Sobre a proposta e o objetivo do pacote
@@ -118,7 +126,7 @@ Numa perspectiva de arquitetura das etapas e de organização dos arquivos .R, a
 
 ## Base de dados obtidas pelo Web Scraping (Folha de Pessoal dos Municípios - TCM/BA)
 
-É possível ter acesso à [base de dados da Folha de Pessoal dos municípios do Estado da Bahia de 2016 a 2019, por meio deste link](https://www.dropbox.com/s/ao6mpyy8k98dpo9/bd_tcm_pessoal.csv.gz?dl=1). Os dados estão armazenados em um único arquino no formato CSV (compactados com GZip) e armazenados no DropBox.
+É possível ter acesso à [base de dados da Folha de Pessoal dos municípios do Estado da Bahia de 2016 a 2019, por meio deste link](https://goo.gl/HdPmKN). Os dados estão armazenados em um único arquino no formato CSV (compactados com GZip) e armazenados no DropBox.
 
 
 # Comunidade e Colaboração
@@ -163,6 +171,7 @@ Na hipótese do usuário preferir contratar um servidor numa infraestrutura de n
 Nesta sugestão de configuração via VPS na DigitalOcean usando Docker, realizamos a instalação do Cointainer do Projeto Rocker [link](https://hub.docker.com/r/rocker/tidyverse) (que agrupa: Compilador R; pacote TidyVerse; e Rstudio). Para obter mais detalhes sobre a configuração de implementação do "droplet" (nomenclatura de 'servidor' na DigitalOcean), indicamos como fonte de consulta o post: ['Run on a remote server'](https://www.andrewheiss.com/blog/2017/04/27/super-basic-practical-guide-to-docker-and-rstudio/) .
 
 As demais configurações sobre o 'Volume' (conceito do Docker que significa a pasta - diretório - compartilhado entre o 'container' Docker e o Host 'servidor') e as configurações de permissão para criação, leitura e escrita do diretório 'os_saj_web_scraping' (nome do diretório de trabalho escolhido pelo OS-SAJ), foram obtidos por meio de consulta no Google.
+
 *OBS: A configuração de escrita no diretório 'os_saj_web_scraping', que será utilizado como diretório de trabalho do 'Web Scraping', foi necessário, pois caso não seja realizado, o RStudio retorna um erro que informa a impossibilidade de escrever/gravar/modificar os arquivos no diretório selecionado para ser o 'Volume'.*
 
 ### 1° Opção: Em uma VPS na Digital Ocean, durante a configuração do Droplet
@@ -214,6 +223,8 @@ Sabemos que o código disponibilizado na versão 1.0 pode ser melhorado e otimiz
 
 
 ### Atualizações
+
+#### versão: 0.1.4:
 
 - Corrigido o erro durante a criação da tabela `tabela_dcalendario` no SQLite: `Error in (function (classes, fdef, mtable): unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"SQLiteConnection", "character"’`
 

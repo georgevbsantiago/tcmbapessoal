@@ -11,13 +11,20 @@ O pacote `tcmbapessoal` é uma das ferramentas utilizadas no projeto de
 Observatório Social do Brasil - Município de Santo Antônio de Jesus -
 Estado da Bahia.
 
-Atualmente, o projeto conta com os seguintes pacotes em Linguagem R:
+Atualmente, o projeto é composto das seguintes ferramentas:
 
-  - Pacote
-    [`tcmbapessoal`](https://github.com/georgevbsantiago/tcmbapessoal)
-  - Pacote
-    [`tcmbadespesas`](https://github.com/georgevbsantiago/tcmbadespesas)
-  - Pacote [`qsacnpj`](https://github.com/georgevbsantiago/qsacnpj)
+Pacotes desenvolvidos em Linguagem R:
+
+  - [`tcmbapessoal`](https://github.com/georgevbsantiago/tcmbapessoal)
+  - [`tcmbadespesas`](https://github.com/georgevbsantiago/tcmbadespesas)
+  - [`qsacnpj`](https://github.com/georgevbsantiago/qsacnpj)
+
+Paineis desenvolvidos em Power BI:
+
+  - [`Painel de Monitoramento das Despesas dos Municípios do Estado da
+    Bahia`](https://goo.gl/rQhwsg)
+  - [`Painel de Monitoramento da Folha de Pessoal dos Municípios do
+    Estado da Bahia`](https://goo.gl/4zHpZp)
 
 ## Sobre a proposta e o objetivo do pacote
 
@@ -230,9 +237,8 @@ desenvolvimento)
 
 É possível ter acesso à [base de dados da Folha de Pessoal dos
 municípios do Estado da Bahia de 2016 a 2019, por meio deste
-link](https://www.dropbox.com/s/ao6mpyy8k98dpo9/bd_tcm_pessoal.csv.gz?dl=1).
-Os dados estão armazenados em um único arquino no formato CSV
-(compactados com GZip) e armazenados no DropBox.
+link](https://goo.gl/HdPmKN). Os dados estão armazenados em um único
+arquino no formato CSV (compactados com GZip) e armazenados no DropBox.
 
 # Comunidade e Colaboração
 
@@ -300,12 +306,13 @@ significa a pasta - diretório - compartilhado entre o ‘container’ Docker
 e o Host ‘servidor’) e as configurações de permissão para criação,
 leitura e escrita do diretório ‘os\_saj\_web\_scraping’ (nome do
 diretório de trabalho escolhido pelo OS-SAJ), foram obtidos por meio de
-consulta no Google. *OBS: A configuração de escrita no diretório
-‘os\_saj\_web\_scraping’, que será utilizado como diretório de
-trabalho do ‘Web Scraping’, foi necessário, pois caso não seja
-realizado, o RStudio retorna um erro que informa a impossibilidade de
-escrever/gravar/modificar os arquivos no diretório selecionado para ser
-o
+consulta no Google.
+
+*OBS: A configuração de escrita no diretório ‘os\_saj\_web\_scraping’,
+que será utilizado como diretório de trabalho do ‘Web Scraping’, foi
+necessário, pois caso não seja realizado, o RStudio retorna um erro que
+informa a impossibilidade de escrever/gravar/modificar os arquivos no
+diretório selecionado para ser o
 ‘Volume’.*
 
 ### 1° Opção: Em uma VPS na Digital Ocean, durante a configuração do Droplet
@@ -372,6 +379,8 @@ de Jesus.
   - Barra de progressão no purrr::walk na função do dropbox
 
 ### Atualizações
+
+#### versão: 0.1.4:
 
   - Corrigido o erro durante a criação da tabela `tabela_dcalendario` no
     SQLite: `Error in (function (classes, fdef, mtable): unable to find
