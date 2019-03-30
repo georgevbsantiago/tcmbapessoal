@@ -13,13 +13,15 @@ Estado da Bahia.
 
 Atualmente, o projeto é composto das seguintes ferramentas:
 
-Pacotes desenvolvidos em Linguagem R:
+Pacotes desenvolvidos em Linguagem R para realizar Web Scraping e
+tratamento de dados:
 
   - [`tcmbapessoal`](https://github.com/georgevbsantiago/tcmbapessoal)
   - [`tcmbadespesas`](https://github.com/georgevbsantiago/tcmbadespesas)
   - [`qsacnpj`](https://github.com/georgevbsantiago/qsacnpj)
 
-Paineis desenvolvidos em Power BI:
+Paineis desenvolvidos em Power BI para produzir diversas visualização
+dos dados:
 
   - [`Painel de Monitoramento das Despesas dos Municípios do Estado da
     Bahia`](https://goo.gl/rQhwsg)
@@ -387,4 +389,4 @@ de Jesus.
     an inherited method for function ‘dbWriteTable’ for signature
     ‘"SQLiteConnection", "character"’`
 
-### BUGs
+### BUGs e Warnings

@@ -22,13 +22,13 @@ O pacote `tcmbapessoal` é uma das ferramentas utilizadas no projeto de "Transpa
 
 Atualmente, o projeto é composto das seguintes ferramentas:
 
-Pacotes desenvolvidos em Linguagem R:
+Pacotes desenvolvidos em Linguagem R para realizar Web Scraping e tratamento de dados:
 
 * [`tcmbapessoal`](https://github.com/georgevbsantiago/tcmbapessoal) 
 * [`tcmbadespesas`](https://github.com/georgevbsantiago/tcmbadespesas)
 * [`qsacnpj`](https://github.com/georgevbsantiago/qsacnpj)
 
-Paineis desenvolvidos em Power BI:
+Paineis desenvolvidos em Power BI para produzir diversas visualização dos dados:
 
 * [`Painel de Monitoramento das Despesas dos Municípios do Estado da Bahia`](https://goo.gl/rQhwsg)
 * [`Painel de Monitoramento da Folha de Pessoal dos Municípios do Estado da Bahia`](https://goo.gl/4zHpZp)
@@ -228,6 +228,6 @@ Sabemos que o código disponibilizado na versão 1.0 pode ser melhorado e otimiz
 
 - Corrigido o erro durante a criação da tabela `tabela_dcalendario` no SQLite: `Error in (function (classes, fdef, mtable): unable to find an inherited method for function ‘dbWriteTable’ for signature ‘"SQLiteConnection", "character"’`
 
-### BUGs
+### BUGs e Warnings
 
 
