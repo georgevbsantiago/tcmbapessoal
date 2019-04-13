@@ -30,8 +30,8 @@ Pacotes desenvolvidos em Linguagem R para realizar Web Scraping e tratamento de 
 
 Paineis desenvolvidos em Power BI para produzir diversas visualização dos dados:
 
-* [`Painel de Monitoramento das Despesas dos Municípios do Estado da Bahia`](https://goo.gl/rQhwsg)
-* [`Painel de Monitoramento da Folha de Pessoal dos Municípios do Estado da Bahia`](https://goo.gl/4zHpZp)
+* [`Painel de Monitoramento das Despesas dos Municípios do Estado da Bahia`](http://bit.ly/2GkegzY)
+* [`Painel de Monitoramento da Folha de Pessoal dos Municípios do Estado da Bahia`](http://bit.ly/2USh8fH)
 
 
 ## Sobre a proposta e o objetivo do pacote
@@ -218,6 +218,8 @@ Sabemos que o código disponibilizado na versão 1.0 pode ser melhorado e otimiz
 - Verificar se ao predefinir o tipo da coluna da tabela, há ganho de performace na rotina 'pegar_dados_html' da função 'data_wrangling_html_pessoal';
 
 - Verificar se a rotina de tratamento de erro na função tcmbapessoal::connect_sgbd(sgbd) possibilita acabar com as rotinas de While, já que a função nunca falharia devido a rotina de tcmbapessoal::connect_sgbd(sgbd);
+
+- Verificar se é possível incluir `DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))` dentro da função `connect_sgbd`e excluir as demais referências a `DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))`  no código.
   
 - Barra de progressão no purrr::walk na função do dropbox
 

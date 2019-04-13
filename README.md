@@ -24,9 +24,9 @@ Paineis desenvolvidos em Power BI para produzir diversas visualização
 dos dados:
 
   - [`Painel de Monitoramento das Despesas dos Municípios do Estado da
-    Bahia`](https://goo.gl/rQhwsg)
+    Bahia`](http://bit.ly/2GkegzY)
   - [`Painel de Monitoramento da Folha de Pessoal dos Municípios do
-    Estado da Bahia`](https://goo.gl/4zHpZp)
+    Estado da Bahia`](http://bit.ly/2USh8fH)
 
 ## Sobre a proposta e o objetivo do pacote
 
@@ -377,6 +377,11 @@ de Jesus.
     tcmbapessoal::connect\_sgbd(sgbd) possibilita acabar com as rotinas
     de While, já que a função nunca falharia devido a rotina de
     tcmbapessoal::connect\_sgbd(sgbd);
+
+  - Verificar se é possível incluir
+    `DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))` dentro da
+    função `connect_sgbd`e excluir as demais referências a
+    `DBI::dbDisconnect(tcmbapessoal::connect_sgbd(sgbd))` no código.
 
   - Barra de progressão no purrr::walk na função do dropbox
 
