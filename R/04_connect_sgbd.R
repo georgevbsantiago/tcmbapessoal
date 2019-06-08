@@ -85,7 +85,7 @@ connect_sgbd <- function(sgbd = "sqlite") {
                                                                   "bd_tcm_folha_pessoal_municipios.db"))
         }
 
-        
+    
     return(sqlite_bd$result)
     
 }

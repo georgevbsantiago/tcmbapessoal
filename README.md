@@ -239,8 +239,8 @@ desenvolvimento)
 
 É possível ter acesso à [base de dados da Folha de Pessoal dos
 municípios do Estado da Bahia de 2016 a 2019, por meio deste
-link](https://goo.gl/HdPmKN). Os dados estão armazenados em um único
-arquino no formato CSV (compactados com GZip) e armazenados no DropBox.
+link](http://bit.ly/2KAsAXH). Os dados estão armazenados em um único
+arquino no formato CSV (compactados com GZip).
 
 # Comunidade e Colaboração
 
